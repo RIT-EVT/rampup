@@ -68,6 +68,28 @@ each one has an address. For the Arduino this will be 0x04. So the complete
 picture is that the STM will write 0x00 to I2C device 0x04, then will read
 from the I2C device 0x04.
 
+## Getting Started
+
+1. Add a ssh-key to Github. I would recommend looking up how to do that on
+your specific setup.
+
+2. Clone the repository. The repository has "submodules" so cloning is a little
+different then normal.
+
+```
+git clone --recurse-submodules git@github.com:RIT-EVT/rampup.git
+```
+
+Or if you cloned normally and didn't realize there were submodules.
+
+```
+git clone git@github.com:RIT-EVT/rampup.git
+git submodule update --init
+```
+
+3. Build the code, you can follow the instructions in `EVT-core` for building
+project.
+
 ## Explaination
 
 Often times on the various boards, we will need to commiunicate with other
