@@ -4,11 +4,10 @@
  * enters.
  */
 #include <EVT/io/manager.hpp>
-#include <EVT/utils/time.hpp>
-#include "Arduino/Arduino.hpp"
+#include <EVT/io/pin.hpp>
+#include <EVT/io/UART.hpp>
 
 namespace IO = EVT::core::IO;
-namespace time = EVT::core::time;
 
 int main() {
     // Initialize system
@@ -17,15 +16,13 @@ int main() {
     // Setup UART
     IO::UART& uart = IO::getUART<IO::Pin::UART_TX, IO::Pin::UART_RX>(9600);
 
-    // Setup i2c Communication
-    IO::I2C& i2c = IO::getI2C<IO::Pin::PB_8, IO::Pin::PB_9>();
-
-    Arduino temperatureController = Arduino(i2c, uart);
+    // String to store user input
+    char buf[100];
 
     while (1) {
         // Read user input
-        temperatureController.logAllBasicData();
-
-        time::wait(1000);
+        uart.printf("Enter message: ");
+        uart.gets(buf, 100);
+        uart.printf("\n\recho: %s\n\r", buf);
     }
 }

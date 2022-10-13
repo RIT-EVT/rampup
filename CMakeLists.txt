@@ -33,7 +33,7 @@ add_definitions(-DUSE_HAL_LIBRARY)
 
 add_executable(${PROJECT_NAME}
     ./src/main.cpp
-        src/Arduino/Arduino.cpp src/Arduino/Arduino.hpp)
+)
 
 # Make the main executable have an ".elf" suffix
 set_target_properties(${PROJECT_NAME} PROPERTIES
