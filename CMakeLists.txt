@@ -3,16 +3,35 @@
 ###############################################################################
 cmake_minimum_required(VERSION 3.15)
 
+###############################################################################
 # Convert CMake flags to compiler flags
+###############################################################################
 if(EVT_CORE_LOG_ENABLE)
     add_compile_definitions(EVT_CORE_LOG_ENABLE)
 endif()
 
-# Handle default selection of the target device
+# Handle selection of the target device
+option(TARGET_DEV "Target device" "STM32F334x8")
 if(NOT TARGET_DEV)
     set(TARGET_DEV "STM32F334x8")
 endif()
 
+if(TARGET_DEV STREQUAL "STM32F302x8")
+    add_compile_definitions(STM32F302x8)
+    add_compile_definitions(STM32F3xx)
+elseif(TARGET_DEV STREQUAL "STM32F334x8")
+    add_compile_definitions(STM32F334x8)
+    add_compile_definitions(STM32F3xx)
+else()
+    message(FATAL_ERROR "The target device is not supported")
+endif()
+
+# Enable use of HAL Drivers
+add_compile_definitions(USE_HAL_DRIVER)
+
+###############################################################################
+# Run EVT-core CMake files
+###############################################################################
 set(EVT_CORE_DIR      ${CMAKE_SOURCE_DIR}/libs/EVT-core)
 
 # Link to the EVT-core library
