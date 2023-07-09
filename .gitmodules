@@ -1,3 +1,4 @@
 [submodule "libs/EVT-core"]
 	path = libs/EVT-core
-	url = git@github.com:RIT-EVT/EVT-core.git
+	url = ../EVT-core.git
+    # Need to set the full url if not cloned into the EVT organization
