@@ -1,2 +1,2 @@
 # Add all targets
-add_subdirectory(rampup)
+add_subdirectory(phase1)

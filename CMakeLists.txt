@@ -1,5 +1,5 @@
 ###############################################################################
-# Top level CMakeList for building the EVT rampup project source code
+# Top level CMakeList for building the EVT phase1 project source code
 ###############################################################################
 cmake_minimum_required(VERSION 3.15)
 
@@ -61,6 +61,7 @@ add_library(${PROJECT_NAME} STATIC)
 
 # Add sources
 target_sources(${PROJECT_NAME} PRIVATE
+        targets/phase1/main.cpp
         )
 
 ###############################################################################
