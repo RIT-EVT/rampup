@@ -61,7 +61,7 @@ add_library(${PROJECT_NAME} STATIC)
 
 # Add sources
 target_sources(${PROJECT_NAME} PRIVATE
-        targets/phase1/main.cpp
+        src/dev/TMP117.cpp
         )
 
 ###############################################################################
