@@ -39,7 +39,7 @@ will help you understand how to work in C++ and with EVT-core, our custom
 library. The only file you'll need to modify is `targets/phase1/main.cpp`.
 
 ### Task Breakdown
-1. Over UART, read two numbers input by the user up to 10 digits.
+1. Over UART, read two numbers input by the user, up to 10 digits each.
 2. Print the sum of the two numbers over UART.
 
 ### Suggestions

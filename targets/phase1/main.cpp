@@ -7,7 +7,7 @@ int main() {
 
     // Set up UART
 
-    // Declare an array to store user input
+    // Declare an array of characters to store user input
 
     while (1) {
         // Read user input
