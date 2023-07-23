@@ -1,5 +1,5 @@
-#ifndef TMS_TMP117_HPP
-#define TMS_TMP117_HPP
+#ifndef TMP117_HPP
+#define TMP117_HPP
 
 #include <EVT/io/I2C.hpp>
 
@@ -40,4 +40,4 @@ private:
 
 }// namespace rampup
 
-#endif//TMS_TMP117_HPP
+#endif//TMP117_HPP

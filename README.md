@@ -78,14 +78,15 @@ circuit (IC) used for temperature sensing. For this phase, you'll need a little
 more hardware. Specifically, you'll need a Firmware Test Board (FTB) and a click
 board with the TMP117 chip on it. At the end, you'll also need a Saleae Logic
 Analyzer to see the I2C waveforms. To get this working, you need to modify
-`targets/phase1/main.cpp` and `src/dev/TMP117.cpp`. The header file
+`targets/phase2/main.cpp` and `src/dev/TMP117.cpp`. The header file
 `include/dev/TMP117.hpp` has been provided for you.
 
 ### Task Breakdown
 1. Write the constructor and implementation for `readTemp()` in `TMP117.hpp`.
-2. Write the target code to call these functions and print it over UART.
-3. Use the Saleae to decode the waveforms and confirm the data matches what is 
-output over UART.
+2. Write the target code to call these functions and print temperatures over 
+UART.
+3. Use the Saleae to decode the waveforms on SDA and SCL and confirm the data 
+matches what is output over UART.
 
 ### Suggestions
 - Read the I2C documentation.
