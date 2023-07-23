@@ -113,6 +113,7 @@ the next phase.
 - Advanced driver development
 - Analog-to-Digital Converter (ADC) use
 - Reading datasheets
+- Running code on EVT hardware
 
 ### Summary
 The next communication protocol to cover is Serial Peripheral Interface,
@@ -125,7 +126,8 @@ switch out the TMP117 board for the MAX22530 board. To test the board, you'll
 also need to get a power supply connected to the input of the ADC to test it.
 For this phase, the header file hasn't been provided for you, so you'll have to
 write that yourself. The files you need to edit are `include/dev/MAX22530.hpp`,
-`src/dev/MAX22530.cpp`, and `targets/phase3/main.cpp`.
+`src/dev/MAX22530.cpp`, and `targets/phase3/main.cpp`. Once the code is working,
+you'll also get to run it on a DEV1 Powertrain Voltage Controller (PVC).
 
 
 ### Task Breakdown
@@ -141,6 +143,8 @@ the data matches what is output over UART.
 - Fully plan out the MAX22530 class in the header file before starting on the 
 implementation.
 - Look at the SPI sample in EVT-core for an example.
+- Read the ST-Link documentation to see how to use it.
+- Read the running code documentation to see how to flash the PVC.
 
 ### Completion
 Once you think it's working, get a variable power supply and apply different
@@ -148,8 +152,9 @@ voltages to the input channels. If you're not familiar with power supplies, have
 a senior member help you set it up. Be sure to limit the current to only a few 
 milliamps to make sure it's safe. Does the voltage on the power supply match the
 UART output? When you're happy with its performance, have a senior member look
-at your Saleae output and your code. Once they give the word, you can start on 
-the last phase.
+at your Saleae output and your code. If it looks good, have them get you a DEV1
+PVC to test the code on. With their help, use the power supply to test the ADC
+on the PVC. If it works, you can start on the last phase.
 
 
 ## Phase 4: CAN
