@@ -1,5 +1,7 @@
 # Rampup Project
 
+//TODO: Add explanations of how to get info out of datasheets
+
 ## Overview
 
 Hello and welcome to EVT! This project is designed to give you a look into what
@@ -109,18 +111,45 @@ the next phase.
 ### Learning Objectives
 - SPI communication
 - Advanced driver development
+- Analog-to-Digital Converter (ADC) use
+- Reading datasheets
 
 ### Summary
+The next communication protocol to cover is Serial Peripheral Interface,
+abbreviated SPI, which is read like "spy." You'll use this protocol to
+communicate between the uC and an Analog-to-Digital Converter (ADC), which is an
+IC that converts an analog signal (continuous) to a digital signal (discrete).
+For our purposes, we're just going to be using it to read the voltage on each of
+the input channels. You'll still need the Saleae and FTB, but you'll need to 
+switch out the TMP117 board for the MAX22530 board. To test the board, you'll 
+also need to get a power supply connected to the input of the ADC to test it.
+For this phase, the header file hasn't been provided for you, so you'll have to
+write that yourself. The files you need to edit are `include/dev/MAX22530.hpp`,
+`src/dev/MAX22530.cpp`, and `targets/phase3/main.cpp`.
 
 
 ### Task Breakdown
-1.
+1. Write the header file for `MAX22530`, so that it can be used to read voltages
+from each channel.
+2. Implement the functions defined in the header file.
+3. Write the target code to call the functions and print all voltages over UART.
+4. Use the Saleae to decode the waveforms on CS, SCL, MOSI, and MISO and confirm
+the data matches what is output over UART.
 
 ### Suggestions
-- 
+- Read the SPI documentation.
+- Fully plan out the MAX22530 class in the header file before starting on the 
+implementation.
+- Look at the SPI sample in EVT-core for an example.
 
 ### Completion
-
+Once you think it's working, get a variable power supply and apply different
+voltages to the input channels. If you're not familiar with power supplies, have
+a senior member help you set it up. Be sure to limit the current to only a few 
+milliamps to make sure it's safe. Does the voltage on the power supply match the
+UART output? When you're happy with its performance, have a senior member look
+at your Saleae output and your code. Once they give the word, you can start on 
+the last phase.
 
 
 ## Phase 4: CAN
