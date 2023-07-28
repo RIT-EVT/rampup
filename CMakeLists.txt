@@ -63,6 +63,7 @@ add_library(${PROJECT_NAME} STATIC)
 target_sources(${PROJECT_NAME} PRIVATE
         src/dev/TMP117.cpp
         src/dev/MAX22530.cpp
+        src/RampupBoard.cpp
         )
 
 ###############################################################################

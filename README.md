@@ -166,13 +166,52 @@ on the PVC. If it works, you can start on the last phase.
 - Waveform analysis with an oscilloscope
 
 ### Summary
+This last phase explores a new communication protocol, Controller Area Network,
+abbreviated CAN. It also serves as a culmination of all the phases leading up to
+this one. For this phase, you'll be using both the drivers you just wrote in a
+single "RampupBoard" class. This class is supposed to represent a board that the
+team would make that reports temperature and voltage data over CAN. We haven't
+made a PCB that does that, but you can prototype one using the FTB. For this
+phase, you'll need a click board for the TMP117 or the MAX22530 and an
+evaluation module for whichever IC isn't on your click. You'll also need a FUN-E
+SNAIL and HUDL, as well as harnesses to connect the FTB and HUDL to the FUN-E 
+SNAIL. Lastly, you'll need the oscilloscope and the PEAK CAN dongle to see the 
+messages being sent. At this point, you'll have a fair amount of hardware, so be
+sure to ask a senior member for help getting this set up. You'll also need to 
+ask them to flash the HUDL with the necessary display code.
 
+For this phase, the end goal is going to be collecting data from the two ICs and
+reporting it over CAN, so that it can be displayed on the HUDL. To accomplish
+this, you'll make calls to the drivers you wrote and work with the CANopen stack
+to have it output over CAN following the CANopen standard. To start, you'll
+still be using UART for debugging, but once the data is being reported properly,
+you can test the ICs the same ways you did in earlier phases, but now you can 
+just look at the data as it appears on the HUDL to confirm it's working. You'll 
+also learn how to use the oscilloscope and the PEAK CAN dongle to debug. For 
+this phase, the files you need to edit are `include/RampupBoard.hpp`, 
+`src/RampupBoard.cpp`, and `targets/phase4/main.cpp`.
 
 ### Task Breakdown
-1.
+1. Modify the RampupBoard header file to link the data to the CANopen 
+dictionary. Search through the dictionary to find all the "replace" comments.
+2. Write the constructor and `process()` methods for RampupBoard in the header
+and implementation files.
+3. Write the main target to initialize everything and run `process()` and the 
+necessary functions to get CANopen working.
+4. Plug the FTB and HUDL into the FUN-E SNAIL to confirm the data displays on
+the HUDL.
+5. Use the Saleae to decode the waveforms on CAN TX and RX to confirm that it
+matches the data that should be sent.
+6. Use the Oscilloscope to see the CAN messages on CAN high and low.
+7. Use the PEAK CAN dongle to see the CAN messages and confirm the data matches
+what is being sent.
 
 ### Suggestions
-- 
+- Read the CAN documentation.
+- Look at the canopen_sample in EVT-core for an example.
+- Read the FUN-E SNAIL documentation.
+- Read the PEAK dongle documentation.
+- Read the oscilloscope documentation.
 
 ### Completion
 
