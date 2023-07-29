@@ -163,6 +163,7 @@ on the PVC. If it works, you can start on the last phase.
 - CAN communication
 - CANopen standard
 - Main target development
+- Memory addressing in C++
 - Waveform analysis with an oscilloscope
 
 ### Summary
@@ -196,22 +197,53 @@ this phase, the files you need to edit are `include/RampupBoard.hpp`,
 dictionary. Search through the dictionary to find all the "replace" comments.
 2. Write the constructor and `process()` methods for RampupBoard in the header
 and implementation files.
-3. Write the main target to initialize everything and run `process()` and the 
+3. Write the main target to initialize everything. Then run `process()` and the 
 necessary functions to get CANopen working.
 4. Plug the FTB and HUDL into the FUN-E SNAIL to confirm the data displays on
 the HUDL.
-5. Use the Saleae to decode the waveforms on CAN TX and RX to confirm that it
+5. Use the PEAK CAN dongle to decode the CAN messages and confirm the data 
+matches what is being sent.
+6. Use the Saleae to decode the waveforms on CAN TX and RX to confirm that it
 matches the data that should be sent.
-6. Use the Oscilloscope to see the CAN messages on CAN high and low.
-7. Use the PEAK CAN dongle to see the CAN messages and confirm the data matches
-what is being sent.
+7. Use the Oscilloscope to see the CAN messages on CAN high and low.
 
 ### Suggestions
 - Read the CAN documentation.
 - Look at the canopen_sample in EVT-core for an example.
+- If the HUDL doesn't work right away, debug the output with the PEAK can dongle
+and the Saleae.
 - Read the FUN-E SNAIL documentation.
 - Read the PEAK dongle documentation.
 - Read the oscilloscope documentation.
 
 ### Completion
+Once you have all the code written, you can start trying out all the testing
+equipment we use as a team. When the code works, you should see all the data
+being reported show up on the HUDL, but, especially in embedded systems, the 
+code rarely works on the first try. The Saleae, PEAK dongle, and oscilloscope
+will all be useful for finding different types of issues. While we've put a lot
+of effort into the documentation for each of these tools, there is some
+practical debugging knowledge that needs to be shown directly. You should start
+by collecting as much information as you can about whatever problem you're
+facing, but feel free to reach out to senior firmware members for any help in
+setting up the hardware or debugging your software.
 
+Once the HUDL is displaying the data properly, make sure you spend some time to
+try out any debugging tools you haven't used yet. When you feel comfortable
+enough with each of them, you can show your code to a senior firmware member for
+a final check. When they approve it, you've officially completed the rampup
+project.
+
+## Next Steps
+Congratulations on completing the rampup project! If you're new to firmware
+development, starting something new like this can be very time-consuming and
+difficult, but you met that challenge and overcame it. I hope you got a good 
+idea of how the firmware team operates and the type of work we do as a team. 
+Having completed the rampup project, you are now a fully-fledged member of our
+team, so you can begin work on a project for one of our bikes. If there's 
+anything else you want to learn about or don't understand, be sure to take some
+time now to read over some documentation and play around with it now. Once you 
+think you're ready, you can reach out to the firmware lead to get your first 
+project.
+
+Good luck!
