@@ -74,3 +74,39 @@ attempt to read the data in register 0x00 from the device at address 0x48. If
 everything goes well, it will then put the data into the variable 
 `outputBuffer`. If you're having issues with this, set up the Saleae to check if
 the signals being sent match these values.
+
+## MAX22530 Datasheet
+
+### Speed
+The first configuration parameter you'll want to locate is speed. Most SPI
+devices support a range of speeds, but they should have a maximum speed.
+Generally, we're always going to want to operate at the fastest speed possible to
+limit latency, so we should operate at the max speed of the device.
+
+Searching with Ctrl+F or using the table, we can pretty quickly find the section
+titled "SPI Interface," which has the speed limit of 10 MHz directly under it.
+This information can also be found in the "Electrical Characteristics" table
+under the heading "SPI TIMING CHARACTERISTICS." 
+
+### Mode
+Mode is often the most difficult information to pin down for a SPI device.
+Because SPI is not strictly standardized, different companies use different
+modes, and they describe what mode they use in different ways. Some datasheets
+may directly tell you the clock polarity and phase, but in this case, the
+datasheet is not so direct. If all else fails, almost all IC datasheets with a
+serial communication protocol will have a timing diagram that shows how the 
+communication works at the logical level (1s and 0s). With a good understanding 
+of clock polarity and phase, we can use the timing diagram to figure out the 
+mode. That said, it's very easy to make a mistake here, so debug this early on
+if you're having issues. Sometimes, it's easiest to just guess and check the
+mode.
+
+The timing diagram on this datasheet is conveniently found right under the
+header "Timing Diagram," so it's easy to find. The 
+
+### Byte Order
+
+### Register Addresses
+
+### Implementation
+
