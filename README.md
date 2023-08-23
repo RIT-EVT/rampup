@@ -1,7 +1,5 @@
 # Rampup Project
 
-//TODO: Add explanations of how to get info out of datasheets
-
 ## Overview
 
 Hello and welcome to EVT! This project is designed to give you a look into what
@@ -95,6 +93,7 @@ matches what is output over UART.
 - Set up the UART code before finishing your TMP117 implementation, so you can
 use the target to test.
 - Look at the I2C sample in EVT-core for an example.
+- Combine the two bytes you read into a single 16-bit integer
 - Read the Saleae documentation.
 
 ### Completion
