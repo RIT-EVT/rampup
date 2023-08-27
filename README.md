@@ -43,10 +43,14 @@ library. The only file you'll need to modify is `targets/phase1/main.cpp`.
 2. Print the sum of the two numbers over UART.
 
 ### Suggestions
-- Be sure you know how to open a serial console.
+- Read the [Nucleo documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/stm32-nucleo).
+- Be sure you know how to open a serial console. (Documented 
+[here](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/running-code))
     - PuTTY for Windows users
     - `screen` for MacOS/Linux
-- Read over the UART documentation.
+- Read over the [UART documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/universal-synchronousasynchronous-receivertransmitter-usartuart).
 - Copy code from the echo sample for a starting point.
 - Look up standard C++ functions for converting from character array to
   integer.
@@ -89,12 +93,15 @@ UART.
 matches what is output over UART.
 
 ### Suggestions
-- Read the I2C documentation.
+- Read the [I2C documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/inter-integrated-circuit-i2c?authuser=0).
+- Read the datasheets.md section about the TMP117 datasheet.
 - Set up the UART code before finishing your TMP117 implementation, so you can
 use the target to test.
 - Look at the I2C sample in EVT-core for an example.
-- Combine the two bytes you read into a single 16-bit integer
-- Read the Saleae documentation.
+- Combine the two bytes you read into a single 16-bit integer.
+- Read the [Saleae documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/saleae-logic-analyzer?authuser=0).
 
 ### Completion
 When believe you've gotten everything working, try holding your thumb against
@@ -130,11 +137,14 @@ you'll also get to run it on a DEV1 Powertrain Voltage Controller (PVC).
 
 
 ### Task Breakdown
-1. Write the header file for `MAX22530`, so that it can be used to read voltages
+1. Read the [SPI documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/serial-peripheral-interface-spi?authuser=0).
+2. Read the datasheets.md section about the MAX22530 datasheet.
+3. Write the header file for `MAX22530`, so that it can be used to read voltages
 from each channel.
-2. Implement the functions defined in the header file.
-3. Write the target code to call the functions and print all voltages over UART.
-4. Use the Saleae to decode the waveforms on CS, SCL, MOSI, and MISO and confirm
+4. Implement the functions defined in the header file.
+5. Write the target code to call the functions and print all voltages over UART.
+6. Use the Saleae to decode the waveforms on CS, SCL, MOSI, and MISO and confirm
 the data matches what is output over UART.
 
 ### Suggestions
@@ -207,13 +217,19 @@ matches the data that should be sent.
 7. Use the Oscilloscope to see the CAN messages on CAN high and low.
 
 ### Suggestions
-- Read the CAN documentation.
+- Read the [CAN documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can?authuser=0).
+- Read the [CANopen documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can/canopen).
 - Look at the canopen_sample in EVT-core for an example.
 - If the HUDL doesn't work right away, debug the output with the PEAK can dongle
 and the Saleae.
-- Read the FUN-E SNAIL documentation.
-- Read the PEAK dongle documentation.
-- Read the oscilloscope documentation.
+- Read the [FUN-E SNAIL documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/fun-e-snail?authuser=0).
+- Read the [PEAK dongle documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/peak-can-viewer?authuser=0).
+- Read the [oscilloscope documentation](
+https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/oscilloscope?authuser=0).
 
 ### Completion
 Once you have all the code written, you can start trying out all the testing
