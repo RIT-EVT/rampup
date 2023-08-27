@@ -7,10 +7,12 @@ int main() {
 
     // Set up UART
 
-    // Declare an array of characters to store user input
+    // Declare two arrays of characters to store user input
 
     while (1) {
         // Read user input
+
+        // Convert the two character arrays to uint64_t
 
         // Output the sum of the two numbers
     }
