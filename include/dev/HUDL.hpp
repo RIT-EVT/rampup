@@ -265,7 +265,7 @@ namespace rampup {
                 {
                         .Key = CO_KEY(0x1600, 3, CO_UNSIGNED32 | CO_OBJ_D__R_),
                         .Type = nullptr,
-                        .Data = CO_LINK(0x2100, 2, 16), // Volate Three
+                        .Data = CO_LINK(0x2100, 2, 16), // Voltage Three
                 },
                 {
                         .Key = CO_KEY(0x1600, 4, CO_UNSIGNED32 | CO_OBJ_D__R_),

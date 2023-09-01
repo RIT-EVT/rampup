@@ -44,14 +44,6 @@ void canInterrupt(IO::CANMessage& message, void* priv) {
     EVT::core::types::FixedQueue<CANOPEN_QUEUE_SIZE, IO::CANMessage>* queue =
             (EVT::core::types::FixedQueue<CANOPEN_QUEUE_SIZE, IO::CANMessage>*) priv;
 
-    //    // Log raw received data
-    //    log::LOGGER.log(log::Logger::LogLevel::DEBUG, "Got RAW message from %X of length %d with data: ", message.getId(), message.getDataLength());
-    //
-    //    uint8_t* data = message.getPayload();
-    //    for (int i = 0; i < message.getDataLength(); i++) {
-    //        log::LOGGER.log(log::Logger::LogLevel::DEBUG, "%X ", *data);
-    //        data++;
-    //    }
     if (queue != nullptr) {
         queue->append(message);
     }
@@ -116,8 +108,7 @@ int main() {
 
     devices[0]->writePin(IO::GPIO::State::HIGH);
 
-    auto& hudl_spi = IO::getSPI<IO::Pin::SPI_SCK, IO::Pin::SPI_MOSI>(
-            devices, deviceCount);
+    auto& hudl_spi = IO::getSPI<IO::Pin::SPI_SCK, IO::Pin::SPI_MOSI>(devices, deviceCount);
 
     IO::PWM& brightness = IO::getPWM<IO::Pin::PC_0>();
     brightness.setPeriod(1);
@@ -189,19 +180,15 @@ int main() {
 
     hudl.initLCD();
 
-    uint8_t displayCounter = 0;
     while (true) {
-        if (displayCounter >= 100) {
-            displayCounter = 0;
-            hudl.updateLCD();
-        } else {
-            displayCounter++;
-        }
+        hudl.updateLCD();
 
         CONodeProcess(&canNode);
         // Update the state of timer based events
         COTmrService(&canNode.Tmr);
         // Handle executing timer events that have elapsed
         COTmrProcess(&canNode.Tmr);
+
+        time::wait(10);
     }
 }
