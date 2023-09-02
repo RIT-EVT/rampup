@@ -18,7 +18,7 @@ namespace rampup {
  */
 class RampupBoard {
 public:
-    /** Rampup Board Pinout */
+/** Rampup Board Pinout */
     static constexpr IO::Pin UART_TX_PIN = IO::Pin::UART_TX;
     static constexpr IO::Pin UART_RX_PIN = IO::Pin::UART_RX;
     static constexpr IO::Pin CAN_TX_PIN = IO::Pin::PA_12;
@@ -52,7 +52,7 @@ private:
      * Have to know the size of the object dictionary for initialization
      * process.
      */
-    static constexpr uint8_t OBJECT_DICTIONARY_SIZE = 31;
+    static constexpr uint8_t OBJECT_DICTIONARY_SIZE = 30;
 
     /**
      * The object dictionary itself. Will be populated by this object during
@@ -221,7 +221,7 @@ private:
         {
             .Key = CO_KEY(0x1A01, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
             .Type = nullptr,
-            .Data = CO_LINK(0x2100, 4, 16),
+            .Data = CO_LINK(0x2101, 0, 16),
         },
 
         // User defined data, this will be where we put elements that can be
@@ -247,15 +247,9 @@ private:
             .Data = (uintptr_t) nullptr /*Replace with address of fourth voltage*/,
         },
         {
-            .Key = CO_KEY(0x2100, 4, CO_UNSIGNED16 | CO_OBJ___PRW),
+            .Key = CO_KEY(0x2101, 0, CO_UNSIGNED16 | CO_OBJ___PRW),
             .Type = nullptr,
             .Data = (uintptr_t) nullptr /*Replace with address of temperature*/,
-        },
-
-        {
-            .Key = CO_KEY(0x1017, 0, CO_UNSIGNED16 | CO_OBJ_D__R_),
-            .Type = CO_THB_PROD,
-            .Data = (uintptr_t) 1000,
         },
 
         // End of dictionary marker

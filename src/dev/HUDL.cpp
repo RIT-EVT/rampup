@@ -57,12 +57,12 @@ namespace rampup {
     void HUDL::updateLCD() {
         for(int x = 0; x < 4; x ++) {
             char voltage[9];
-            std::sprintf(voltage, "%hu.%hu v", voltages[x] / 10, voltages[x] % 10);
+            std::sprintf(voltage, "%d", voltages[x]);
             lcd.setTextForSection(x, voltage);
         }
 
         char temp[9];
-        std::sprintf(temp, "%hu.%hu C", temperature / 100, temperature % 100);
-        lcd.setTextForSection(5, temp);
+        std::sprintf(temp, "%d", temperature);
+        lcd.setTextForSection(4, temp);
     }
 }// namespace HUDL
