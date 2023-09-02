@@ -4,8 +4,8 @@
 
 #include <Canopen/co_core.h>
 
-#include <EVT/io/types/CANMessage.hpp>
 #include <EVT/io/CANopen.hpp>
+#include <EVT/io/types/CANMessage.hpp>
 
 namespace IO = EVT::core::IO;
 
@@ -127,6 +127,5 @@ int main() {
         // Handle executing timer events that have elapsed
 
         // Wait 100 ms
-
     }
 }
