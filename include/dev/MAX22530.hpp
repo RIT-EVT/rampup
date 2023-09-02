@@ -13,9 +13,8 @@ public:
 
 private:
     // Private member variables
-
 };
 
-}// namespace PreCharge
+}// namespace rampup
 
 #endif//MAX22530_HPP
