@@ -18,7 +18,7 @@ namespace rampup {
  */
 class RampupBoard {
 public:
-/** Rampup Board Pinout */
+    /** Rampup Board Pinout */
     static constexpr IO::Pin UART_TX_PIN = IO::Pin::UART_TX;
     static constexpr IO::Pin UART_RX_PIN = IO::Pin::UART_RX;
     static constexpr IO::Pin CAN_TX_PIN = IO::Pin::PA_12;

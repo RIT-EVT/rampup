@@ -42,7 +42,7 @@ const uint8_t deviceCount = 1;
 // create a can interrupt handler
 void canInterrupt(IO::CANMessage& message, void* priv) {
     EVT::core::types::FixedQueue<CANOPEN_QUEUE_SIZE, IO::CANMessage>* queue =
-            (EVT::core::types::FixedQueue<CANOPEN_QUEUE_SIZE, IO::CANMessage>*) priv;
+        (EVT::core::types::FixedQueue<CANOPEN_QUEUE_SIZE, IO::CANMessage>*) priv;
 
     if (queue != nullptr) {
         queue->append(message);
@@ -155,16 +155,16 @@ int main() {
 
     //setup CANopen Node
     CO_NODE_SPEC canSpec = {
-            .NodeId = rampup::HUDL::NODE_ID,
-            .Baudrate = IO::CAN::DEFAULT_BAUD,
-            .Dict = hudl.getObjectDictionary(),
-            .DictLen = hudl.getObjectDictionarySize(),
-            .EmcyCode = NULL,
-            .TmrMem = appTmrMem,
-            .TmrNum = 16,
-            .TmrFreq = 1,
-            .Drv = &canStackDriver,
-            .SdoBuf = reinterpret_cast<uint8_t*>(&sdoBuffer[0]),
+        .NodeId = rampup::HUDL::NODE_ID,
+        .Baudrate = IO::CAN::DEFAULT_BAUD,
+        .Dict = hudl.getObjectDictionary(),
+        .DictLen = hudl.getObjectDictionarySize(),
+        .EmcyCode = NULL,
+        .TmrMem = appTmrMem,
+        .TmrNum = 16,
+        .TmrFreq = 1,
+        .Drv = &canStackDriver,
+        .SdoBuf = reinterpret_cast<uint8_t*>(&sdoBuffer[0]),
     };
 
     CO_NODE canNode;
