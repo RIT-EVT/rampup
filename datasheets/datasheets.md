@@ -63,18 +63,24 @@ Here, it has the address written as "00h", but it means the same thing as 0x00.
 The prefix "0x" and the suffix "h" are both just used to indicate that the
 number is hexadecimal instead of decimal.
 
+### Register Details
 After the table, there are a few sections that go into detail about each 
 register. You will need this information in some cases, but here, the register
-just stores a two-byte integer that we want to read, so it's straightforward.
+just stores a two-byte integer that we want to read, so it's fairly 
+straightforward. You will just need to be sure you use the multi-byte 
+`readReg()` method of the `I2C` class, not the single-byte read.
 
 ### Implementation
 Based on this information from the datasheet, you're going to want an I2C call
-that looks something like `i2c.readReg(0x48, 0x00, &outputBuffer);`. This will
-attempt to read the data in register 0x00 from the device at address 0x48. 
-`outputBuffer` should be a two-byte buffer used to store the output, which you
-can create with `uint8_t outputBuf[2];`. If everything goes well, it will then
-put the data into the `outputBuffer`. If you're having issues with this, set up
-the Saleae to check if the signals being sent match the values in this call.
+that looks something like 
+`i2c.readReg(0x48, registerBuffer, 1, outputBuffer, 2);`. This will attempt to 
+read from the slave device at address 0x48 on the I2C bus. From this device, it 
+will read the data at the address stored in `registerBuffer`, which you should 
+set to 0x00. `outputBuffer` should be a two-byte buffer used to store the 
+output, which you can create with `uint8_t outputBuf[2];`. If everything goes 
+well, it will then put the data into the `outputBuffer`. If you're having issues
+with this, set up the Saleae to check if the signals being sent match the values
+in this call.
 
 ## MAX22530 Datasheet
 
