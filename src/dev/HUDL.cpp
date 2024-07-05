@@ -46,14 +46,6 @@ void HUDL::initLCD() {
     lcd.displaySectionHeaders();
 }
 
-CO_OBJ_T* HUDL::getObjectDictionary() {
-    return &objectDictionary[0];
-}
-
-uint16_t HUDL::getObjectDictionarySize() const {
-    return OBJECT_DICTIONARY_SIZE;
-}
-
 void HUDL::updateLCD() {
     for (int x = 0; x < 4; x++) {
         char voltage[9];
