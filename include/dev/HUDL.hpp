@@ -3,12 +3,12 @@
 
 #include <stdint.h>
 
-#include <co_core.h>
 #include <EVT/dev/LCD.hpp>
 #include <EVT/io/CANDevice.hpp>
 #include <EVT/io/CANOpenMacros.hpp>
 #include <EVT/io/GPIO.hpp>
 #include <EVT/io/SPI.hpp>
+#include <co_core.h>
 
 namespace IO = EVT::core::IO;
 namespace DEV = EVT::core::DEV;

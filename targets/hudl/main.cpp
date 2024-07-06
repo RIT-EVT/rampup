@@ -117,7 +117,7 @@ int main() {
     CO_IF_CAN_DRV canDriver;
     CO_IF_TIMER_DRV timerDriver;
     CO_IF_NVM_DRV nvmDriver;
-    
+
     CO_NODE canNode;
 
     // IO::getCANopenCANDriver(&can, &canOpenQueue, &canDriver);
