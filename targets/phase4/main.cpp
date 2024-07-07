@@ -31,7 +31,7 @@ void canInterrupt(IO::CANMessage& message, void* priv) {
 // Create array of 1 GPIO pointer for the chip select GPIO
 
 ///////////////////////////////////////////////////////////////////////////////
-// Main program. This includes all the logic to initalized the necessary 
+// Main program. This includes all the logic to initalized the necessary
 //hardware and run the main processing loop.
 ///////////////////////////////////////////////////////////////////////////////
 int main() {

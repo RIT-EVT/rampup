@@ -52,7 +52,7 @@ extern "C" void HAL_CAN_RxFifo1FullCallback(CAN_HandleTypeDef* hcan) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Main program. This includes all the logic to initalized the necessary 
+// Main program. This includes all the logic to initalized the necessary
 //hardware and run the main processing loop.
 ///////////////////////////////////////////////////////////////////////////////
 int main() {
@@ -121,7 +121,7 @@ int main() {
     CO_IF_CAN_DRV canDriver;
     CO_IF_TIMER_DRV timerDriver;
     CO_IF_NVM_DRV nvmDriver;
-    
+
     // Make CAN node
     CO_NODE canNode;
 
