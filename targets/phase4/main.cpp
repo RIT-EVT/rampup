@@ -1,5 +1,5 @@
 /**
- * This is the main target for the rampup project.
+ * This is the main target for the rampup phase4 project.
  */
 
 #include <EVT/io/CANopen.hpp>
@@ -30,6 +30,10 @@ void canInterrupt(IO::CANMessage& message, void* priv) {
 
 // Create array of 1 GPIO pointer for the chip select GPIO
 
+///////////////////////////////////////////////////////////////////////////////
+// Main program. This includes all the logic to initalized the necessary 
+//hardware and run the main processing loop.
+///////////////////////////////////////////////////////////////////////////////
 int main() {
     // Initialize system
 
@@ -58,38 +62,21 @@ int main() {
     // Attempt to join the CAN network
 
     ///////////////////////////////////////////////////////////////////////////
-    // Setup CAN configuration, this handles making drivers, applying settings.
+    // Setup CANOpen, this handles making drivers, applying settings.
     // And generally creating the CANopen stack node which is the interface
     // between the application (the code we write) and the physical CAN network
     ///////////////////////////////////////////////////////////////////////////
     // Make drivers
+
+    // Make CAN node
 
     // Initialize all the CANOpen drivers.
 
     // Initialize the CANOpen node we are using.
 
     // Set CAN mode
-    /*
-    CO_NODE_SPEC canSpec = {
-        .NodeId = .NODE_ID,
-        .Baudrate = IO::CAN::DEFAULT_BAUD,
-        .Dict = .getObjectDictionary(), Add call to RampupBoard instance
-        .DictLen = .getNumElements(),
-        .EmcyCode = NULL,
-        .TmrMem = appTmrMem,
-        .TmrNum = 16,
-        .TmrFreq = 100,
-        .Drv = &canStackDriver,
-        .SdoBuf = reinterpret_cast<uint8_t*>(&sdoBuffer[0]),
-    };
 
-    CO_NODE canNode;
-
-    CONodeInit(&canNode, &canSpec);
-    CONodeStart(&canNode);
-    CONmtSetMode(&canNode.Nmt, CO_OPERATIONAL);
-    */
-
+    // Main Loop
     while (1) {
         // Run rampup board process
 

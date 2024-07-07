@@ -3,12 +3,12 @@
 
 #include <stdint.h>
 
-#include <co_core.h>
 #include <EVT/dev/LCD.hpp>
 #include <EVT/io/CANDevice.hpp>
 #include <EVT/io/CANOpenMacros.hpp>
 #include <EVT/io/GPIO.hpp>
 #include <EVT/io/SPI.hpp>
+#include <co_core.h>
 
 namespace IO = EVT::core::IO;
 namespace DEV = EVT::core::DEV;
@@ -163,58 +163,30 @@ private:
         /**
          * *** START RPDO SETTINGS ***
          */
+
         /**
          * RampUP Board RPDO 0 Settings
-         * 0: RPDO number in index and total number of sub indexes.
-         * 1: The COB-ID to receive PDOs from.
-         * 2: transmission trigger
+         * 0: RPDO number, 0
+         * 1: The PDO number to receive, 0
+         * 2: The COB-ID to receive PDOs from.
+         * 3: transmission trigger
          */
         RECEIVE_PDO_SETTINGS_OBJECT_140X(0, 0, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
 
-        // {
-        //     .Key = CO_KEY(0x1400, 0, CO_UNSIGNED8 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) 3,
-        // },
-        // {
-        //     .Key = CO_KEY(0x1400, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) CO_COBID_TPDO_DEFAULT(0) + RAMPUP_NODE_ID,
-        // },
-        // {
-        //     .Key = CO_KEY(0x1400, 2, CO_UNSIGNED8 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) 0xFE,
-        // },
-
         /**
          * RampUP Board RPDO 1 Settings
-         * 0: RPDO number in index and total number of sub indexes.
-         * 1: The COB-ID to receive PDOs from.
-         * 2: transmission trigger
+         * 0: RPDO number, 1
+         * 1: The PDO number to receive, 1
+         * 2: The COB-ID to receive PDOs from.
+         * 3: transmission trigger
          */
-        RECEIVE_PDO_SETTINGS_OBJECT_140X(0, 1, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
-        // {
-        //     .Key = CO_KEY(0x1401, 0, CO_UNSIGNED8 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) 3,
-        // },
-        // {
-        //     .Key = CO_KEY(0x1401, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) CO_COBID_TPDO_DEFAULT(1) + RAMPUP_NODE_ID,
-        // },
-        // {
-        //     .Key = CO_KEY(0x1401, 2, CO_UNSIGNED8 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) 0xFE,
-        // },
+        RECEIVE_PDO_SETTINGS_OBJECT_140X(1, 1, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
 
         /**
          * *** START RPDO MAPPING ***
          */
         /**
-         * RampUP Board RPODO 0 Mapping
+         * RampUP Board RPDO 0 Mapping
          * Determines the PDO messages to receive when RPDO0 is triggered
          * 0: The number of PDO message associated with the RPDO
          * 1: Voltage One
@@ -227,49 +199,15 @@ private:
         RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 2, PDO_MAPPING_UNSIGNED16),
         RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 3, PDO_MAPPING_UNSIGNED16),
         RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 4, PDO_MAPPING_UNSIGNED16),
-        // {
-        //     .Key = CO_KEY(0x1600, 0, CO_UNSIGNED8 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) 4,
-        // },
-        // {
-        //     .Key = CO_KEY(0x1600, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = CO_LINK(0x2100, 0, 16),// Voltage One
-        // },
-        // {
-        //     .Key = CO_KEY(0x1600, 2, CO_UNSIGNED32 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = CO_LINK(0x2100, 1, 16),// Voltage Two
-        // },
-        // {
-        //     .Key = CO_KEY(0x1600, 3, CO_UNSIGNED32 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = CO_LINK(0x2100, 2, 16),// Voltage Three
-        // },
-        // {
-        //     .Key = CO_KEY(0x1600, 4, CO_UNSIGNED32 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = CO_LINK(0x2100, 3, 16),// Voltage Four
-        // },
+
         /**
-                 * RampUP Board RPDO 1 Mapping
-                 * Determines the PDO messages to receive when RPDO1 is triggered
-                 * 0: The number of PDO message associated with the RPDO
-                 * 1: Temperature
-                 */
+         * RampUP Board RPDO 1 Mapping
+         * Determines the PDO messages to receive when RPDO1 is triggered
+         * 0: The number of PDO message associated with the RPDO
+         * 1: Temperature
+         */
         RECEIVE_PDO_MAPPING_START_KEY_16XX(1, 1),
         RECEIVE_PDO_MAPPING_ENTRY_16XX(1, 1, PDO_MAPPING_UNSIGNED16),
-        // {
-        //     .Key = CO_KEY(0x1601, 0, CO_UNSIGNED8 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) 1,
-        // },
-        // {
-        //     .Key = CO_KEY(0x1601, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-        //     .Type = nullptr,
-        //     .Data = CO_LINK(0x2101, 0, 16),// Temperature
-        // },
 
         /**
          * *** START VARIABLE LINKING ***
@@ -285,35 +223,10 @@ private:
         DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, &voltages[2]),
         DATA_LINK_21XX(0, 4, CO_TUNSIGNED16, &voltages[3]),
 
-        // {
-        //     .Key = CO_KEY(0x2100, 0, CO_UNSIGNED16 | CO_OBJ___PRW),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) &voltages[0],
-        // },
-        // {
-        //     .Key = CO_KEY(0x2100, 1, CO_UNSIGNED16 | CO_OBJ___PRW),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) &voltages[1],
-        // },
-        // {
-        //     .Key = CO_KEY(0x2100, 2, CO_UNSIGNED16 | CO_OBJ___PRW),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) &voltages[2],
-        // },
-        // {
-        //     .Key = CO_KEY(0x2100, 3, CO_UNSIGNED16 | CO_OBJ___PRW),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) &voltages[3],
-        // },
         /* Assign the data we mapped in the RampUP Board RPDO 1 Mapping to variables */
         DATA_LINK_START_KEY_21XX(1, 1),
         DATA_LINK_21XX(1, 1, CO_TUNSIGNED16, &temperature),
-        // {
-        //     .Key = CO_KEY(0x2101, 0, CO_UNSIGNED16 | CO_OBJ___PRW),
-        //     .Type = nullptr,
-        //     .Data = (uintptr_t) &temperature,
-        // },
-        // END THE DICTIONARY
+
         CO_OBJ_DICT_ENDMARK,
     };
 };

@@ -51,6 +51,10 @@ extern "C" void HAL_CAN_RxFifo1FullCallback(CAN_HandleTypeDef* hcan) {
     log::LOGGER.log(log::Logger::LogLevel::DEBUG, "RX Full");
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Main program. This includes all the logic to initalized the necessary 
+//hardware and run the main processing loop.
+///////////////////////////////////////////////////////////////////////////////
 int main() {
     // Initialize system
     EVT::core::platform::init();
@@ -107,7 +111,7 @@ int main() {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // Setup CAN configuration, this handles making drivers, applying settings.
+    // Setup CANOpen, this handles making drivers, applying settings.
     // And generally creating the CANopen stack node which is the interface
     // between the application (the code we write) and the physical CAN network
     ///////////////////////////////////////////////////////////////////////////
@@ -118,29 +122,8 @@ int main() {
     CO_IF_TIMER_DRV timerDriver;
     CO_IF_NVM_DRV nvmDriver;
     
+    // Make CAN node
     CO_NODE canNode;
-
-    // IO::getCANopenCANDriver(&can, &canOpenQueue, &canDriver);
-    // IO::getCANopenTimerDriver(&timer, &timerDriver);
-    // IO::getCANopenNVMDriver(&nvmDriver);
-
-    // canStackDriver.Can = &canDriver;
-    // canStackDriver.Timer = &timerDriver;
-    // canStackDriver.Nvm = &nvmDriver;
-
-    //setup CANopen Node
-    // CO_NODE_SPEC canSpec = {
-    //     .NodeId = rampup::HUDL::NODE_ID,
-    //     .Baudrate = IO::CAN::DEFAULT_BAUD,
-    //     .Dict = hudl.getObjectDictionary(),
-    //     .DictLen = hudl.getObjectDictionarySize(),
-    //     .EmcyCode = NULL,
-    //     .TmrMem = appTmrMem,
-    //     .TmrNum = 16,
-    //     .TmrFreq = 1,
-    //     .Drv = &canStackDriver,
-    //     .SdoBuf = reinterpret_cast<uint8_t*>(&sdoBuffer[0]),
-    // };
 
     // Initialize all the CANOpen drivers.
     IO::initializeCANopenDriver(&canOpenQueue, &can, &timer, &canStackDriver, &nvmDriver, &timerDriver, &canDriver);
