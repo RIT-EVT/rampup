@@ -160,7 +160,7 @@ private:
         HEARTBEAT_PRODUCER_1017(2000),
         IDENTITY_OBJECT_1018,
         SDO_CONFIGURATION_1200,
-        
+
         //**************************** Begin RPDO Settings ****************************//
         /**
          * RampupBoard RPDO 0 Settings:
@@ -204,7 +204,7 @@ private:
          */
         RECEIVE_PDO_MAPPING_START_KEY_16XX(1, 1),
         RECEIVE_PDO_MAPPING_ENTRY_16XX(1, 1, PDO_MAPPING_UNSIGNED16),
-        
+
         //**************************** Begin Data Linking *****************************//
         /**
          * User defined data. Put elements that can be accessed via SDO
