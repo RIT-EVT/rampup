@@ -1,5 +1,5 @@
 /**
- * This is the main target for the rampup phase4 project.
+ * This is the main target for the rampup phase 4 project.
  */
 
 #include <EVT/io/CANopen.hpp>
@@ -7,10 +7,10 @@
 
 namespace IO = EVT::core::IO;
 
-///////////////////////////////////////////////////////////////////////////////
-// EVT-core CAN callback and CAN setup. This will include logic to set
-// aside CANopen messages into a specific queue
-///////////////////////////////////////////////////////////////////////////////
+/****************************************************************************************
+ * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen 
+ * messages into a specific queue.
+***************************************************************************************/
 
 /**
  * Interrupt handler to get CAN messages. A function pointer to this function
@@ -30,58 +30,60 @@ void canInterrupt(IO::CANMessage& message, void* priv) {
 
 // Create array of 1 GPIO pointer for the chip select GPIO
 
-///////////////////////////////////////////////////////////////////////////////
-// Main program. This includes all the logic to initalized the necessary
-//hardware and run the main processing loop.
-///////////////////////////////////////////////////////////////////////////////
+/****************************************************************************************
+ * Main program. This includes all the logic to initalized the necessary hardware and run
+ * the main processing loop.
+ ***************************************************************************************/
 int main() {
-    // Initialize system
+    // Initialize system.
 
-    // Set up UART
+    // Set up UART.
 
-    // Set up I2C
+    // Set up I2C.
 
-    // Create TMP117 instance
+    // Set up chip select GPIO and put in array.
 
-    // Set up chip select GPIO and put in array
+    // Set up and configure SPI (<10 MHz, Mode 0, MSB first).
 
-    // Set up and configure SPI (<10 MHz, Mode 0, MSB first)
+    // Initialize the timer.
 
-    // Create MAX22530 instance
+    // Create TMP117 instance.
 
-    // Create RampupBoard instance
+    // Create MAX22530 instance.
 
-    // Create queue to store CANopen messages that will be populated by the EVT-core CAN interrupt
+    // Create RampupBoard instance.
 
-    // Initialize CAN, add an IRQ which will add messages to the queue above
+    /************************************************************************************
+     * Setup CAN configuration, this handles making drivers, applying settings. And 
+     * generally creating the CANopen stack node which is the interface between the 
+     * application (the code we write) and the physical CAN network.
+     ***********************************************************************************/
+    // Create queue to store CANopen messages that will be populated by the EVT-core CAN interrupt.
 
-    // Initialize the timer
+    // Initialize CAN, add an IRQ which will add messages to the queue above.
 
-    // Reserved memory for CANopen stack usage
+    // Reserved memory for CANopen stack usage.
 
-    // Attempt to join the CAN network
+    // Reserve CAN drivers.
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Setup CANOpen, this handles making drivers, applying settings.
-    // And generally creating the CANopen stack node which is the interface
-    // between the application (the code we write) and the physical CAN network
-    ///////////////////////////////////////////////////////////////////////////
-    // Make drivers
+    // Reserve CAN node.
 
-    // Make CAN node
+    // Attempt to join the CAN network.
 
     // Initialize all the CANOpen drivers.
 
-    // Initialize the CANOpen node we are using.
+    // Initialize the CANOpen node.
 
-    // Set CAN mode
+    // Set the node to operational mode.
 
-    // Main Loop
+    /**************************************************************************
+     *                               Main loop
+     *************************************************************************/
     while (1) {
-        // Run rampup board process
+        // Run rampup board process.
 
-        // Process incoming CAN messages
+        // Process CAN messages.
 
-        // Wait 100 ms
+        // Wait 100 ms.
     }
 }

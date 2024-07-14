@@ -155,18 +155,16 @@ private:
     static constexpr uint16_t OBJECT_DICTIONARY_SIZE = 33;
 
     CO_OBJ_T objectDictionary[OBJECT_DICTIONARY_SIZE + 1] = {
+        //*********************** Begin Required Board Entries ************************//
         MANDATORY_IDENTIFICATION_ENTRIES_1000_1014,
         HEARTBEAT_PRODUCER_1017(2000),
         IDENTITY_OBJECT_1018,
         SDO_CONFIGURATION_1200,
-
+        
+        //**************************** Begin RPDO Settings ****************************//
         /**
-         * *** START RPDO SETTINGS ***
-         */
-
-        /**
-         * RampUP Board RPDO 0 Settings
-         * 0: RPDO number, 0
+         * RampupBoard RPDO 0 Settings:
+         * 0: The RPDO number, 0
          * 1: The PDO number to receive, 0
          * 2: The COB-ID to receive PDOs from.
          * 3: transmission trigger
@@ -174,25 +172,23 @@ private:
         RECEIVE_PDO_SETTINGS_OBJECT_140X(0, 0, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
 
         /**
-         * RampUP Board RPDO 1 Settings
-         * 0: RPDO number, 1
+         * RampupBoard RPDO 1 Settings:
+         * 0: The RPDO number, 1
          * 1: The PDO number to receive, 1
          * 2: The COB-ID to receive PDOs from.
          * 3: transmission trigger
          */
         RECEIVE_PDO_SETTINGS_OBJECT_140X(1, 1, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
 
+        //***************************** Begin RPDO Maping *****************************//
         /**
-         * *** START RPDO MAPPING ***
-         */
-        /**
-         * RampUP Board RPDO 0 Mapping
-         * Determines the PDO messages to receive when RPDO0 is triggered
+         * RampupBoard RPDO 0 Mapping:
+         * Determines the PDO messages to receive when RPDO 0 is triggered
          * 0: The number of PDO message associated with the RPDO
-         * 1: Voltage One
-         * 2: Voltage Two
-         * 3: Voltage Three
-         * 4: Voltage Four
+         * 1: Link to the first voltage PDO data.
+         * 2: Link to the second voltage PDO data.
+         * 3: Link to the third voltage PDO data.
+         * 4: Link to the fourth voltage PDO data.
          */
         RECEIVE_PDO_MAPPING_START_KEY_16XX(0, 4),
         RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 1, PDO_MAPPING_UNSIGNED16),
@@ -201,32 +197,31 @@ private:
         RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 4, PDO_MAPPING_UNSIGNED16),
 
         /**
-         * RampUP Board RPDO 1 Mapping
-         * Determines the PDO messages to receive when RPDO1 is triggered
+         * RampupBoard RPDO 1 Mapping
+         * Determines the PDO messages to receive when RPDO 1 is triggered
          * 0: The number of PDO message associated with the RPDO
-         * 1: Temperature
+         * 1: Link to the temperature PDO data.
          */
         RECEIVE_PDO_MAPPING_START_KEY_16XX(1, 1),
         RECEIVE_PDO_MAPPING_ENTRY_16XX(1, 1, PDO_MAPPING_UNSIGNED16),
-
-        /**
-         * *** START VARIABLE LINKING ***
-         */
+        
+        //**************************** Begin Data Linking *****************************//
         /**
          * User defined data. Put elements that can be accessed via SDO
          * and depending on the configuration PDO
          */
-        /* Assign the data we mapped in the RampUP Board RPDO 0 Mapping to variables */
+        /* Assign the data we mapped in the RampupBoard RPDO 0 Mapping to variables */
         DATA_LINK_START_KEY_21XX(0, 4),
         DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, &voltages[0]),
         DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, &voltages[1]),
         DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, &voltages[2]),
         DATA_LINK_21XX(0, 4, CO_TUNSIGNED16, &voltages[3]),
 
-        /* Assign the data we mapped in the RampUP Board RPDO 1 Mapping to variables */
+        /* Assign the data we mapped in the RampupBoard RPDO 1 Mapping to variables */
         DATA_LINK_START_KEY_21XX(1, 1),
         DATA_LINK_21XX(1, 1, CO_TUNSIGNED16, &temperature),
 
+        //*************************** End Object Dictionary ***************************//
         CO_OBJ_DICT_ENDMARK,
     };
 };
