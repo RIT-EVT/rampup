@@ -8,8 +8,8 @@
 #include <EVT/io/pin.hpp>
 #include <co_core.h>
 
-#include "dev/MAX22530.hpp"
-#include "dev/TMP117.hpp"
+#include <dev/MAX22530.hpp>
+#include <dev/TMP117.hpp>
 
 namespace IO = EVT::core::IO;
 
