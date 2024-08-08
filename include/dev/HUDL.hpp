@@ -1,12 +1,14 @@
 #ifndef _HUDL_
 #define _HUDL_
 
-#include <Canopen/co_core.h>
+#include <stdint.h>
+
 #include <EVT/dev/LCD.hpp>
-#include <EVT/io/CANopen.hpp>
+#include <EVT/io/CANDevice.hpp>
+#include <EVT/io/CANOpenMacros.hpp>
 #include <EVT/io/GPIO.hpp>
 #include <EVT/io/SPI.hpp>
-#include <stdint.h>
+#include <co_core.h>
 
 namespace IO = EVT::core::IO;
 namespace DEV = EVT::core::DEV;
@@ -18,7 +20,7 @@ namespace rampup {
  * for communicating with other devices on the CAN network and functionality
  * for displaying what a user wants to an LCD screen
  */
-class HUDL {
+class HUDL : public CANDevice {
 public:
     /**
          * The node ID used to identify the device on the CAN network.
@@ -40,18 +42,31 @@ public:
     void initLCD();
 
     /**
-         * Gets the object dictionary
-         *
-         * @return an object dictionary
-         */
-    CO_OBJ_T* getObjectDictionary();
+     * Get a pointer to the start of the object dictionary
+     *
+     * @return Pointer to the start of the object dictionary
+     */
+    CO_OBJ_T* getObjectDictionary() override {
+        return &objectDictionary[0];
+    };
 
     /**
-         * Gets the size of the Object Dictionary
-         *
-         * @return size of the Object Dictionary
-         */
-    uint16_t getObjectDictionarySize() const;
+     * Get the number of elements in the object dictionary.
+     *
+     * @return The number of elements in the object dictionary
+     */
+    uint8_t getNumElements() override {
+        return OBJECT_DICTIONARY_SIZE + 1;
+    };
+
+    /**
+    * Get the device's node ID
+    *
+    * @return The node ID of the can device.
+     */
+    uint8_t getNodeID() override {
+        return NODE_ID;
+    };
 
     /**
          * Updates the LCD display with values received from the CAN network
@@ -137,194 +152,77 @@ private:
     uint16_t voltages[4];
     uint16_t temperature;
 
-    static constexpr uint16_t OBJECT_DICTIONARY_SIZE = 25;
+    static constexpr uint16_t OBJECT_DICTIONARY_SIZE = 33;
 
     CO_OBJ_T objectDictionary[OBJECT_DICTIONARY_SIZE + 1] = {
-        // Sync ID, defaults to 0x80
-        {
-            CO_KEY(0x1005, 0, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            nullptr,
-            (uintptr_t) 0x80,
-        },
+        //*********************** Begin Required Board Entries ************************//
+        MANDATORY_IDENTIFICATION_ENTRIES_1000_1014,
+        HEARTBEAT_PRODUCER_1017(2000),
+        IDENTITY_OBJECT_1018,
+        SDO_CONFIGURATION_1200,
+
+        //**************************** Begin RPDO Settings ****************************//
+        /**
+         * RampupBoard RPDO 0 Settings:
+         * 0: The RPDO number, 0
+         * 1: The PDO number to receive, 0
+         * 2: The COB-ID to receive PDOs from.
+         * 3: transmission trigger
+         */
+        RECEIVE_PDO_SETTINGS_OBJECT_140X(0, 0, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
 
         /**
-                 * Information about the hardware , hard coded sample values for now
-                 * 1: Vendor ID
-                 * 2: Product Code
-                 * 3: Revision Number
-                 * 4: Serial Number
-                 */
-        {
-            .Key = CO_KEY(0x1018, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 0x10,
-        },
-        {
-            .Key = CO_KEY(0x1018, 2, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 0x11,
-        },
-        {
-            .Key = CO_KEY(0x1018, 3, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 0x12,
-        },
-        {
-            .Key = CO_KEY(0x1018, 4, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 0x13,
-        },
+         * RampupBoard RPDO 1 Settings:
+         * 0: The RPDO number, 1
+         * 1: The PDO number to receive, 1
+         * 2: The COB-ID to receive PDOs from.
+         * 3: transmission trigger
+         */
+        RECEIVE_PDO_SETTINGS_OBJECT_140X(1, 1, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
+
+        //***************************** Begin RPDO Maping *****************************//
+        /**
+         * RampupBoard RPDO 0 Mapping:
+         * Determines the PDO messages to receive when RPDO 0 is triggered
+         * 0: The number of PDO message associated with the RPDO
+         * 1: Link to the first voltage PDO data.
+         * 2: Link to the second voltage PDO data.
+         * 3: Link to the third voltage PDO data.
+         * 4: Link to the fourth voltage PDO data.
+         */
+        RECEIVE_PDO_MAPPING_START_KEY_16XX(0, 4),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 1, PDO_MAPPING_UNSIGNED16),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 2, PDO_MAPPING_UNSIGNED16),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 3, PDO_MAPPING_UNSIGNED16),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 4, PDO_MAPPING_UNSIGNED16),
 
         /**
-                 * SDO CAN message IDS.
-                 * 1: Client -> Server ID, default is 0x600 + NODE_ID
-                 * 2: Server -> Client ID, default is 0x580 + NODE_ID
-                 */
-        {
-            .Key = CO_KEY(0x1200, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 0x600 + NODE_ID,
-        },
-        {
-            .Key = CO_KEY(0x1200, 2, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 0x580 + NODE_ID,
-        },
+         * RampupBoard RPDO 1 Mapping
+         * Determines the PDO messages to receive when RPDO 1 is triggered
+         * 0: The number of PDO message associated with the RPDO
+         * 1: Link to the temperature PDO data.
+         */
+        RECEIVE_PDO_MAPPING_START_KEY_16XX(1, 1),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(1, 1, PDO_MAPPING_UNSIGNED16),
 
+        //**************************** Begin Data Linking *****************************//
         /**
-                 * *** START RPDO SETTINGS ***
-                 */
-        /**
-                 * RampUP Board RPDO 0 Settings
-                 * 0: RPDO number in index and total number of sub indexes.
-                 * 1: The COB-ID to receive PDOs from.
-                 * 2: transmission trigger
-                 */
-        {
-            .Key = CO_KEY(0x1400, 0, CO_UNSIGNED8 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 3,
-        },
-        {
-            .Key = CO_KEY(0x1400, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) CO_COBID_TPDO_DEFAULT(0) + RAMPUP_NODE_ID,
-        },
-        {
-            .Key = CO_KEY(0x1400, 2, CO_UNSIGNED8 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 0xFE,
-        },
-        /**
-                 * RampUP Board RPDO 1 Settings
-                 * 0: RPDO number in index and total number of sub indexes.
-                 * 1: The COB-ID to receive PDOs from.
-                 * 2: transmission trigger
-                 */
-        {
-            .Key = CO_KEY(0x1401, 0, CO_UNSIGNED8 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 3,
-        },
-        {
-            .Key = CO_KEY(0x1401, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) CO_COBID_TPDO_DEFAULT(1) + RAMPUP_NODE_ID,
-        },
-        {
-            .Key = CO_KEY(0x1401, 2, CO_UNSIGNED8 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 0xFE,
-        },
-        /**
-                 * *** START RPDO MAPPING ***
-                 */
-        /**
-                 * RampUP Board RPODO 0 Mapping
-                 * Determines the PDO messages to receive when RPDO0 is triggered
-                 * 0: The number of PDO message associated with the RPDO
-                 * 1: Voltage One
-                 * 2: Voltage Two
-                 * 3: Voltage Three
-                 * 4: Voltage Four
-                 */
-        {
-            .Key = CO_KEY(0x1600, 0, CO_UNSIGNED8 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 4,
-        },
-        {
-            .Key = CO_KEY(0x1600, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = CO_LINK(0x2100, 0, 16),// Voltage One
-        },
-        {
-            .Key = CO_KEY(0x1600, 2, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = CO_LINK(0x2100, 1, 16),// Voltage Two
-        },
-        {
-            .Key = CO_KEY(0x1600, 3, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = CO_LINK(0x2100, 2, 16),// Voltage Three
-        },
-        {
-            .Key = CO_KEY(0x1600, 4, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = CO_LINK(0x2100, 3, 16),// Voltage Four
-        },
-        /**
-                 * RampUP Board RPDO 1 Mapping
-                 * Determines the PDO messages to receive when RPDO1 is triggered
-                 * 0: The number of PDO message associated with the RPDO
-                 * 1: Temperature
-                 */
-        {
-            .Key = CO_KEY(0x1601, 0, CO_UNSIGNED8 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = (uintptr_t) 1,
-        },
-        {
-            .Key = CO_KEY(0x1601, 1, CO_UNSIGNED32 | CO_OBJ_D__R_),
-            .Type = nullptr,
-            .Data = CO_LINK(0x2101, 0, 16),// Temperature
-        },
-        /**
-                 * *** START VARIABLE LINKING ***
-                 */
-        /**
-                 * User defined data. Put elements that can be accessed via SDO
-                 * and depending on the configuration PDO
-                 */
-        /* Assign the data we mapped in the RampUP Board RPDO 0 Mapping to variables */
-        {
-            .Key = CO_KEY(0x2100, 0, CO_UNSIGNED16 | CO_OBJ___PRW),
-            .Type = nullptr,
-            .Data = (uintptr_t) &voltages[0],
-        },
-        {
-            .Key = CO_KEY(0x2100, 1, CO_UNSIGNED16 | CO_OBJ___PRW),
-            .Type = nullptr,
-            .Data = (uintptr_t) &voltages[1],
-        },
-        {
-            .Key = CO_KEY(0x2100, 2, CO_UNSIGNED16 | CO_OBJ___PRW),
-            .Type = nullptr,
-            .Data = (uintptr_t) &voltages[2],
-        },
-        {
-            .Key = CO_KEY(0x2100, 3, CO_UNSIGNED16 | CO_OBJ___PRW),
-            .Type = nullptr,
-            .Data = (uintptr_t) &voltages[3],
-        },
-        /* Assign the data we mapped in the RampUP Board RPDO 1 Mapping to variables */
-        {
-            .Key = CO_KEY(0x2101, 0, CO_UNSIGNED16 | CO_OBJ___PRW),
-            .Type = nullptr,
-            .Data = (uintptr_t) &temperature,
-        },
-        // END THE DICTIONARY
-        CO_OBJ_DIR_ENDMARK,
+         * User defined data. Put elements that can be accessed via SDO
+         * and depending on the configuration PDO
+         */
+        /* Assign the data we mapped in the RampupBoard RPDO 0 Mapping to variables */
+        DATA_LINK_START_KEY_21XX(0, 4),
+        DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, &voltages[0]),
+        DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, &voltages[1]),
+        DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, &voltages[2]),
+        DATA_LINK_21XX(0, 4, CO_TUNSIGNED16, &voltages[3]),
+
+        /* Assign the data we mapped in the RampupBoard RPDO 1 Mapping to variables */
+        DATA_LINK_START_KEY_21XX(1, 1),
+        DATA_LINK_21XX(1, 1, CO_TUNSIGNED16, &temperature),
+
+        //*************************** End Object Dictionary ***************************//
+        CO_OBJ_DICT_ENDMARK,
     };
 };
 

@@ -1,18 +1,16 @@
 /**
- * This is the main target for the rampup project.
+ * This is the main target for the rampup phase 4 project.
  */
-
-#include <Canopen/co_core.h>
 
 #include <EVT/io/CANopen.hpp>
 #include <EVT/io/types/CANMessage.hpp>
 
 namespace IO = EVT::core::IO;
 
-///////////////////////////////////////////////////////////////////////////////
-// EVT-core CAN callback and CAN setup. This will include logic to set
-// aside CANopen messages into a specific queue
-///////////////////////////////////////////////////////////////////////////////
+/****************************************************************************************
+ * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen 
+ * messages into a specific queue.
+***************************************************************************************/
 
 /**
  * Interrupt handler to get CAN messages. A function pointer to this function
@@ -30,102 +28,62 @@ void canInterrupt(IO::CANMessage& message, void* priv) {
         queue->append(message);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// CANopen specific Callbacks. Need to be defined in some location
-///////////////////////////////////////////////////////////////////////////////
-extern "C" void CONodeFatalError(void) {}
-
-extern "C" void COIfCanReceive(CO_IF_FRM* frm) {}
-
-extern "C" int16_t COLssStore(uint32_t baudrate, uint8_t nodeId) { return 0; }
-
-extern "C" int16_t COLssLoad(uint32_t* baudrate, uint8_t* nodeId) { return 0; }
-
-extern "C" void CONmtModeChange(CO_NMT* nmt, CO_MODE mode) {}
-
-extern "C" void CONmtHbConsEvent(CO_NMT* nmt, uint8_t nodeId) {}
-
-extern "C" void CONmtHbConsChange(CO_NMT* nmt, uint8_t nodeId, CO_MODE mode) {}
-
-extern "C" int16_t COParaDefault(CO_PARA* pg) { return 0; }
-
-extern "C" void COPdoTransmit(CO_IF_FRM* frm) {}
-
-extern "C" int16_t COPdoReceive(CO_IF_FRM* frm) { return 0; }
-
-extern "C" void COPdoSyncUpdate(CO_RPDO* pdo) {}
-
-extern "C" void COTmrLock(void) {}
-
-extern "C" void COTmrUnlock(void) {}
-
 // Create array of 1 GPIO pointer for the chip select GPIO
 
+/****************************************************************************************
+ * Main program. This includes all the logic to initalized the necessary hardware and run
+ * the main processing loop.
+ ***************************************************************************************/
 int main() {
-    // Initialize system
+    // Initialize system.
 
-    // Set up UART
+    // Set up UART.
 
-    // Set up I2C
+    // Set up I2C.
 
-    // Create TMP117 instance
+    // Set up chip select GPIO and put in array.
 
-    // Set up chip select GPIO and put in array
+    // Set up and configure SPI (<10 MHz, Mode 0, MSB first).
 
-    // Set up and configure SPI (<10 MHz, Mode 0, MSB first)
+    // Initialize the timer.
 
-    // Create MAX22530 instance
+    // Create TMP117 instance.
 
-    // Create RampupBoard instance
+    // Create MAX22530 instance.
 
-    // Create queue to store CANopen messages that will be populated by the EVT-core CAN interrupt
+    // Create RampupBoard instance.
 
-    // Initialize CAN, add an IRQ which will add messages to the queue above
+    /************************************************************************************
+     * Setup CAN configuration, this handles making drivers, applying settings. And 
+     * generally creating the CANopen stack node which is the interface between the 
+     * application (the code we write) and the physical CAN network.
+     ***********************************************************************************/
+    // Create queue to store CANopen messages that will be populated by the EVT-core CAN interrupt.
 
-    // Initialize the timer
+    // Initialize CAN, add an IRQ which will add messages to the queue above.
 
-    // Reserved memory for CANopen stack usage
+    // Reserved memory for CANopen stack usage.
 
-    // Attempt to join the CAN network
+    // Reserve CAN drivers.
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Setup CAN configuration, this handles making drivers, applying settings.
-    // And generally creating the CANopen stack node which is the interface
-    // between the application (the code we write) and the physical CAN network
-    ///////////////////////////////////////////////////////////////////////////
-    // Make drivers
+    // Reserve CAN node.
 
-    //setup CANopen Node
-    /*
-    CO_NODE_SPEC canSpec = {
-        .NodeId = .NODE_ID,
-        .Baudrate = IO::CAN::DEFAULT_BAUD,
-        .Dict = .getObjectDictionary(), Add call to RampupBoard instance
-        .DictLen = .getNumElements(),
-        .EmcyCode = NULL,
-        .TmrMem = appTmrMem,
-        .TmrNum = 16,
-        .TmrFreq = 100,
-        .Drv = &canStackDriver,
-        .SdoBuf = reinterpret_cast<uint8_t*>(&sdoBuffer[0]),
-    };
+    // Attempt to join the CAN network.
 
-    CO_NODE canNode;
+    // Initialize all the CANOpen drivers.
 
-    CONodeInit(&canNode, &canSpec);
-    CONodeStart(&canNode);
-    CONmtSetMode(&canNode.Nmt, CO_OPERATIONAL);
-    */
+    // Initialize the CANOpen node.
 
+    // Set the node to operational mode.
+
+    /**************************************************************************
+     *                               Main loop
+     *************************************************************************/
     while (1) {
-        // Run rampup board process
+        // Run rampup board process.
 
-        // Process incoming CAN messages
+        // Process CAN messages.
 
-        // Update the state of timer based events
-
-        // Handle executing timer events that have elapsed
-
-        // Wait 100 ms
+        // Wait 100 ms.
     }
 }
