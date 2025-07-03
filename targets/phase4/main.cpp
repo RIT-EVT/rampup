@@ -2,10 +2,10 @@
  * This is the main target for the rampup phase 4 project.
  */
 
-#include <EVT/io/CANopen.hpp>
-#include <EVT/io/types/CANMessage.hpp>
+#include <core/io/CANopen.hpp>
+#include <core/io/types/CANMessage.hpp>
 
-namespace IO = EVT::core::IO;
+namespace io = core::io;
 
 /****************************************************************************************
  * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen 
@@ -22,8 +22,8 @@ namespace IO = EVT::core::IO;
  *
  * @param message[in] The passed in CAN message that was read.
  */
-void canInterrupt(IO::CANMessage& message, void* priv) {
-    auto* queue = (EVT::core::types::FixedQueue<CANOPEN_QUEUE_SIZE, IO::CANMessage>*) priv;
+void canInterrupt(io::CANMessage& message, void* priv) {
+    auto* queue = (core::types::FixedQueue<CANOPEN_QUEUE_SIZE, io::CANMessage>*) priv;
     if (queue != nullptr)
         queue->append(message);
 }

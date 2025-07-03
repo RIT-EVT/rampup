@@ -23,8 +23,8 @@ namespace rampup {
 class HUDL : public CANDevice {
 public:
     /**
-         * The node ID used to identify the device on the CAN network.
-         */
+     * The node ID used to identify the device on the CAN network.
+     */
     static constexpr uint8_t NODE_ID = 0x11;
 
     /**
