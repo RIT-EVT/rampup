@@ -3,15 +3,15 @@
 
 #include <cstdint>
 
-#include <EVT/io/CANDevice.hpp>
-#include <EVT/io/CANOpenMacros.hpp>
-#include <EVT/io/pin.hpp>
+#include <core/io/CANDevice.hpp>
+#include <core/io/CANOpenMacros.hpp>
+#include <core/io/pin.hpp>
 #include <co_core.h>
 
 #include <dev/MAX22530.hpp>
 #include <dev/TMP117.hpp>
 
-namespace IO = EVT::core::IO;
+namespace io = core::io;
 
 namespace rampup {
 
@@ -21,14 +21,14 @@ namespace rampup {
 class RampupBoard : public CANDevice {
 public:
     /** Rampup Board Pinout */
-    static constexpr IO::Pin UART_TX_PIN = IO::Pin::UART_TX;
-    static constexpr IO::Pin UART_RX_PIN = IO::Pin::UART_RX;
-    static constexpr IO::Pin CAN_TX_PIN = IO::Pin::PA_12;
-    static constexpr IO::Pin CAN_RX_PIN = IO::Pin::PA_11;
-    static constexpr IO::Pin SPI_CS = IO::Pin::SPI_CS;
-    static constexpr IO::Pin SPI_MOSI = IO::Pin::SPI_MOSI;
-    static constexpr IO::Pin SPI_MISO = IO::Pin::SPI_MISO;
-    static constexpr IO::Pin SPI_SCK = IO::Pin::SPI_SCK;
+    static constexpr io::Pin UART_TX_PIN = io::Pin::UART_TX;
+    static constexpr io::Pin UART_RX_PIN = io::Pin::UART_RX;
+    static constexpr io::Pin CAN_TX_PIN = io::Pin::PA_12;
+    static constexpr io::Pin CAN_RX_PIN = io::Pin::PA_11;
+    static constexpr io::Pin SPI_CS = io::Pin::SPI_CS;
+    static constexpr io::Pin SPI_MOSI = io::Pin::SPI_MOSI;
+    static constexpr io::Pin SPI_MISO = io::Pin::SPI_MISO;
+    static constexpr io::Pin SPI_SCK = io::Pin::SPI_SCK;
 
     /** Node ID used to identify the board on the CAN network. */
     static constexpr uint8_t NODE_ID = 50;

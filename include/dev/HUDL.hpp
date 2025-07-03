@@ -3,15 +3,15 @@
 
 #include <stdint.h>
 
-#include <EVT/dev/LCD.hpp>
-#include <EVT/io/CANDevice.hpp>
-#include <EVT/io/CANOpenMacros.hpp>
-#include <EVT/io/GPIO.hpp>
-#include <EVT/io/SPI.hpp>
+#include <core/dev/LCD.hpp>
+#include <core/io/CANDevice.hpp>
+#include <core/io/CANOpenMacros.hpp>
+#include <core/io/GPIO.hpp>
+#include <core/io/SPI.hpp>
 #include <co_core.h>
 
-namespace IO = EVT::core::IO;
-namespace DEV = EVT::core::DEV;
+namespace io = core::io;
+namespace dev = core::dev;
 
 namespace rampup {
 
@@ -34,7 +34,7 @@ public:
          * @param[in] reset is the reset pin
          * @param[in] spi is the SPI instance
          */
-    HUDL(IO::GPIO& reg_select, IO::GPIO& reset, IO::SPI& spi);
+    HUDL(io::GPIO& reg_select, io::GPIO& reset, io::SPI& spi);
 
     /**
          * Initializes LCD for use
@@ -78,7 +78,7 @@ public:
          * reset      PB_3
          * cs         PB_12
          */
-    DEV::LCD lcd;
+    dev::LCD lcd;
 
     static constexpr uint8_t RAMPUP_NODE_ID = 50;
 
