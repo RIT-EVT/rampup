@@ -5,7 +5,7 @@
 #include <cstdio>
 // clang-format on
 
-namespace io = core::io;
+namespace io  = core::io;
 namespace dev = core::dev;
 namespace log = core::log;
 
@@ -47,4 +47,4 @@ void HUDL::updateLCD() {
     std::sprintf(temp, "%d", temperature);
     lcd.setTextForSection(4, temp);
 }
-}// namespace rampup
+} // namespace rampup

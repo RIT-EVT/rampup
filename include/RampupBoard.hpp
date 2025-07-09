@@ -3,10 +3,10 @@
 
 #include <cstdint>
 
+#include <co_core.h>
 #include <core/io/CANDevice.hpp>
 #include <core/io/CANOpenMacros.hpp>
 #include <core/io/pin.hpp>
-#include <co_core.h>
 
 #include <dev/MAX22530.hpp>
 #include <dev/TMP117.hpp>
@@ -23,12 +23,12 @@ public:
     /** Rampup Board Pinout */
     static constexpr io::Pin UART_TX_PIN = io::Pin::UART_TX;
     static constexpr io::Pin UART_RX_PIN = io::Pin::UART_RX;
-    static constexpr io::Pin CAN_TX_PIN = io::Pin::PA_12;
-    static constexpr io::Pin CAN_RX_PIN = io::Pin::PA_11;
-    static constexpr io::Pin SPI_CS = io::Pin::SPI_CS;
-    static constexpr io::Pin SPI_MOSI = io::Pin::SPI_MOSI;
-    static constexpr io::Pin SPI_MISO = io::Pin::SPI_MISO;
-    static constexpr io::Pin SPI_SCK = io::Pin::SPI_SCK;
+    static constexpr io::Pin CAN_TX_PIN  = io::Pin::PA_12;
+    static constexpr io::Pin CAN_RX_PIN  = io::Pin::PA_11;
+    static constexpr io::Pin SPI_CS      = io::Pin::SPI_CS;
+    static constexpr io::Pin SPI_MOSI    = io::Pin::SPI_MOSI;
+    static constexpr io::Pin SPI_MISO    = io::Pin::SPI_MISO;
+    static constexpr io::Pin SPI_SCK     = io::Pin::SPI_SCK;
 
     /** Node ID used to identify the board on the CAN network. */
     static constexpr uint8_t NODE_ID = 50;
@@ -52,9 +52,9 @@ public:
     };
 
     /**
-    * Get the device's node ID.
-    *
-    * @return The node ID of the can device.
+     * Get the device's node ID.
+     *
+     * @return The node ID of the can device.
      */
     uint8_t getNodeID() override {
         return NODE_ID;
@@ -102,7 +102,8 @@ private:
          * 2: Inhibit time, disabled or 0.
          * 3: Timer trigger time in 1ms units, 0 will disable the timer based triggering.
          */
-        TRANSMIT_PDO_SETTINGS_OBJECT_18XX(0, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE, 0 /*Replace with trigger interval*/),
+        TRANSMIT_PDO_SETTINGS_OBJECT_18XX(0, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE,
+                                          0 /*Replace with trigger interval*/),
 
         /**
          * RampupBoard TPDO 1 settings:
@@ -111,7 +112,8 @@ private:
          * 2: Inhibit time, disabled or 0.
          * 3: Timer trigger time in 1ms units, 0 will disable the timer based triggering.
          */
-        TRANSMIT_PDO_SETTINGS_OBJECT_18XX(1, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE, 0 /*Replace with trigger interval*/),
+        TRANSMIT_PDO_SETTINGS_OBJECT_18XX(1, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE,
+                                          0 /*Replace with trigger interval*/),
 
         //***************************** Begin TPDO Maping *****************************//
         /**
@@ -140,7 +142,7 @@ private:
 
         //**************************** Begin Data Linking *****************************//
         /**
-         * User defined data. This will be where we put elements that can be accessed 
+         * User defined data. This will be where we put elements that can be accessed
          * via SDO and the first PDO.
          */
         /* Link the data we want to map into RampupBoard TPDO 0 to variables */
@@ -159,6 +161,6 @@ private:
     };
 };
 
-}// namespace rampup
+} // namespace rampup
 
-#endif//RAMPUP_BOARD_HPP
+#endif // RAMPUP_BOARD_HPP

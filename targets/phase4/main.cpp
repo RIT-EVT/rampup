@@ -8,9 +8,9 @@
 namespace io = core::io;
 
 /****************************************************************************************
- * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen 
+ * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen
  * messages into a specific queue.
-***************************************************************************************/
+ ***************************************************************************************/
 
 /**
  * Interrupt handler to get CAN messages. A function pointer to this function
@@ -54,8 +54,8 @@ int main() {
     // Create RampupBoard instance.
 
     /************************************************************************************
-     * Setup CAN configuration, this handles making drivers, applying settings. And 
-     * generally creating the CANopen stack node which is the interface between the 
+     * Setup CAN configuration, this handles making drivers, applying settings. And
+     * generally creating the CANopen stack node which is the interface between the
      * application (the code we write) and the physical CAN network.
      ***********************************************************************************/
     // Create queue to store CANopen messages that will be populated by the EVT-core CAN interrupt.

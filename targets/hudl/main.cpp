@@ -12,19 +12,19 @@
 
 #include <dev/HUDL.hpp>
 
-namespace io = core::io;
-namespace dev = core::dev;
+namespace io   = core::io;
+namespace dev  = core::dev;
 namespace time = core::time;
-namespace log = core::log;
+namespace log  = core::log;
 using namespace std;
 
-const uint32_t SPI_SPEED = SPI_SPEED_500KHZ;
+const uint32_t SPI_SPEED  = SPI_SPEED_500KHZ;
 const uint8_t deviceCount = 1;
 
 /****************************************************************************************
- * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen 
+ * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen
  * messages into a specific queue.
-***************************************************************************************/
+ ***************************************************************************************/
 
 /**
  * Interrupt handler to get CAN messages. A function pointer to this function
@@ -70,7 +70,7 @@ int main() {
 
     // HUDL 1.2
     io::GPIO& reset = io::getGPIO<io::Pin::PB_7>(core::io::GPIO::Direction::OUTPUT);
-    devices[0] = &io::getGPIO<io::Pin::PB_12>(core::io::GPIO::Direction::OUTPUT);
+    devices[0]      = &io::getGPIO<io::Pin::PB_12>(core::io::GPIO::Direction::OUTPUT);
 
     devices[0]->writePin(io::GPIO::State::HIGH);
 
@@ -89,8 +89,8 @@ int main() {
     rampup::HUDL hudl(regSelect, reset, hudl_spi);
 
     /************************************************************************************
-     * Setup CAN configuration, this handles making drivers, applying settings. And 
-     * generally creating the CANopen stack node which is the interface between the 
+     * Setup CAN configuration, this handles making drivers, applying settings. And
+     * generally creating the CANopen stack node which is the interface between the
      * application (the code we write) and the physical CAN network.
      ***********************************************************************************/
     // Create queue to store CANopen messages that will be populated by the EVT-core CAN interrupt.
@@ -126,8 +126,7 @@ int main() {
     }
 
     // Initialize all the CANOpen drivers.
-    io::initializeCANopenDriver(&canOpenQueue, &can, &timer, &canStackDriver, &nvmDriver,
-                                &timerDriver, &canDriver);
+    io::initializeCANopenDriver(&canOpenQueue, &can, &timer, &canStackDriver, &nvmDriver, &timerDriver, &canDriver);
 
     // Initialize the CANOpen node we are using.
     io::initializeCANopenNode(&canNode, &hudl, &canStackDriver, sdoBuffer, appTmrMem);
@@ -137,7 +136,7 @@ int main() {
 
     time::wait(500);
 
-    //print any CANopen errors.
+    // print any CANopen errors.
     log::LOGGER.log(log::Logger::LogLevel::DEBUG, "Error: %d\r\n", CONodeGetErr(&canNode));
 
     hudl.initLCD();

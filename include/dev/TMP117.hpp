@@ -38,6 +38,6 @@ private:
     io::I2C& i2c;
 };
 
-}// namespace rampup
+} // namespace rampup
 
-#endif//TMP117_HPP
+#endif // TMP117_HPP

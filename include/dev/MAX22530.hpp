@@ -15,6 +15,6 @@ private:
     // Private member variables
 };
 
-}// namespace rampup
+} // namespace rampup
 
-#endif//MAX22530_HPP
+#endif // MAX22530_HPP
