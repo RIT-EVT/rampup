@@ -1,5 +1,5 @@
 /**
- * This is a simple example of reading data over I2C and printing it over UART.
+ * This is a simple example of taking user input and printing output over UART.
  */
 
 int main() {
@@ -7,15 +7,13 @@ int main() {
 
     // Set up UART
 
-    // Set up I2C
-
-    // Create TMP117 instance
+    // Declare two arrays of characters to store user input
 
     while (1) {
-        // Read temperature
+        // Read user input
 
-        // Print temperature
+        // Convert the two character arrays to uint64_t
 
-        // Wait 1 s
+        // Output the sum of the two numbers
     }
 }
