@@ -72,7 +72,7 @@ int main() {
     // HUDL 1.2
     io::GPIO& reset = io::getGPIO<io::Pin::PB_7>(core::io::GPIO::Direction::OUTPUT);
 
-    devices[0]      = &io::getGPIO<io::Pin::PB_12>(core::io::GPIO::Direction::OUTPUT);
+    devices[0] = &io::getGPIO<io::Pin::PB_12>(core::io::GPIO::Direction::OUTPUT);
     devices[0]->writePin(io::GPIO::State::HIGH);
 
     auto& hudl_spi = io::getSPI<io::Pin::SPI_SCK, io::Pin::SPI_MOSI>(devices, deviceCount);

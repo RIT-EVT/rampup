@@ -1,5 +1,5 @@
-#include <dev/HUDL.hpp>
 #include <core/utils/log.hpp>
+#include <dev/HUDL.hpp>
 
 #include <cstdio>
 
