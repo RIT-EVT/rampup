@@ -1,9 +1,7 @@
-// clang-format off
 #include <dev/HUDL.hpp>
 #include <core/utils/log.hpp>
 
 #include <cstdio>
-// clang-format on
 
 namespace io  = core::io;
 namespace dev = core::dev;
@@ -17,6 +15,7 @@ void HUDL::initLCD() {
     lcd.initLCD();
     lcd.clearLCD();
     lcd.setEntireScreenBitMap(evtBitMap);
+
     core::time::wait(2000);
     lcd.clearLCD();
 
