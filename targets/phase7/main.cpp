@@ -1,5 +1,5 @@
 /**
- * This is the main target for the rampup phase 4 project.
+ * This is the main target for the rampup phase 7 project.
  */
 
 #include <core/io/CANopen.hpp>
