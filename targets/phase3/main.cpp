@@ -1,26 +1,20 @@
 /**
- * This is a simple example of reading data over SPI and printing it over UART.
+ * This is a simple example of reading data over I2C and printing it over UART.
  */
-
-// Create array of 1 GPIO pointer for the chip select GPIO
 
 int main() {
     // Initialize system
 
     // Set up UART
 
-    // Set up chip select GPIO and put in array
+    // Set up I2C
 
-    // Set up and configure SPI (<10 MHz, Mode 0, MSB first)
-
-    // Create MAX22530 instance
-
-    // Create a uint16_t array to store the four voltages
+    // Create TMP117 instance
 
     while (1) {
-        // Read all 4 voltages
+        // Read temperature
 
-        // Print the voltages
+        // Print temperature
 
         // Wait 1 s
     }

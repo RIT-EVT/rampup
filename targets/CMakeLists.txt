@@ -1,6 +1,10 @@
 # Add all targets
+add_subdirectory(phase0)
 add_subdirectory(phase1)
 add_subdirectory(phase2)
 add_subdirectory(phase3)
 add_subdirectory(phase4)
+add_subdirectory(phase5)
+add_subdirectory(phase6)
+add_subdirectory(phase7)
 add_subdirectory(hudl)

@@ -2,29 +2,30 @@
  * This is the main code running on the HUDL responsible for displaying
  * information that other boards that broadcast through the CAN network.
  */
-#include <EVT/dev/Timer.hpp>
-#include <EVT/io/CANopen.hpp>
-#include <EVT/io/GPIO.hpp>
-#include <EVT/io/pin.hpp>
-#include <EVT/manager.hpp>
-#include <EVT/utils/log.hpp>
-#include <EVT/utils/time.hpp>
+#include <core/dev/Timer.hpp>
+#include <core/io/CANopen.hpp>
+#include <core/io/GPIO.hpp>
+#include <core/io/pin.hpp>
+#include <core/manager.hpp>
+#include <core/utils/log.hpp>
+#include <core/utils/time.hpp>
 
 #include <dev/HUDL.hpp>
 
-namespace IO = EVT::core::IO;
-namespace DEV = EVT::core::DEV;
-namespace time = EVT::core::time;
-namespace log = EVT::core::log;
+namespace io   = core::io;
+namespace dev  = core::dev;
+namespace time = core::time;
+namespace log  = core::log;
+
 using namespace std;
 
-const uint32_t SPI_SPEED = SPI_SPEED_500KHZ;
+const uint32_t SPI_SPEED  = SPI_SPEED_500KHZ;
 const uint8_t deviceCount = 1;
 
 /****************************************************************************************
- * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen 
+ * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen
  * messages into a specific queue.
-***************************************************************************************/
+ ***************************************************************************************/
 
 /**
  * Interrupt handler to get CAN messages. A function pointer to this function
@@ -38,9 +39,9 @@ const uint8_t deviceCount = 1;
  */
 
 // create a can interrupt handler
-void canInterrupt(IO::CANMessage& message, void* priv) {
-    EVT::core::types::FixedQueue<CANOPEN_QUEUE_SIZE, IO::CANMessage>* queue =
-        (EVT::core::types::FixedQueue<CANOPEN_QUEUE_SIZE, IO::CANMessage>*) priv;
+void canInterrupt(io::CANMessage& message, void* priv) {
+    core::types::FixedQueue<CANOPEN_QUEUE_SIZE, io::CANMessage>* queue =
+        (core::types::FixedQueue<CANOPEN_QUEUE_SIZE, io::CANMessage>*) priv;
 
     if (queue != nullptr) {
         queue->append(message);
@@ -57,47 +58,47 @@ extern "C" void HAL_CAN_RxFifo1FullCallback(CAN_HandleTypeDef* hcan) {
  ***************************************************************************************/
 int main() {
     // Initialize system.
-    EVT::core::platform::init();
+    core::platform::init();
 
     // Initialize UART.
-    IO::UART& uart = IO::getUART<IO::Pin::UART_TX, IO::Pin::UART_RX>(9600);
+    io::UART& uart = io::getUART<io::Pin::UART_TX, io::Pin::UART_RX>(9600);
     log::LOGGER.setUART(&uart);
 
     // Set up chip select GPIO and put in array.
-    IO::GPIO* devices[deviceCount];
+    io::GPIO* devices[deviceCount];
 
-    IO::GPIO& regSelect = IO::getGPIO<IO::Pin::PA_3>(EVT::core::IO::GPIO::Direction::OUTPUT);
+    io::GPIO& regSelect = io::getGPIO<io::Pin::PA_3>(core::io::GPIO::Direction::OUTPUT);
 
     // HUDL 1.2
-    IO::GPIO& reset = IO::getGPIO<IO::Pin::PB_7>(EVT::core::IO::GPIO::Direction::OUTPUT);
-    devices[0] = &IO::getGPIO<IO::Pin::PB_12>(EVT::core::IO::GPIO::Direction::OUTPUT);
+    io::GPIO& reset = io::getGPIO<io::Pin::PB_7>(core::io::GPIO::Direction::OUTPUT);
 
-    devices[0]->writePin(IO::GPIO::State::HIGH);
+    devices[0] = &io::getGPIO<io::Pin::PB_12>(core::io::GPIO::Direction::OUTPUT);
+    devices[0]->writePin(io::GPIO::State::HIGH);
 
-    auto& hudl_spi = IO::getSPI<IO::Pin::SPI_SCK, IO::Pin::SPI_MOSI>(devices, deviceCount);
+    auto& hudl_spi = io::getSPI<io::Pin::SPI_SCK, io::Pin::SPI_MOSI>(devices, deviceCount);
 
-    IO::PWM& brightness = IO::getPWM<IO::Pin::PC_0>();
+    io::PWM& brightness = io::getPWM<io::Pin::PC_0>();
     brightness.setPeriod(1);
     brightness.setDutyCycle(100);
 
-    hudl_spi.configureSPI(SPI_SPEED, IO::SPI::SPIMode::SPI_MODE0, SPI_MSB_FIRST);
+    hudl_spi.configureSPI(SPI_SPEED, io::SPI::SPIMode::SPI_MODE0, SPI_MSB_FIRST);
 
     // Initialize the timer.
-    DEV::Timerf3xx timer(TIM2, 160);
+    dev::Timerf3xx timer(TIM2, 160);
 
     // Create HUDL instance.
     rampup::HUDL hudl(regSelect, reset, hudl_spi);
 
     /************************************************************************************
-     * Setup CAN configuration, this handles making drivers, applying settings. And 
-     * generally creating the CANopen stack node which is the interface between the 
+     * Setup CAN configuration, this handles making drivers, applying settings. And
+     * generally creating the CANopen stack node which is the interface between the
      * application (the code we write) and the physical CAN network.
      ***********************************************************************************/
     // Create queue to store CANopen messages that will be populated by the EVT-core CAN interrupt.
-    auto canOpenQueue = EVT::core::types::FixedQueue<CANOPEN_QUEUE_SIZE, IO::CANMessage>(true);
+    auto canOpenQueue = core::types::FixedQueue<CANOPEN_QUEUE_SIZE, io::CANMessage>(true);
 
     // Initialize CAN, add an IRQ which will add messages to the queue above.
-    IO::CAN& can = IO::getCAN<IO::Pin::PA_12, IO::Pin::PA_11>();
+    io::CAN& can = io::getCAN<io::Pin::PA_12, io::Pin::PA_11>();
     can.addIRQHandler(canInterrupt, reinterpret_cast<void*>(&canOpenQueue));
 
     // Reserved memory for CANopen stack usage.
@@ -115,10 +116,10 @@ int main() {
     CO_NODE canNode;
 
     // Attempt to join the CAN network.
-    IO::CAN::CANStatus result = can.connect();
+    io::CAN::CANStatus result = can.connect();
 
     // Test that the board is connected to the can network.
-    if (result != IO::CAN::CANStatus::OK) {
+    if (result != io::CAN::CANStatus::OK) {
         log::LOGGER.log(log::Logger::LogLevel::ERROR, "Failed to connect to CAN network\r\n");
         return 1;
     } else {
@@ -126,18 +127,17 @@ int main() {
     }
 
     // Initialize all the CANOpen drivers.
-    IO::initializeCANopenDriver(&canOpenQueue, &can, &timer, &canStackDriver, &nvmDriver,
-                                &timerDriver, &canDriver);
+    io::initializeCANopenDriver(&canOpenQueue, &can, &timer, &canStackDriver, &nvmDriver, &timerDriver, &canDriver);
 
     // Initialize the CANOpen node we are using.
-    IO::initializeCANopenNode(&canNode, &hudl, &canStackDriver, sdoBuffer, appTmrMem);
+    io::initializeCANopenNode(&canNode, &hudl, &canStackDriver, sdoBuffer, appTmrMem);
 
     // Set CAN mode.
     CONmtSetMode(&canNode.Nmt, CO_OPERATIONAL);
 
     time::wait(500);
 
-    //print any CANopen errors.
+    // print any CANopen errors.
     log::LOGGER.log(log::Logger::LogLevel::DEBUG, "Error: %d\r\n", CONodeGetErr(&canNode));
 
     hudl.initLCD();
@@ -148,7 +148,7 @@ int main() {
     while (true) {
         hudl.updateLCD();
 
-        IO::processCANopenNode(&canNode);
+        io::processCANopenNode(&canNode);
 
         time::wait(10);
     }
