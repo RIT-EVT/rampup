@@ -74,7 +74,7 @@ That makes this pretty simple, you will just need to be sure you use the
 multi-byte readReg() method of the I2C class, not the single-byte read.
 
 The datasheet also explains that each least significant bit (each raw unit of output)
-in the temperature register, equals 7.8125 millidegrees Celsius, or 0.0078125°C. 
+in the temperature register, equals 7.8125 millidegrees Celsius (m°C), or 0.0078125°C. 
 This means the sensor’s raw 16-bit output is not in degrees Celsius, but instead 
 must be converted to be human-readable.
 
@@ -91,8 +91,9 @@ with this, set up the Saleae to check if the signals being sent match the values
 in this call. 
 
 After that, you will need to properly convert the output, in a ratio
-of 1 to 0.078125. If you are having issues with losing data, make sure to use a temporary
-variable of larger scale, like a uint32_t or uint64_t (32 or 64 bit integer).
+of 1 to 7.8125 (34.56 °C would be stored as 3456 m°C). If you are having issues with 
+losing data, make sure to use a temporary variable of larger scale, like a 
+uint32_t or uint64_t (32 or 64 bit integer).
 
 ## MAX22530 Datasheet
 
