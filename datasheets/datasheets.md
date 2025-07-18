@@ -47,40 +47,52 @@ hexadecimal, we get 4 possibilities:
  - 1001010 -> 0x4A
  - 1001011 -> 0x4B
 
-The slave address for your device will be one of these four. Normally, you'd
-have to talk with the electrical engineers who are designing the PCB you're
-writing code for to get this number, but for the evaluation modules (EVMs)
-you're working with, you should be able to see some indication on the board of
-what address it's set up for. If you're having trouble, ask a senior member to
-point it out for you.
+The slave address for your device will be one of these four. Normally, you'd 
+have to talk with the electrical engineers who are designing the PCB you're 
+writing code for to get this number, but for the evaluation modules (EVMs) 
+you're working with, you should be able to see some indication on the board 
+of what address it's set up for. If you're having trouble, ask a senior member 
+to point it out for you.
 
 ### Register Addresses
 After you've found the address of the slave device, you need to find the address
 for the data you're looking for inside the slave device. Luckily, this time,
 it's pretty easy to find as section 7.6 is titled "Register Map." There are 10
-registers, but the only one we're interested in is Temp_Result at address 0x00.
-Here, it has the address written as "00h", but it means the same thing as 0x00.
-The prefix "0x" and the suffix "h" are both just used to indicate that the
-number is hexadecimal instead of decimal.
+registers, but the only one we're interested in is Temp_Result at address 0x00. 
+
+Here, it has the register address written as "00h", but it means the same thing 
+as 0x00. The prefix "0x" and the suffix "h" are both just used to indicate that 
+the number is hexadecimal instead of decimal.
 
 ### Register Details
 After the table, there are a few sections that go into detail about each 
-register. You will need this information in some cases, but here, the register
-just stores a two-byte integer that we want to read, so it's fairly 
-straightforward. You will just need to be sure you use the multi-byte 
-`readReg()` method of the `I2C` class, not the single-byte read.
+register. 
+
+The datasheet explains in section 7.6.2, “Temperature Register,” that the 
+Temp_Result register holds the temperature data, stored as a two-byte integer. 
+That makes this pretty simple, you will just need to be sure you use the 
+multi-byte readReg() method of the I2C class, not the single-byte read.
+
+The datasheet also explains that each least significant bit (each raw unit of output)
+in the temperature register, equals 7.8125 millidegrees Celsius, or 0.0078125°C. 
+This means the sensor’s raw 16-bit output is not in degrees Celsius, but instead 
+must be converted to be human-readable.
 
 ### Implementation
 Based on this information from the datasheet, you're going to want an I2C call
 that looks something like 
-`i2c.readReg(0x48, registerBuffer, 1, outputBuffer, 2);`. This will attempt to 
-read from the slave device at address 0x48 on the I2C bus. From this device, it 
-will read the data at the address stored in `registerBuffer`, which you should 
-set to 0x00. `outputBuffer` should be a two-byte buffer used to store the 
+`i2c.readReg(slaveAddress, registerBuffer, 1, outputBuffer, 2);`. This will attempt to 
+read 2 bytes from the slave device at address `slaveAddress` on the I2C bus. From this device, it 
+will read the data at the 1 byte address stored in `registerBuffer`, which you should 
+set to 0x00 (the Temp_Result register). `outputBuffer` should be a two-byte buffer used to store the 
 output, which you can create with `uint8_t outputBuf[2];`. If everything goes 
 well, it will then put the data into the `outputBuffer`. If you're having issues
 with this, set up the Saleae to check if the signals being sent match the values
-in this call.
+in this call. 
+
+After that, you will need to properly convert the output, in a ratio
+of 1 to 7.8125. If you are having issues with losing data, make sure to use a temporary
+variable of larger scale, like a uint32_t or uint64_t (32 or 64 bit integer).
 
 ## MAX22530 Datasheet
 
