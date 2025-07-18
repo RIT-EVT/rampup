@@ -9,7 +9,7 @@
 using namespace std;
 namespace IO = EVT::core::IO;
 namespace time = EVT::core::time;
-constexpr uint8_t i2cSlaveAddress = 0x48;
+constexpr uint8_t i2cSlaveAddress = 0x48; // This is known by looking at the click board and table in datasheet, depends on what the ADD0 pin is connected to (GND, 3.3V, SDA, SCL)
 
 int main() {
     // Initialize system
@@ -31,7 +31,7 @@ int main() {
         tmp.readTemp(temperature);
 
         // Print temperature
-        uart.printf("Temp: %d\n\r", temperature);
+        uart.printf("Temp: %d.%d Celsius\n\r", temperature / 100, temperature % 100); // Turns into normal celsius (2534 centi-Celsius => 25.34 Celsius)
 
         // Wait 1 s
         time::wait(1000);
