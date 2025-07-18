@@ -39,6 +39,7 @@ matches what is output over UART.
 ### Suggestions
 - Read the [FTB documentation](
 https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/firmware-test-board-ftb).
+- Learn about I2C through a [short video](https://www.youtube.com/watch?v=CAvawEcxoPU) (10 min) or if you have a poor attention span, a [really short video](https://www.youtube.com/shorts/8R13KHx4dTQ) (1 min).
 - Read the [I2C documentation](
 https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/inter-integrated-circuit-i2c?authuser=0).
 - Read the datasheets.md section about the TMP117 datasheet.
