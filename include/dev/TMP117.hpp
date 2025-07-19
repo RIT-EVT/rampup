@@ -27,7 +27,7 @@ public:
      * Reads the temperature from the TMP sensor
      *
      * @param temperature reading in centi-degrees Celsius (Celsius * 100)
-     * @return I2CStatus indicating the success or failure of the read. 
+     * @return I2CStatus indicating the success or failure of the read.
      */
     io::I2C::I2CStatus readTemp(uint16_t& temperature);
 
