@@ -10,7 +10,7 @@ IO::I2C::I2CStatus TMP117::readTemp(uint16_t& temperature) {
     uint8_t outputBuffer[2];
 
     // Doing multi-byte read as we need 2 bytes back (temperature register is 2 bytes)
-    IO::I2C::I2CStatus status = i2c.read(i2cSlaveAddress, &registerBuffer, 1, outputBuffer, 2); // Method found here https://github.com/RIT-EVT/EVT-core/blob/main/src/core/io/I2C.cpp
+    IO::I2C::I2CStatus status = i2c.read(i2cSlaveAddress, &registerBuffer, 1, outputBuffer, 2);
 
     // Not necessary but probably a good idea to have, or some sort of error handling...
     if (status != IO::I2C::I2CStatus::OK) {
