@@ -1,13 +1,13 @@
-## Phase 3: I2C
+# Phase 3: I2C
 
-### Learning Objectives
+## Learning Objectives
 - I2C communication
 - Object-oriented programming in C++
 - Basic driver development
 - Fixed point data formatting
 - Waveform analysis with a logic analyzer
 
-### Summary
+## Summary
 Now that you can communicate between the microcontroller (uC) and your 
 computer, you can start playing with other communication protocols and report
 the results back over UART. The first one we'll cover is Inter-Integrated
@@ -29,14 +29,14 @@ more information on the Saleae Logic Analyzer, visit [our webpage](
 https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/saleae-logic-analyzer),
 or ask a senior member to explain.
 
-### Task Breakdown
+## Task Breakdown
 1. Write the constructor and implementation for `readTemp()` in `TMP117.hpp`.
 2. Write the target code to call these functions and print temperatures over 
 UART.
 3. Use the Saleae to decode the waveforms on SDA and SCL and confirm the data 
 matches what is output over UART.
 
-### Suggestions
+## Suggestions
 - Read the [FTB documentation](
 https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/firmware-test-board-ftb).
 - Learn about I2C through a [short video](https://www.youtube.com/watch?v=CAvawEcxoPU) (10 min) or if you have a poor attention span, a [really short video](https://www.youtube.com/shorts/8R13KHx4dTQ) (1 min).
@@ -51,7 +51,7 @@ use the target to test.
 - Read the [Saleae documentation](
 https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/saleae-logic-analyzer?authuser=0).
 
-### Completion
+## Completion
 When believe you've gotten everything working, try holding your thumb against
 the TMP chip to heat it up. Then, blow on it to cool it down. Does the reported
 value update appropriately? Once you're satisfied with your code's performance,
