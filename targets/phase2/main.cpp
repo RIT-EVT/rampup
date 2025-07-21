@@ -18,10 +18,6 @@ int main() {
     char userInput1[100];
     char userInput2[100];
 
-    uint64_t num1 = 0;
-    uint64_t num2 = 0;
-    uint64_t num3 = 0;
-
     while (1) {
         // Read user input
         uart.printf("\n\rEnter first number: ");
@@ -31,12 +27,11 @@ int main() {
         uart.gets(userInput2, 100);
 
         // Convert the two character arrays to uint64_t
-        num1 = static_cast<uint64_t>(userInput1[0] - '0');
-        num2 = static_cast<uint64_t>(userInput2[0] - '0');
-
-        num3 = num1 + num2;
+        uint64_t num1 = static_cast<uint64_t>(userInput1[0] - '0');
+        uint64_t num2 = static_cast<uint64_t>(userInput2[0] - '0');
 
         // Output the sum of the two numbers
+        uint64_t num3 = num1 + num2;
         uart.printf("\n\r%u\n\r", num3);
     }
 }
