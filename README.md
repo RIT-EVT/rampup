@@ -38,6 +38,10 @@ is probably the best way to learn it. Your key commands are:
  - `git clone [url]`  - This makes a local copy of a repository for you start
                         modifying code. 
  - `git pull` - This updates your local repository with changes on the server.
+ - `git checkout [-b] [<branch_name>]` - This will switch your local code to a 
+                                         different branch. The `-b` option will
+                                         also create a new local branch before
+                                         switching to it. 
  - `git submodule update --init --recursive` - This downloads additional
                         repositories that are referenced in a project.
  - `git commit` - This allows you to submit your changes to the local
@@ -61,12 +65,21 @@ Now lets get you started on the rampup project! First, clone rampup to your
 project directory (NOT the EVT-core directory!) with 
 `git clone git@github.com:RIT-EVT/rampup.git`. Again, update your submodules 
 with `git submodule update --init --recursive` to get the included copy of 
-EVT-core and libraries. With the repository cloned, its time to get started 
-with Phase 0.
+EVT-core and libraries. We will now create a new local branch for your changes. 
+Any time we are developing a new feature or fixing a bug, we always create a 
+branch for that specific bug or feature off of the main branch. This branch follows the standard naming format of: 
+`[bug/feature]/[GitHubUsername]/[name-of-bug-or-feature]`. For example, to 
+complete rampup one might make the branch: feature/mjh9585/solved-rampup. 
+Create your own local branch now with:
+
+    git checkout -b feature/[GitHubUsername]/[branch-name]
+
+With the repository cloned and your development branch created, its time to get 
+started on Phase 0.
 
 ## Phase 0: C++
 
-Phase 0 is a short introduction C++ if you have never used it before. If you are comfortable with C++ object orientated programming, go a head an skip to Phase 1. 
+Phase 0 is a short introduction C++ if you have never used it before. If you are comfortable with C++ object orientated programming, go a head an skip to Phase 1 and let the firmware lead know. 
 
 To get started, follow the instructions in [targets/phase0](targets/phase0/Instructions.md).
 
