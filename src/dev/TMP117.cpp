@@ -2,11 +2,30 @@
 
 namespace rampup {
 
-// TMP117::TMP117(IO::I2C& i2c, uint8_t i2cSlaveAddress) : i2cSlaveAddress(/*something here*/), i2c(/*something here*/)
-// {}
+/*
+ * The slave(slave), i2c(i2c) in this line are the c++ constructor initializer list.
+ * This is effectively just saying to do i2c (the class variable) = i2c (the one passed in as a parameter)
+ */
+TMP117::TMP117(IO::I2C& i2c, uint8_t i2cSlaveAddress) : i2cSlaveAddress(i2cSlaveAddress), i2c(i2c) {}
 
-// IO::I2C::I2CStatus TMP117::readTemp(uint16_t& temperature) {
-//     // Implementation here
-// }
+IO::I2C::I2CStatus TMP117::readTemp(uint16_t& temperature) {
+    // Create variable to hold the register variable (the TEMP_REG value defined in the TMP117.hpp)
+
+    // Create a buffer to hold
+
+    // Do a multibyte i2c read as we need 2 bytes back (temperature register is 2 bytes)
+
+    // Create a temporary variable (u32 or u64) to do conversion math in
+
+    // combine the two bytes of sensor data
+
+    // The raw output is 1 unit = 7.8125 m°C (= 0.078125°C)
+    // so convert, without floating point math
+
+    // Assign the value of the converted temp to the temperature variable
+
+    // Return the i2c read status
+    return null;
+}
 
 } // namespace rampup

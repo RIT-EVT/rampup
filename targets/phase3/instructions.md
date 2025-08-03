@@ -47,7 +47,7 @@ https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-pro
 use the target to test.
 - Look at the I2C sample in EVT-core for an example.
 - Combine the two bytes you read into a single 16-bit integer.
-- Avoid floating point math (instead of 2 * .05, do (2 * 5) / 100)
+- Avoid floating point math, i.e. instead of 2 * .05, do (2 * 5) / 100
 - Read the [Saleae documentation](
 https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/saleae-logic-analyzer?authuser=0).
 
