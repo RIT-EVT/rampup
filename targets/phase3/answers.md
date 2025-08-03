@@ -2,35 +2,40 @@
 Phase 3 is about learning basics of I2C communication and driver development.
 
 ## targets/phase3/main.cpp
-The main things that need to be seen in here is just that they:
 - Create/Setup I2C
 ```cpp
-i2c = IO::getI2C<...>()
+io::I2C& i2c = IO::getI2C<IO::Pin::PB_8, IO::Pin::PB_9>();
 ```
 
-- Create/Setup the TMP117 `tmp(...)`
+- Create/Setup the TMP117
 ```cpp
-
+rampup::TMP117 tmp(i2c, i2cSlaveAddress);
 ```
 
 - Call the readTemp(...)
 ```cpp
-tmp.readTemp(temp)
+uint16_t temperature;
+io::I2C::I2CStatus status = tmp.readTemp(temperature)
 ```
 
 - Print result
 ```cpp
-
+uart.printf("Temp: %d.%d Celsius\n\r", temperature / 100, temperature % 100);
 ```
-
 
 Look at targets/phase3/main.cpp for completed implementation.
 
 ## src/dev/TMP117.cpp readTemp() Implementation
-The main things that need to be checked in the code is that they are:
-- Reading from i2c
+
+- Setting up variables
 ```cpp
-i2cStatus = i2c.read()
+uint8_t registerValue = TEMP_REG;
+uint8_t outputBuffer[2];
+```
+
+- Reading from i2c
+```cpp 
+io::I2C::I2CStatus status = i2c.readReg(i2cSlaveAddress, &registerValue, 1, outputBuffer, 2);
 ``` 
 
 - Combining the raw output from the sensor
