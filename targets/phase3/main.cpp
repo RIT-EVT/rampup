@@ -26,17 +26,12 @@ int main() {
     // Create TMP117 instance
     rampup::TMP117 tmp(i2c, i2cSlaveAddress);
 
+    // Create a variable to hold temperature data
     uint16_t temperature;
 
     while (1) {
         // Read temperature
         io::I2C::I2CStatus status = tmp.readTemp(temperature);
-
-        // Error handling
-        if (status != io::I2C::I2CStatus::OK) {
-            uart.printf("I2C Error!");
-            continue;
-        }
 
         // Print temperature as normal celsius (2534 centi-Celsius => 25.34 Celsius)
         uart.printf("Temp: %d.%d Celsius\n\r", temperature / 100, temperature % 100);
