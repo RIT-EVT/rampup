@@ -82,7 +82,9 @@ well, it will then put the data into the `outputBuffer`. If you're having issues
 with this, set up the Saleae to check if the signals being sent match the values
 in this call.
 
-## MAX22530 Datasheet
+## ADXL345 Datasheet
+
+TODO All
 
 ### Speed
 The first configuration parameter you'll want to locate is speed. Most SPI
