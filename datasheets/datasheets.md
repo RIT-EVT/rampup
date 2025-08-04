@@ -50,7 +50,7 @@ hexadecimal, we get 4 possibilities:
 The slave address for your device will be one of these four. Normally, you'd 
 have to talk with the electrical engineers who are designing the PCB you're 
 writing code for to get this number, but for the evaluation modules (EVMs) 
-you're working with, you should be able to see some indication on the board 
+you're working with, you should be able to see some indication on the board      ADD PHOTO HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 of what address it's set up for. If you're having trouble, ask a senior member 
 to point it out for you.
 
