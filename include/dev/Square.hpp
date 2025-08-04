@@ -1,8 +1,8 @@
 #ifndef _SQUARE_
 #define _SQUARE_
 
-#include <stdint.h>
 #include "Rectangle.hpp"
+#include <stdint.h>
 
 namespace rampup {
 
@@ -12,9 +12,10 @@ namespace rampup {
 class Square : public Rectangle {
 public:
     Square(uint32_t sideLength);
+
 private:
 };
 
-} //namespace rampup
+} // namespace rampup
 
 #endif // _SQUARE_

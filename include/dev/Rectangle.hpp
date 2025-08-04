@@ -1,8 +1,8 @@
 #ifndef _RECTANGLE_
 #define _RECTANGLE_
 
-#include <stdint.h>
 #include "Shape.hpp"
+#include <stdint.h>
 
 namespace rampup {
 
@@ -36,12 +36,11 @@ public:
     // Overrided methods from Shape
     uint32_t getArea() override;
     uint32_t getPerimeter() override;
+
 private:
-    //TODO: add 2 variables here that store all the information that is needed about a Rectangle
-
-
+    // TODO: add 2 variables here that store all the information that is needed about a Rectangle
 };
 
-} //namespace rampup
+} // namespace rampup
 
 #endif // _RECTANGLE_
