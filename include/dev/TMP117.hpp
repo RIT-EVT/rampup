@@ -19,7 +19,7 @@ public:
      * Temp sensor constructor
      *
      * @param i2c used to read temperature
-     * @param i2cSlaveAddress address to identify the sensor on the I2C bus
+     * @param[in] i2cSlaveAddress address to identify the sensor on the I2C bus
      * */
     TMP117(io::I2C& i2c, uint8_t i2cSlaveAddress);
 
