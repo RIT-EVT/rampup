@@ -2,26 +2,26 @@
  * This is a simple example of reading data over I2C and printing it over UART.
  */
 #include "dev/TMP117.hpp"
-#include <EVT/io/I2C.hpp>
-#include <EVT/io/UART.hpp>
-#include <EVT/manager.hpp>
+#include <core/io/I2C.hpp>
+#include <core/io/UART.hpp>
+#include <core/manager.hpp>
 
 using namespace std;
-namespace io = EVT::core::io;
-namespace time = EVT::core::time;
+namespace io = core::io;
+namespace time = core::time;
 
 // This is known by looking at the click board and table in datasheet, depends on what the ADD0 pin is connected to (GND, 3.3V, SDA, SCL)
 constexpr uint8_t i2cSlaveAddress = 0x48;
 
 int main() {
     // Initialize system
-    EVT::core::platform::init();
+    core::platform::init();
 
     // Set up UART
-    io::UART& uart = IO::getUART<IO::Pin::UART_TX, IO::Pin::UART_RX>(9600);
+    io::UART& uart = io::getUART<io::Pin::UART_TX, io::Pin::UART_RX>(9600);
 
     // Set up I2C
-    io::I2C& i2c = IO::getI2C<IO::Pin::PB_8, IO::Pin::PB_9>();
+    io::I2C& i2c = io::getI2C<io::Pin::PB_8, io::Pin::PB_9>();
 
     // Create TMP117 instance
     rampup::TMP117 tmp(i2c, i2cSlaveAddress);
