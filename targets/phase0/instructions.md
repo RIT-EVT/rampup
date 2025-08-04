@@ -31,6 +31,30 @@ over the name of the method with your cursor, and a documentation window should 
 When making your class, think about what values are required to represent each instance of the class, and make sure to override
 the getArea() and getPerimeter() methods from Shape. Once your class is created, go back to phase0/main.cpp and add one or two
 instances of your class to the shapeArr. Don't forget to increase the size of the shapeArr!
+8. After creating this other type of Shape, add an if statement to the for loop that checks for a shape with a 
+area to perimeter ratio of greater than or equal to 0.5. 
+
+**Note:** We are still just using uint32_t values, so you will not be able
+   to directly represent a ratio of 0.5. Instead, you should use "fixed point numbers". Unlike the 
+   classic floating point numbers, fixed point numbers are fundamentally still just integers. Imagine a square with side 
+   lengths of 2: the square has a perimeter of 8 and an area of 4.
+   This means that area/perimeter = 0.5. We could not represent this with an integer in meters, it would end up being 0:
+
+
+    floor(8/4) = floor(0.5) = 0. 
+
+   Now imagine that we instead represent the perimeter and area in centimeters. This is an issue,
+   because we want to know the ratio more exactly than that. Lets say that we only cared about the ratio in terms of the nearest
+   one-hundredth (0.01): we could multiply by 100: 
+
+    floor((8*100)/4) = 50.
+   
+   As long as we understand that the "50" is really
+   _50 hundredths_, we can now deal with decimal values to a certain level of accuracy, without compromising the accuracy
+   of non-floating point numbers. You can think of this as just changing the unit we are using: it's really the difference
+   between measuring something in meters or measuring something in centimeters.
+
+
 
 ### Suggestions
 - If you're ever confused about anything in this rampup, first try to just mess around with whatever it is you're
