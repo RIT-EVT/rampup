@@ -22,6 +22,13 @@ public:
      * @return area of the shape
      */
     virtual uint32_t getArea() = 0;
+    //this method is marked virtual, which means that it is overridable. Subclasses
+    // (classes that inherit from this class) can OVERRIDE this method with their own implementation of it.
+
+    // Setting this function equal to 0 makes it a "pure virtual" function. This means that subclasses MUST override
+    // this function, and that the Shape class itself is an abstract class-- no object can be just a Shape. An object
+    // could be a Rectangle, which is also a Shape through inheritance, but there will never be an object that is just
+    // a Shape and nothing else.
 
     /**
      * Gets the perimeter of the shape.

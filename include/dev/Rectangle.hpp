@@ -37,8 +37,9 @@ public:
     uint32_t getArea() override;
     uint32_t getPerimeter() override;
 private:
-    uint32_t length;  ///< length of the rectangle
-    uint32_t width;   ///< width of the rectangle
+    //TODO: add 2 variables here that store all the information that is needed about a Rectangle
+
+
 };
 
 } //namespace rampup

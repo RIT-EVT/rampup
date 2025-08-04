@@ -13,7 +13,6 @@ class Square : public Rectangle {
 public:
     Square(uint32_t sideLength);
 private:
-    uint32_t sideLength;
 };
 
 } //namespace rampup
