@@ -25,8 +25,10 @@ store all the necessary information needed to describe a Rectangle.
 described in Rectangle.hpp (Note that Shape does not have a corresponding cpp. This is because
 Shape is an abstract class, and so has no real implementation). You must implement all the methods
 from Rectangle inside this  (right now they all return -1). If you're not sure what a method is supposed to do, hover 
-over the name of the method with your cursor, and a documentation window should pop up.
-6. Move over to phase0/main.cpp; inside this main method, construct 2 square objects, and then add them to the array
+over the name of the method with your cursor, and a documentation window should pop up. Don't forget to fully implement
+the constructor!
+6. Move over to phase0/main.cpp; inside this main method, construct 2 square objects, and then add them to the array.
+Compile and run the main method to test out your changes. This can be done 
 7. Go back to src/dev and include/dev and create another type of Shape (from scratch). Anything goes- Circles, Ovals, Pentagons.
 When making your class, think about what values are required to represent each instance of the class, and make sure to override
 the getArea() and getPerimeter() methods from Shape. Once your class is created, go back to phase0/main.cpp and add one or two
@@ -67,3 +69,10 @@ number- it's the maximum number possible for a uint32_t (2^31-1). The -1 in this
 "biggest possible number".
 
 ### Completion
+Once you completed step 8, you're done with this phase! This phase doesn't cover every feature of C++ you read about in
+the writeup, but it should prepare you enough for the later phases, which will slowly introduce the vast remainder of 
+C++ features. Feel free to play around with the code you wrote: maybe create another class, or see what happens if you
+change the Shape class from uint32_ts to floats (if you do that, be sure to change your if statement to an exact comparison,
+which will give you a tangible example of why floats are so inconsistent and generally avoided). If you're especially
+ambitious, you could modify Shape to be a templated class where you can specify the datatype of the shape and area.
+However, the most important thing to do right now is to move on to phase 1, where you will start on actual firmware.
