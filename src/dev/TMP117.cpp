@@ -3,8 +3,8 @@
 namespace rampup {
 
 /*
- * The slave(slave), i2c(i2c) in this line are the c++ constructor initializer list.
- * This is effectively just saying to do i2c (the class variable) = i2c (the one passed in as a parameter)
+ * The "slave(slave), i2c(i2c)" on line 9 are the c++ constructor initializer list.
+ * This is effectively just saying to do i2c (the class variable) = i2c (the one passed in as a parameter) and the same for slave
  */
 TMP117::TMP117(IO::I2C& i2c, uint8_t i2cSlaveAddress) : i2cSlaveAddress(i2cSlaveAddress), i2c(i2c) {}
 

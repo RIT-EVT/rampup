@@ -1,4 +1,10 @@
-# Reading Datasheets
+# Datasheets
+
+Datasheets (aka documentation), are instruction manuals for code, hardware, 
+tools, or systems you’re working with. It explains what something is, how it 
+works, and how to use it correctly. Creators/Manufacturers will make them, and 
+they contain all the information about a chip or board, like its memory layout, 
+power pins, timers, and communication interfaces.
 
 Reading datasheets is far from the most interesting work we do on the team, but 
 it is an important skill to have as an engineer of any discipline. Like any
