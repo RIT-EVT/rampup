@@ -2,9 +2,9 @@
  * This is a simple example of reading data over I2C and printing it over UART.
  */
 #include <include/dev/TMP117.hpp>
-#include <EVT/io/I2C.hpp>
-#include <EVT/io/UART.hpp>
-#include <EVT/manager.hpp>
+#include <core/io/I2C.hpp>
+#include <core/io/UART.hpp>
+#include <core/manager.hpp>
 
 using namespace std;
 namespace io = core::io;
@@ -15,10 +15,10 @@ constexpr uint8_t i2cSlaveAddress = 0x48;
 
 int main() {
     // Initialize system
-    EVT::core::platform::init();
+    core::platform::init();
 
     // Set up UART
-    io::UART& uart = IO::getUART<IO::Pin::UART_TX, IO::Pin::UART_RX>(9600);
+    io::UART& uart = io::getUART<io::Pin::UART_TX, io::Pin::UART_RX>(9600);
 
     // Set up I2C
 
