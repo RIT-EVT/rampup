@@ -47,8 +47,8 @@ the left. This way, the electrical engineers can configure the address of the
 device just by changing which pin they have connected to ADD0.
 
 In the left column, there are 4 possible addresses listed, each of the form 
-"10010##x". These indicate the actual bits of each of the bits. The last bit is
-an "x" because is could be either a 0 or 1, depending on if a read or write is
+"10010##x". These indicate the actual bits of each of the addresses. The last bit is
+an "x" because it could be either a 0 or 1, depending on if a read or write is
 being done. Our code is set up, so that it automatically handles that logic, so
 we're just worried about the upper 7 bits. Converting these numbers to
 hexadecimal, we get 4 possibilities:

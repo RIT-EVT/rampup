@@ -10,8 +10,8 @@ using namespace std;
 namespace io   = core::io;
 namespace time = core::time;
 
-// This is known by looking at the click board and table in datasheet, depends on what the ADD0 pin is connected to
-// (GND, 3.3V, SDA, SCL)
+// This is known by looking at the click board and table in datasheet, depends on what the ADD0 pin is
+// connected to (GND, 3.3V, SDA, SCL)
 constexpr uint8_t i2cSlaveAddress = 0x48;
 
 int main() {
