@@ -12,7 +12,7 @@ TMP117::TMP117(io::I2C& i2c, uint8_t i2cSlaveAddress) : i2cSlaveAddress(i2cSlave
 io::I2C::I2CStatus TMP117::readTemp(uint16_t& temperature) {
     // Create variable to hold the register variable (the TEMP_REG value defined in the TMP117.hpp)
 
-    // Create a buffer to hold
+    // Create a buffer to hold the temperature from the I2C
 
     // Do a multibyte i2c read as we need 2 bytes back (temperature register is 2 bytes)
 
