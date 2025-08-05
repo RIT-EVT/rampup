@@ -1,7 +1,7 @@
 /**
  * This is a simple example of reading data over I2C and printing it over UART.
  */
-#include <include/dev/TMP117.hpp>
+#include <dev/TMP117.hpp>
 #include <core/io/I2C.hpp>
 #include <core/io/UART.hpp>
 #include <core/manager.hpp>
