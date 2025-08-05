@@ -20,8 +20,7 @@ io::I2C::I2CStatus TMP117::readTemp(uint16_t& temperature) {
 
     // combine the two bytes of sensor data
 
-    // The raw output is 1 unit = 7.8125 m°C (= 0.078125°C)
-    // so convert, without floating point math
+    // Convert; The raw output is 1 unit = 7.8125 m°C (= 0.078125°C)
 
     // Assign the value of the converted temp to the temperature variable
 
