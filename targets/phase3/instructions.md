@@ -33,23 +33,23 @@ or ask a senior member to explain.
 1. Write the constructor and implementation for `readTemp()` in `TMP117.hpp`.
 2. Write the target code to call these functions and print temperatures over 
 UART.
-3. Use the Saleae to decode the waveforms on SDA and SCL and confirm the data 
+3. Learn about I2C through a [short video](https://www.youtube.com/watch?v=CAvawEcxoPU) (10 min) or if you have a poor attention span, a [really short video](https://www.youtube.com/shorts/8R13KHx4dTQ) (1 min).
+4. Read the [I2C documentation](
+  https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/inter-integrated-circuit-i2c?authuser=0).
+5. Read the datasheets.md section about the TMP117 datasheet.
+4. Read the [Saleae documentation](
+  https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/saleae-logic-analyzer?authuser=0).
+5. Use the Saleae to decode the waveforms on SDA and SCL and confirm the data 
 matches what is output over UART.
 
 ## Suggestions
 - Read the [FTB documentation](
 https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/firmware-test-board-ftb).
-- Learn about I2C through a [short video](https://www.youtube.com/watch?v=CAvawEcxoPU) (10 min) or if you have a poor attention span, a [really short video](https://www.youtube.com/shorts/8R13KHx4dTQ) (1 min).
-- Read the [I2C documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/inter-integrated-circuit-i2c?authuser=0).
-- Read the datasheets.md section about the TMP117 datasheet.
 - Set up the UART code before finishing your TMP117 implementation, so you can
 use the target to test.
-- Look at the I2C sample in EVT-core for an example.
 - Combine the two bytes you read into a single 16-bit integer.
 - Avoid floating point math, i.e. instead of 2 * .05, do (2 * 5) / 100
-- Read the [Saleae documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/saleae-logic-analyzer?authuser=0).
+- Look at the I2C sample in EVT-core for an example.
 
 ## Completion
 When believe you've gotten everything working, try holding your thumb against
