@@ -1,13 +1,14 @@
 # Datasheets
 
+## Introduction to Datasheets
 Datasheets (aka documentation), are instruction manuals for code, hardware, 
 tools, or systems you’re working with. It explains what something is, how it 
 works, and how to use it correctly. Creators/Manufacturers will make them, and 
 they contain all the information about a chip or board, like its memory layout, 
 power pins, timers, and communication interfaces. If you ask a technical question
 to a senior member, there is a chance you get a response something like "have you 
-read the documentation?" (Shout out to Matthew 'Read the Docs' Heller), and they 
-are referring to the datasheet.
+read the documentation / datasheet?" (Shout out to Matthew 'Read the Docs' Heller), 
+and they are referring to the datasheet of whatever you are working with.
 
 Reading datasheets is far from the most interesting work we do on the team, but 
 it is an important skill to have as an engineer of any discipline. Like any

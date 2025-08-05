@@ -30,16 +30,16 @@ https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentat
 or ask a senior member to explain.
 
 ## Task Breakdown
-1. Write the constructor and implementation for `readTemp()` in `TMP117.hpp`.
-2. Write the target code to call these functions and print temperatures over 
+1. Learn about I2C through a [short video](https://www.youtube.com/watch?v=CAvawEcxoPU) (10 min) or if you have a poor attention span, a [really short video](https://www.youtube.com/shorts/8R13KHx4dTQ) (1 min).
+2. Read the [I2C documentation](
+   https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/inter-integrated-circuit-i2c?authuser=0).
+3. Read the `datasheets/datasheets.md` section about the TMP117 datasheet.
+4. Write the constructor and implementation for `readTemp()` in `TMP117.cpp`.
+5. Write the target code to call these functions and print temperatures over 
 UART.
-3. Learn about I2C through a [short video](https://www.youtube.com/watch?v=CAvawEcxoPU) (10 min) or if you have a poor attention span, a [really short video](https://www.youtube.com/shorts/8R13KHx4dTQ) (1 min).
-4. Read the [I2C documentation](
-  https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/inter-integrated-circuit-i2c?authuser=0).
-5. Read the datasheets.md section about the TMP117 datasheet.
-4. Read the [Saleae documentation](
+6. Read the [Saleae documentation](
   https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/saleae-logic-analyzer?authuser=0).
-5. Use the Saleae to decode the waveforms on SDA and SCL and confirm the data 
+7. Use the Saleae to decode the waveforms on SDA and SCL and confirm the data 
 matches what is output over UART.
 
 ## Suggestions
