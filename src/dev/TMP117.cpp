@@ -1,4 +1,4 @@
-#include <dev/TMP117.hpp>
+#include <include/dev/TMP117.hpp>
 
 namespace rampup {
 
@@ -17,12 +17,6 @@ io::I2C::I2CStatus TMP117::readTemp(uint16_t& temperature) {
 
     // Do a multibyte i2c read as we need 2 bytes back (temperature register is 2 bytes)
     io::I2C::I2CStatus status = i2c.readReg(i2cSlaveAddress, &registerValue, 1, outputBuffer, 2);
-
-    // Not necessary but probably a good idea to have, or some sort of error handling...
-    if (status != io::I2C::I2CStatus::OK) {
-        temperature = 0;
-        return status;
-    }
 
     // Create a temporary variable (u32 or u64) to do conversion math in
     uint64_t raw;
