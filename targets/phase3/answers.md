@@ -4,7 +4,7 @@ Phase 3 is about learning basics of I2C communication and driver development.
 ## targets/phase3/main.cpp
 - Create/Setup I2C
 ```cpp
-io::I2C& i2c = IO::getI2C<IO::Pin::PB_8, IO::Pin::PB_9>();
+io::I2C& i2c = io::getI2C<io::Pin::PB_8, io::Pin::PB_9>();
 ```
 
 - Create/Setup the TMP117
@@ -12,10 +12,10 @@ io::I2C& i2c = IO::getI2C<IO::Pin::PB_8, IO::Pin::PB_9>();
 rampup::TMP117 tmp(i2c, i2cSlaveAddress);
 ```
 
-- Call the readTemp(...)
+- Call the readTemp(...) function
 ```cpp
 uint16_t temperature;
-io::I2C::I2CStatus status = tmp.readTemp(temperature)
+io::I2C::I2CStatus status = tmp.readTemp(temperature);
 ```
 
 - Print result
