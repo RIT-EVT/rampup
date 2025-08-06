@@ -1,9 +1,9 @@
 // this #ifndef _SHAPE_ is the include guard- try to think of how this works to prevent the shape class from being
 // included twice in the same project.
 #ifndef _SHAPE_
-#define _SHAPE_
+    #define _SHAPE_
 
-#include <stdint.h>
+    #include <stdint.h>
 
 // everything in this set of brackets is in the rampup namespace.
 // To access Shape outside the namespace, you will have to use rampup::Shape.
@@ -35,9 +35,9 @@ public:
      */
     virtual uint32_t getPerimeter() = 0;
 
-// there are no private variables or methods in this class, so the private section is empty
-// it's not strictly necessary to have the 'private: ' header, but it helps to keep the same structure
-// for all header files.
+    // there are no private variables or methods in this class, so the private section is empty
+    // it's not strictly necessary to have the 'private: ' header, but it helps to keep the same structure
+    // for all header files.
 private:
 };
 

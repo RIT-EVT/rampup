@@ -5,8 +5,8 @@
 #include "../../include/dev/Rectangle.hpp"
 #include "../../include/dev/Shape.hpp"
 #include "../../include/dev/Square.hpp"
-#include <stdint.h>
 #include <cstdio>
+#include <stdint.h>
 
 #define SHAPE_ARRAY_LENGTH 4
 
