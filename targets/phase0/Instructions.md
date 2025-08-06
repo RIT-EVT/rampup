@@ -13,25 +13,25 @@ it has its own quirks and idiosyncrasies.
 
 ### Task Breakdown
 1. Read through the [C++ and Object Oriented Programming](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/object-oriented-programming-and-c) writeup on the EVT website.
-2. Look through the hpp files found in the rampup/include/dev folder that have to do with phase 0. 
+2. Look through the hpp files found in the `rampup/include/dev` folder that have to do with phase 0. 
 There are three classes, Shape, Square, and Rectangle. These classes relate to one another via _inheritance_.
 A Square is a subclass of Rectangle, and a Rectangle is a subclass of Shape.
-3. Take a close look at rampup/include/dev/Shape.hpp; this hpp file is heavily annotated with information
+3. Take a close look at `rampup/include/dev/Shape.hpp`; this hpp file is heavily annotated with information
 about the structure of an hpp file.
-4. Now, move on to rampup/include/dev/Rectangle.hpp. This is a concrete (i.e. non-abstract) class
+4. Now, move on to `rampup/include/dev/Rectangle.hpp`. This is a concrete (i.e. non-abstract) class
 that inherits from Shape. You will need to add two variable to the private section of the class. These variables should
 store all the necessary information needed to describe a Rectangle.
-5. Move over to rampup/src/dev/Rectangle.cpp. This is the cpp file that implements the methods
+5. Move over to `rampup/src/dev/Rectangle.cpp`. This is the cpp file that implements the methods
 described in Rectangle.hpp (Note that Shape does not have a corresponding cpp. This is because
 Shape is an abstract class, and so has no real implementation). You must implement all the methods
-from Rectangle inside this  (right now they all return -1). If you're not sure what a method is supposed to do, hover 
+from Rectangle inside this (right now they all return -1). If you're not sure what a method is supposed to do, hover 
 over the name of the method with your cursor, and a documentation window should pop up. Don't forget to fully implement
 the constructor!
-6. Move over to phase0/main.cpp; inside this main method, construct 2 square objects, and then add them to the array.
-Compile and run the main method to test out your changes. This can be done 
-7. Go back to src/dev and include/dev and create another type of Shape (from scratch). Anything goes- Circles, Ovals, Pentagons.
+6. Move over to `phase0/main.cpp`; inside this main method, construct 2 square objects, and then add them to the array.
+Compile and run the main method to test out your changes. This can be done [ADD HOW IT CAN BE DONE]
+7. Go back to `src/dev` and `include/dev` and create another type of Shape (from scratch). Anything goes- Circles, Ovals, Pentagons.
 When making your class, think about what values are required to represent each instance of the class, and make sure to override
-the getArea() and getPerimeter() methods from Shape. Once your class is created, go back to phase0/main.cpp and add one or two
+the getArea() and getPerimeter() methods from Shape. Once your class is created, go back to `phase0/main.cpp` and add one or two
 instances of your class to the shapeArr. Don't forget to increase the size of the shapeArr!
 8. After creating this other type of Shape, add an if statement to the for loop that checks for a shape with a 
 area to perimeter ratio of greater than or equal to 0.5. 
@@ -66,7 +66,8 @@ or, if they can't, point you to someone who can.
 - You might notice how the methods in Rectangle.cpp return -1, even though they are uint32_t, and thus unsigned.
 If this code was run, you would find that the methods do not really return -1, but instead 4294967295. This is not an arbitrary
 number- it's the maximum number possible for a uint32_t (2^31-1). The -1 in this case is really a shorthand for 
-"biggest possible number".
+"biggest possible number". This is because a uint32_t can only be 0 to 2^31-1, so when you write "-1", the number wraps
+around from 0 back to the largest possible number. If we wrote -2, it would be 2^31-2, and so on.
 
 ### Completion
 Once you completed step 8, you're done with this phase! This phase doesn't cover every feature of C++ you read about in

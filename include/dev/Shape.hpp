@@ -1,10 +1,9 @@
-
 // this #ifndef _SHAPE_ is the include guard- try to think of how this works to prevent the shape class from being
 // included twice in the same project.
 #ifndef _SHAPE_
-    #define _SHAPE_
+#define _SHAPE_
 
-    #include <stdint.h>
+#include <stdint.h>
 
 // everything in this set of brackets is in the rampup namespace.
 // To access Shape outside the namespace, you will have to use rampup::Shape.
@@ -21,7 +20,7 @@ public:
      * @return area of the shape
      */
     virtual uint32_t getArea() = 0;
-    // this method is marked virtual, which means that it is overridable. Subclasses
+    // the above method is marked virtual, which means that it is overridable. Subclasses
     //  (classes that inherit from this class) can OVERRIDE this method with their own implementation of it.
 
     // Setting this function equal to 0 makes it a "pure virtual" function. This means that subclasses MUST override
@@ -36,6 +35,9 @@ public:
      */
     virtual uint32_t getPerimeter() = 0;
 
+// there are no private variables or methods in this class, so the private section is empty
+// it's not strictly necessary to have the 'private: ' header, but it helps to keep the same structure
+// for all header files.
 private:
 };
 
