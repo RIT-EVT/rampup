@@ -1,10 +1,10 @@
 
 #ifndef _SHAPE_
-#define _SHAPE_
+    #define _SHAPE_
 // this #ifndef _SHAPE_ is the include guard- try to think of how this works to prevent the shape class from being
 // included twice in the same project.
 
-#include <stdint.h>
+    #include <stdint.h>
 
 // everything in this set of brackets is in the rampup namespace.
 // To access Shape outside the namespace, you will have to use rampup::Shape.
