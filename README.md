@@ -74,7 +74,7 @@ Create your own local branch now with:
 
     git checkout -b feature/[GitHubUsername]/[branch-name]
 
-With the repository cloned and your development branch created, it time to get 
+With the repository cloned and your development branch created, it's time to get 
 started on Phase 0.
 
 ## Phase 0: C++
