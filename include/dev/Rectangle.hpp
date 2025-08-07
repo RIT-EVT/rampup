@@ -2,7 +2,7 @@
 #define _RECTANGLE_
 
 #include "Shape.hpp"
-#include <stdint.h>
+#include <cstdint>
 
 namespace rampup {
 

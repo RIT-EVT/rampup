@@ -28,11 +28,35 @@ from Rectangle inside this (right now they all return -1). If you're not sure wh
 over the name of the method with your cursor, and a documentation window should pop up. Don't forget to fully implement
 the constructor!
 6. Move over to `phase0/main.cpp`; inside this main method, construct 2 square objects, and then add them to the array.
-Compile and run the main method to test out your changes. This can be done [ADD HOW IT CAN BE DONE]
+Compile and run the main method to test out your changes. This will be done via the "GCC" (GNU Compiler Collection) libraries.
+When we compile code to run on the stm32s (the microcontrollers that we use in EVT), we use arm-gcc because stm32 chips
+are all arm. However, your computer is most likely not an arm computer, so you will need a different version of gcc.
+
+MAC Installation: run `homebrew install gcc` in your terminal. 
+
+Windows Installation: You will need to install MinGW. 
+Follow the instructions in [this video](https://www.youtube.com/watch?v=GxFiUEO_3zM), including adding MinGW to your path.
+Download MinGW from [this SourceForge page](https://sourceforge.net/projects/mingw/).
+
+Creating The Executable:
+After installing gcc (you can run `g++ --version` in your terminal to make sure it is installed correctly), navigate to the
+`targets/phase0` directory in your terminal and run the command: 
+`g++ -o phase0 main.cpp ../..src/dev/Rectangle.cpp ../..src/dev/Square.cpp`.
+This will use gcc's c++ compiler (referred to as g++) to compile and link `main.cpp`, `Rectangle.cpp`, and `Square.cpp` 
+together to create an executable file called phase0.exe (if you want a different name, change the phase0 in the command 
+to the desired name).
+
+Running The Executable:
+In your terminal, simply type `./phase0` (or whatever you have named your executable). This should run your executable and
+any printf statements in main.cpp should print directly to the terminal. Pressing `ctrl+c` will terminate any running 
+executable if they are stuck in an infinite loop.
+
 7. Go back to `src/dev` and `include/dev` and create another type of Shape (from scratch). Anything goes- Circles, Ovals, Pentagons.
 When making your class, think about what values are required to represent each instance of the class, and make sure to override
 the getArea() and getPerimeter() methods from Shape. Once your class is created, go back to `phase0/main.cpp` and add one or two
-instances of your class to the shapeArr. Don't forget to increase the size of the shapeArr!
+instances of your class to the shapeArr. Don't forget to increase the size of the shapeArr! Recompile the executable in your terminal,
+but make sure to add your new Shape's cpp file to the list of src files for to link together.
+
 8. After creating this other type of Shape, add an if statement to the for loop that checks for a shape with a 
 area to perimeter ratio of greater than or equal to 0.5. 
 
