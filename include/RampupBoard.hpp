@@ -8,7 +8,7 @@
 #include <core/io/CANOpenMacros.hpp>
 #include <core/io/pin.hpp>
 
-#include <dev/MAX22530.hpp>
+#include <dev/ADXL345.hpp>
 #include <dev/TMP117.hpp>
 
 namespace io = core::io;
@@ -67,7 +67,7 @@ public:
 
 private:
     /** MAX instance used to get voltage data*/
-    MAX22530 max;
+    ADXL345 adxl345;
     /** TMP instance used to get temperature data */
     TMP117 tmp;
     /** Current voltages */

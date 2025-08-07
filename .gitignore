@@ -11,6 +11,7 @@ venv/
 .idea/
 .vscode/
 .cache/
+*.settings/
 
 # macOS files
 .DS_Store
