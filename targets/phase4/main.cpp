@@ -18,7 +18,7 @@ int main() {
     // Create a uint16_t array to store the three accelerations
 
     while (1) {
-        // Read all 3 accelerations
+        // Read all 3 axis
 
         // Nicely print the three accelerations to 2 decimal places
 
