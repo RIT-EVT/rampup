@@ -33,7 +33,7 @@ public:
      */
     virtual uint32_t getWidth();
 
-    // Overrided methods from Shape
+    // Overridden methods from Shape
     uint32_t getArea() override;
     uint32_t getPerimeter() override;
 

@@ -20,7 +20,7 @@ int main() {
 
     // TODO: (Step 7) when you make your other type of Shape, construct it here
 
-    // This is an array of pointers to Shape objects- note that's different than an array of Shape objects themselves
+    // This is an array of pointers to Shape objects- note that's different from an array of Shape objects themselves
     rampup::Shape* shapeArr[SHAPE_ARRAY_LENGTH] = {
         &rect1,
         &rect2,
