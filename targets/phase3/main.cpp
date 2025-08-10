@@ -6,7 +6,6 @@
 #include <core/manager.hpp>
 #include <dev/TMP117.hpp>
 
-using namespace std;
 namespace io   = core::io;
 namespace time = core::time;
 
@@ -16,10 +15,8 @@ constexpr uint8_t i2cSlaveAddress = 0x48;
 
 int main() {
     // Initialize system
-    core::platform::init();
 
     // Set up UART
-    io::UART& uart = io::getUART<io::Pin::UART_TX, io::Pin::UART_RX>(9600);
 
     // Set up I2C
 
