@@ -2,265 +2,126 @@
 
 ## Overview
 
-Hello and welcome to EVT! This project is designed to give you a look into what
-it is like to develop on the firmware team. The goal is for you to get exposure
-to the full life cycle of development for EVT, from prototyping with a breakout
-board to communicating information between boards. This process is broken down
-into four phases, each introducing a communication protocol that the team
-commonly uses. Throughout the process, you'll learn everything you need to be a
-firmware engineer, from C++ fundamentals to class-level software design to
-hardware debugging.
+Hello and welcome to the Electric Vehicle Team (EVT)! This project is designed 
+to give you a look into what it is like to develop on the firmware team with. 
+The goal is for you to get exposure to the full development life cycle at EVT, 
+from prototyping with a breakout board to communicating between boards. This 
+process is broken down into eight phases, each introducing a key part of our 
+core library that the team uses all of our boards. Throughout the process you 
+will learn everything you need to be a firmware engineer, from C++ fundamentals 
+to class-level software design to hardware debugging.
 
-If this is your first time doing embedded development, it will take some time
-to get used to all the new concepts and the quirks of working with hardware.
-Through this process, be sure to use all the resources at your disposal.
-Google is great for general C++ questions, and the firmware docs are useful for
-background on the tools we use for development, but when you're stuck, your
-best resource is going to be other firmware members, new and old. Collaboration
-is critical to our team's success, and it's often a lot more fun than
-grinding out code on your own!
+If this is your first time doing embedded development, it will take some time 
+to get used to all the new concepts and the quirks of working with hardware. 
+Through this process, be sure to use all the resources at your disposal. Google 
+is great for general C++ questions, and the firmware docs are useful for 
+background on the tools we use for development, but when you're stuck, your 
+best resource is going to be other firmware members, new and old. Collaboration 
+is critical to our team's success, and it's often a lot more fun than grinding 
+out code on your own!
 
+## Getting started
 
-## Phase 1: UART
+Before getting started on the eight rampup phase, you need to first setup your
+build environment in order to actually compile code. Start out by heading to the
+[Environment Setup](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/environment-setup)
+page on the EVT website to install all the necessary tools for developing and 
+compiling code. While you are waiting on all those tools to install, now is a 
+perfect time to read up on [Git and Github](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/version-control-git-and-github).
 
-### Learning Objectives
-- C++ syntax
-- EVT-core basics
-- Making a UART interface
-- Working with a nucleo
+We primarily use Git and by extension Github ALOT. So it is important that you 
+know a few basics. If you haven't used Git before, it might seem a bit 
+overwhelming with all the different commands and terminology, but there is 
+really only five key commands you need to know for 90% of your interactions 
+with it. If any problems arise, Google is your friend when it comes to Git and 
+is probably the best way to learn it. Your key commands are: 
+ - `git clone [url]`  - This makes a local copy of a repository for you start
+                        modifying code. 
+ - `git pull` - This updates your local repository with changes on the server.
+ - `git checkout [-b] [<branch_name>]` - This will switch your local code to a 
+                                         different branch. The `-b` option will
+                                         also create a new local branch before
+                                         switching to it. 
+ - `git submodule update --init --recursive` - This downloads additional
+                        repositories that are referenced in a project.
+ - `git commit` - This allows you to submit your changes to the local
+                  repository's history. 
+ - `git push` - This pushes your local history to the remote server for other
+                to view and edit.
 
-### Summary
-The first communication protocol you should be aware of is UART, which we
-commonly use to communicate between a laptop and a board, mostly for debugging.
-To use this protocol, you'll only need a Nucleo and your laptop. Your goal will
-be to simply take two numbers from the user, add them, and print the result.
-Obviously, the actual work being done isn't very complex, but this first step
-will help you understand how to work in C++ and with EVT-core, our custom
-library. The only file you'll need to modify is `targets/phase1/main.cpp`.
+With your environment setup and a crash course in Git, lets try it out! Start 
+by cloning [EVT-core](https://github.com/RIT-EVT/EVT-core) to your local 
+project folder with `git clone git@github.com:RIT-EVT/EVT-core.git` (If you do 
+not have a project folder, we HIGHLY recommend you create one to store all of 
+the different EVT repositories in to which you will clone many). Once you have 
+EVT-core cloned, enter into the new directory and download all the submodules 
+with `git submodule update --init --recursive` in order to get all the 
+additional libraries we use. Finally follow the instruction in 
+[Running Code](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/running-code) 
+to build the repository. If all goes well, you now have a fully functional 
+build environment.
 
-### Task Breakdown
-1. Over UART, read two numbers input by the user, up to 10 digits each.
-2. Print the sum of the two numbers over UART.
+Now lets get you started on the rampup project! First, clone rampup to your 
+project directory (NOT the EVT-core directory!) with 
+`git clone git@github.com:RIT-EVT/rampup.git`. Again, update your submodules 
+with `git submodule update --init --recursive` to get the included copy of 
+EVT-core and libraries. We will now create a new local branch for your changes. 
+Any time we are developing a new feature or fixing a bug, we always create a 
+branch for that specific bug or feature off of the main branch. This branch follows the standard naming format of: 
+`[bug/feature]/[GitHubUsername]/[name-of-bug-or-feature]`. For example, to 
+complete rampup one might make the branch: feature/mjh9585/solved-rampup. 
+Create your own local branch now with:
 
-### Suggestions
-- Read the [Nucleo documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/stm32-nucleo).
-- Be sure you know how to open a serial console. (Documented 
-[here](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/running-code))
-    - PuTTY for Windows users
-    - `screen` for MacOS/Linux
-- Read over the [UART documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/universal-synchronousasynchronous-receivertransmitter-usartuart).
-- Copy code from the echo sample for a starting point.
-- Look up standard C++ functions for converting from character array to
-  integer.
+    git checkout -b feature/[GitHubUsername]/[branch-name]
 
-### Completion
-Once you've gotten it working, play around with it for a bit to see if you can
-break it. What happens when you put in something that isn't a number? What
-happens when you put in a really long input? Once you're happy with what you
-have, show your code to a designated senior firmware member. Once they say it
-looks good, you can move on to the next phase.
+With the repository cloned and your development branch created, it's time to get 
+started on Phase 0.
 
+## Phase 0: C++
 
-## Phase 2: I2C
+Phase 0 is a short introduction C++ if you have never used it before. If you are comfortable with C++ object orientated programming, go a head an skip to Phase 1 and let the firmware lead know. 
 
-### Learning Objectives
-- I2C communication
-- Object-oriented programming in C++
-- Basic driver development
-- Fixed point data formatting
-- Waveform analysis with a logic analyzer
+To get started, follow the instructions in [targets/phase0](targets/phase0/Instructions.md).
 
-### Summary
-Now that you can communicate between the microcontroller (uC) and your 
-computer, you can start playing with other communication protocols and report
-the results back over UART. The first one we'll cover is Inter-Integrated
-Circuit, abbreviated I2C, which is read as "eye-two-cee" or "eye-squared-cee".
-You'll use this protocol to communicate between the uC and an integrated
-circuit (IC) used for temperature sensing. For this phase, you'll need a little
-more hardware. Specifically, you'll need a Firmware Test Board (FTB) and a click
-board with the TMP117 chip on it. At the end, you'll also need a Saleae Logic
-Analyzer to see the I2C waveforms. To get this working, you need to modify
-`targets/phase2/main.cpp` and `src/dev/TMP117.cpp`. The header file
-`include/dev/TMP117.hpp` has been provided for you.
+## Phase 1: GPIO
 
-### Task Breakdown
-1. Write the constructor and implementation for `readTemp()` in `TMP117.hpp`.
-2. Write the target code to call these functions and print temperatures over 
-UART.
-3. Use the Saleae to decode the waveforms on SDA and SCL and confirm the data 
-matches what is output over UART.
+To get started, follow the instructions in [targets/phase1](targets/phase1/Instructions.md).
 
-### Suggestions
-- Read the [FTB documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/firmware-test-board-ftb).
-- Read the [I2C documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/inter-integrated-circuit-i2c?authuser=0).
-- Read the datasheets.md section about the TMP117 datasheet.
-- Set up the UART code before finishing your TMP117 implementation, so you can
-use the target to test.
-- Look at the I2C sample in EVT-core for an example.
-- Combine the two bytes you read into a single 16-bit integer.
-- Read the [Saleae documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/saleae-logic-analyzer?authuser=0).
+## Phase 2: UART
 
-### Completion
-When believe you've gotten everything working, try holding your thumb against
-the TMP chip to heat it up. Then, blow on it to cool it down. Does the reported
-value update appropriately? Once you're satisfied with your code's performance,
-call over a senior member and show them your work. Also be sure to show them the
-waveform recorded by the Saleae. Once they say it looks good, you can move on to
-the next phase.
+To get started, follow the instructions in [targets/phase2](targets/phase2/Instructions.md).
 
+## Phase 3: I2C
 
-## Phase 3: SPI
+To get started, follow the instructions in [targets/phase3](targets/phase3/Instructions.md).
 
-### Learning Objectives
-- SPI communication
-- Advanced driver development
-- Analog-to-Digital Converter (ADC) use
-- Reading datasheets
-- Running code on EVT hardware
+## Phase 4: SPI
 
-### Summary
-The next communication protocol to cover is Serial Peripheral Interface,
-abbreviated SPI, which is read like "spy." You'll use this protocol to
-communicate between the uC and an Analog-to-Digital Converter (ADC), which is an
-IC that converts an analog signal (continuous) to a digital signal (discrete).
-For our purposes, we're just going to be using it to read the voltage on each of
-the input channels. You'll still need the Saleae and FTB, but you'll need to 
-switch out the TMP117 board for the MAX22530 board. To test the board, you'll 
-also need to get a power supply connected to the input of the ADC to test it.
-For this phase, the header file hasn't been provided for you, so you'll have to
-write that yourself. The files you need to edit are `include/dev/MAX22530.hpp`,
-`src/dev/MAX22530.cpp`, and `targets/phase3/main.cpp`. Once the code is working,
-you'll also get to run it on a DEV1 Powertrain Voltage Controller (PVC).
+To get started, follow the instructions in [targets/phase4](targets/phase4/Instructions.md).
 
+## Phase 5: ADC
 
-### Task Breakdown
-1. Read the [SPI documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/serial-peripheral-interface-spi?authuser=0).
-2. Read the datasheets.md section about the MAX22530 datasheet.
-3. Write the header file for `MAX22530`, so that it can be used to read voltages
-from each channel.
-4. Implement the functions defined in the header file.
-5. Write the target code to call the functions and print all voltages over UART.
-6. Use the Saleae to decode the waveforms on CS, SCL, MOSI, and MISO and confirm
-the data matches what is output over UART.
+To get started, follow the instructions in [targets/phase5](targets/phase5/Instructions.md).
 
-### Suggestions
-- Read the SPI documentation.
-- Fully plan out the MAX22530 class in the header file before starting on the 
-implementation.
-- Look at the SPI sample in EVT-core for an example.
-- Read the ST-Link documentation to see how to use it.
-- Read the running code documentation to see how to flash the PVC.
+## Phase 6: CAN
 
-### Completion
-Once you think it's working, get a variable power supply and apply different
-voltages to the input channels. If you're not familiar with power supplies, have
-a senior member help you set it up. Be sure to limit the current to only a few 
-milliamps to make sure it's safe. Does the voltage on the power supply match the
-UART output? When you're happy with its performance, have a senior member look
-at your Saleae output and your code. If it looks good, have them get you a DEV1
-PVC to test the code on. With their help, use the power supply to test the ADC
-on the PVC. If it works, you can start on the last phase.
+To get started, follow the instructions in [targets/phase6](targets/phase6/Instructions.md).
 
+## Phase 7: CANOpen
 
-## Phase 4: CAN
-
-### Learning Objectives
-- CAN communication
-- CANopen standard
-- Main target development
-- Memory addressing in C++
-- Waveform analysis with an oscilloscope
-
-### Summary
-This last phase explores a new communication protocol, Controller Area Network,
-abbreviated CAN. It also serves as a culmination of all the phases leading up to
-this one. For this phase, you'll be using both the drivers you just wrote in a
-single "RampupBoard" class. This class is supposed to represent a board that the
-team would make that reports temperature and voltage data over CAN. We haven't
-made a PCB that does that, but you can prototype one using the FTB. For this
-phase, you'll need a click board for the TMP117 or the MAX22530 and an
-evaluation module for whichever IC isn't on your click. You'll also need a FUN-E
-SNAIL and HUDL, as well as harnesses to connect the FTB and HUDL to the FUN-E 
-SNAIL. Lastly, you'll need the oscilloscope and the PEAK CAN dongle to see the 
-messages being sent. At this point, you'll have a fair amount of hardware, so be
-sure to ask a senior member for help getting this set up. You'll also need to 
-ask them to flash the HUDL with the necessary display code.
-
-For this phase, the end goal is going to be collecting data from the two ICs and
-reporting it over CAN, so that it can be displayed on the HUDL. To accomplish
-this, you'll make calls to the drivers you wrote and work with the CANopen stack
-to have it output over CAN following the CANopen standard. To start, you'll
-still be using UART for debugging, but once the data is being reported properly,
-you can test the ICs the same ways you did in earlier phases, but now you can 
-just look at the data as it appears on the HUDL to confirm it's working. You'll 
-also learn how to use the oscilloscope and the PEAK CAN dongle to debug. For 
-this phase, the files you need to edit are `include/RampupBoard.hpp`, 
-`src/RampupBoard.cpp`, and `targets/phase4/main.cpp`.
-
-### Task Breakdown
-1. Modify the RampupBoard header file to link the data to the CANopen 
-dictionary. Search through the dictionary to find all the "replace" comments.
-2. Write the constructor and `process()` methods for RampupBoard in the header
-and implementation files.
-3. Write the main target to initialize everything. Then run `process()` and the 
-necessary functions to get CANopen working.
-4. Plug the FTB and HUDL into the FUN-E SNAIL to confirm the data displays on
-the HUDL.
-5. Use the PEAK CAN dongle to decode the CAN messages and confirm the data 
-matches what is being sent.
-6. Use the Saleae to decode the waveforms on CAN TX and RX to confirm that it
-matches the data that should be sent.
-7. Use the Oscilloscope to see the CAN messages on CAN high and low.
-
-### Suggestions
-- Read the [CAN documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can?authuser=0).
-- Read the [CANopen documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can/canopen).
-- Look at the canopen_sample in EVT-core for an example.
-- If the HUDL doesn't work right away, debug the output with the PEAK can dongle
-and the Saleae.
-- Read the [FUN-E SNAIL documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/fun-e-snail?authuser=0).
-- Read the [PEAK dongle documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/peak-can-viewer?authuser=0).
-- Read the [oscilloscope documentation](
-https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/oscilloscope?authuser=0).
-
-### Completion
-Once you have all the code written, you can start trying out all the testing
-equipment we use as a team. When the code works, you should see all the data
-being reported show up on the HUDL, but, especially in embedded systems, the 
-code rarely works on the first try. The Saleae, PEAK dongle, and oscilloscope
-will all be useful for finding different types of issues. While we've put a lot
-of effort into the documentation for each of these tools, there is some
-practical debugging knowledge that needs to be shown directly. You should start
-by collecting as much information as you can about whatever problem you're
-facing, but feel free to reach out to senior firmware members for any help in
-setting up the hardware or debugging your software.
-
-Once the HUDL is displaying the data properly, make sure you spend some time to
-try out any debugging tools you haven't used yet. When you feel comfortable
-enough with each of them, you can show your code to a senior firmware member for
-a final check. When they approve it, you've officially completed the rampup
-project.
+To get started, follow the instructions in [targets/phase7](targets/phase7/Instructions.md).
 
 ## Next Steps
+
 Congratulations on completing the rampup project! If you're new to firmware
 development, starting something new like this can be very time-consuming and
-difficult, but you met that challenge and overcame it. I hope you got a good 
-idea of how the firmware team operates and the type of work we do as a team. 
+difficult, but you met that challenge and overcame it. I hope you got a good
+idea of how the firmware team operates and the type of work we do as a team.
 Having completed the rampup project, you are now a fully-fledged member of our
-team, so you can begin work on a project for one of our bikes. If there's 
+team, so you can begin work on a project for one of our bikes. If there's
 anything else you want to learn about or don't understand, be sure to take some
-time now to read over some documentation and play around with it now. Once you 
-think you're ready, you can reach out to the firmware lead to get your first 
+time now to read over some documentation and play around with it now. Once you
+think you're ready, you can reach out to the firmware lead to get your first
 project.
 
 Good luck!
