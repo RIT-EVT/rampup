@@ -19,15 +19,15 @@ library. The only file you'll need to modify is `targets/phase1/main.cpp`.
 
 ## Task Breakdown
 
-1. Over UART, read two numbers input by the user, up to 10 digits each.
-2. Print the sum of the two numbers over UART.
+1. Read the [Nucleo documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/stm32-nucleo).
+2. Read over the [UART documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/universal-synchronousasynchronous-receivertransmitter-usartuart). 
+3. Over UART, read two numbers input by the user, up to 10 digits each. 
+4. Print the sum of the two numbers over UART.
 
 ## Suggestions
 
-- Read the [Nucleo documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/stm32-nucleo).
 - Be sure you know how to open a serial console. (Documented
   [here](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/running-code)) - PuTTY for Windows users - `screen` for MacOS/Linux
-- Read over the [UART documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/universal-synchronousasynchronous-receivertransmitter-usartuart).
 - Copy code from the echo sample for a starting point.
 - Look up standard C++ functions for converting from character array to
   integer.
