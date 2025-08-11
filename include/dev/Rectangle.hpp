@@ -39,6 +39,14 @@ public:
 
 private:
     // TODO: add 2 variables here that store all the information that is needed about a Rectangle
+    /**
+     * Length of the rectangle
+     */
+    uint32_t length;
+    /**
+     * Width of the rectangle
+     */
+     uint32_t width;
 };
 
 } // namespace rampup

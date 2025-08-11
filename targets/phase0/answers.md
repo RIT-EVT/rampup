@@ -19,8 +19,13 @@ Make sure to also explain a docstrings (/**) comment vs. a normal multiline comm
 ## Step 5
 In dev/Rectangle.cpp
 ```cpp
+Rectangle::Rectangle(uint32_t length, uint32_t width) : length(length), width(width) {}
+
+// notice how each method starts with 'Rectangle::'?
+// This is how C++ links the declarations of the methods in Rectangle.hpp
+// with the implementations here in Rectangle.cpp.
 uint32_t Rectangle::getArea() {
-    return length*width;
+    return length * width;
 }
 
 uint32_t Rectangle::getPerimeter() {
@@ -35,6 +40,8 @@ uint32_t Rectangle::getLength() {
     return length;
 }
 ```
+If they're getting incorrect values that aren't 2^31-1, make sure that they have the initializer list in the constructor.
+If they are setting the local variables inside the constructor, make sure to show them the initializer list.
 
 ## Step 6
 - construct 2 square objects here, then add them to the shapeArray
@@ -75,15 +82,22 @@ Shape ideas:
 - Circle (they might want to use fixed point to make their calculations more accurate, then round back down)
 The example used in the answer guide is a Circle, but that doesn't mean it's the only answer.
 
+Don't forget that when they build they will need to use 
+'g++ -o executable main.cpp ..\..\src\dev\Rectangle.cpp ..\..\src\dev\Square.cpp ..\..\src\dev\NEW_SHAPE.cpp'
+
 ## Step 8
 In phase0/main
 ```cpp
     uint32_t ratio = (shapeArr[i]->getArea() * 100) / shapeArr[i]->getPerimeter();
+    printf("Shape %u has an area to perimeter ratio of %u.%u\n\r", i, ratio/100, ratio%100);
     if(ratio >= 50) {
-        printf("Shape %u has an area to perimeter ratio of %u.%u", i, ratio%100, ratio/100);
+        printf("Shape %u has an area to perimeter greater than or equal to 0.5.", i);
+        //we are manually splitting the ratio because it is fixed point.
+    } else {
+        printf("Shape %u has an area to perimeter less than 0.5.", i);
     }
 ```
-They don't have to do it exactly like this, they just need to signal in some way that the ratio is above 0.5
+They don't have to do it exactly like this, they just need to signal in some way that the ratio is above 0.5.
 
 ## FAQ
 Any commonly asked questions and their answers should be recorded here. Keep track of what questions
