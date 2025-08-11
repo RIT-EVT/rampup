@@ -106,3 +106,6 @@ you get asked, and if there are common ones make sure to add them to this docume
 1.
    - Q: 
    - A: 
+
+## Other Resources
+- [C++ Tutorial](https://cplusplus.com/doc/tutorial/)
