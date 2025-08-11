@@ -57,3 +57,11 @@ IMAGE TO BE ADDED!
 
 ## Saleae Expected Image
 IMAGE TO BE ADDED!
+
+## FAQ
+Any commonly asked questions and their answers should be recorded here. Keep track of what questions
+you get asked, and if there are common ones make sure to add them to this document.
+
+1.
+    - Q:
+    - A: 

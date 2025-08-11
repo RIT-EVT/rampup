@@ -37,3 +37,11 @@ uint64_t num2 = atoi(userInput2);
 uint64_t num3 = num1 + num2;
 uart.printf("\n\r%u\n\r", num3);
 ```
+
+## FAQ
+Any commonly asked questions and their answers should be recorded here. Keep track of what questions
+you get asked, and if there are common ones make sure to add them to this document.
+
+1.
+    - Q:
+    - A: 
