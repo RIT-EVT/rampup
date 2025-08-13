@@ -58,9 +58,9 @@ instance, and if the uC is a f4 generation, the second `#ifdef` occurs, creating
 ### Usage
 The last thing you need to know about templates are how to use them. 
 
-When you call the template, the parameters in the less than and greater than symbols will go after 
-the declaration in less than and greater than symbols, and any values in the parenthesis will follow in parentheses 
-of their own, like this:
+When you call the template, the parameters in the `< >` that follow "template" will go after 
+the declaration in `< >`, and any values in the parameter parenthesis after the function name, 
+in this case "getGPIO", will follow in parentheses of their own, like this:
 
 ```cpp
 // Declaration
@@ -72,7 +72,7 @@ GPIO& getGPIO(GPIO::Direction direction = GPIO::Direction::OUTPUT, GPIO::Pull pu
 GPIO& gpio = getGPIO<pinHere>(directionHere, pullHere)
 ```
 
-Note that the direction and pull can be skipped, as they have default values.
+Note that the direction and pull can be skipped in this case, as they have default values.
 
 
 ## Follow along
