@@ -1,8 +1,8 @@
 /**
  * This is a simple example of GPIO usage
  */
-#include <core/manager.hpp>
 #include <core/io/GPIO.hpp>
+#include <core/manager.hpp>
 
 namespace io = core::io;
 
