@@ -6,7 +6,7 @@ Unlike GPIO.hpp, time.hpp is not a class, it is instead a collection
 of related functions and structs that are useful when working with time.
 
 ## Follow along
-Open `libs/EVT-core/include/core/utils/time.hpp` and split the screen between these instructions and time.hpp
+Open [`libs/EVT-core/include/core/utils/time.hpp`](libs/EVT-core/include/core/utils/time.hpp) and split the screen between these instructions and time.hpp
 
 The first thing to notice when finding the functions and tools you want to use is the namespace, as this is how
 you will be able to call these functions.
