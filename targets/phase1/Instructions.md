@@ -33,8 +33,10 @@ In EVT’s bikes, GPIO pins are used for things like reading from sensors and se
 
 #### Step 1 – Understand the Hardware
 - An LED has 2 legs, one longer (the anode) and one shorter (the cathode)
-  - The longer leg needs to be connected to the power
+  - The longer leg needs to be connected to a pin to power the LED
   - The shorter leg needs to be connected to the boards ground (GND)
+- The LED **MUST have a resistor** to avoid burning out the LED or damaging the uC. 
+  - The resistor limits the current to a safe level, letting the LED light up without overheating or failing. 
 - The LED is connected to a specific pin on your board (e.g., PA_5).
 - The pin must be set as Output, as you are sending a signal (turn on, or turn off) to the LED.
 - As the LED is connected to a pin, when the pin is set to HIGH, it will send out a 3.3 volt signal, which will cause the LED to turn on
@@ -47,6 +49,9 @@ In EVT’s bikes, GPIO pins are used for things like reading from sensors and se
 - create a gpio for your pin
 - create an infinite loop
   - toggle the led on/off and wait .5 seconds
+
+#### Step 4 - Flashing (Running) the code
+- Something here about flashing code
 
 ## Task Breakdown
 - Follow [**The Time Guide**](Time.md) to learn how to use the namespace functions in `time.hpp`
@@ -62,5 +67,5 @@ you don't understand
 ## Completion
 
 Once you've gotten it working, play around with it for a bit, maybe try to have 2 LED's
-that are offset. Once you're happy with what you have, show your code to a designated senior firmware member. 
+that are offset. Once you're happy with what you have, show your code to a senior firmware member. 
 Once they say it looks good, you can move on to the next phase.
