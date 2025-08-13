@@ -76,7 +76,7 @@ Note that the direction and pull can be skipped in this case, as they have defau
 
 
 ## Follow along
-Open [`libs/EVT-core/include/core/utils/GPIO.hpp`](libs/EVT-core/include/core/io/GPIO.hpp) and split the screen 
+Open [`libs/EVT-core/include/core/utils/GPIO.hpp`](../../libs/EVT-core/include/core/io/GPIO.hpp) and split the screen 
 between these instructions and GPIO.hpp.
 
 This GPIO.hpp is an abstract class that all uC specific implementations of the GPIO class **MUST** follow, meaning 
