@@ -58,9 +58,9 @@ instance, and if the uC is a f4 generation, the second `#ifdef` occurs, creating
 ### Usage
 The last thing you need to know about templates are how to use them. 
 
-When you call the template, the parameters in the `< >` that follow "template" will go after 
-the declaration in `< >`, and any values in the parameter parenthesis after the function name, 
-in this case "getGPIO", will follow in parentheses of their own, like this:
+When you call the template, the parameters in the declarations `< >` that follow "template" will go after 
+the usage call in `< >`, and any values in the templates parameter parenthesis after the function name, 
+in this case "getGPIO", will follow in parentheses of their own in the usage, like this:
 
 ```cpp
 // Declaration
