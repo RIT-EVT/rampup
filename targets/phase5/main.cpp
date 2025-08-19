@@ -28,8 +28,7 @@ int main() {
         core::log::LOGGER.log(core::log::Logger::LogLevel::INFO, "ADC0: %d%%", static_cast<uint32_t>(throttle.readPercentage() * 100));
         core::log::LOGGER.log(core::log::Logger::LogLevel::INFO, "ADC0 raw: %d", throttle.readRaw());
         core::log::LOGGER.log(core::log::Logger::LogLevel::INFO, "--------------------\r\n");
-        // Clear the screen
-        core::log::LOGGER.log(core::log::Logger::LogLevel::INFO, " \033[2J\033[1;1H");
-        time::wait(10);
+        time::wait(500);
+        core::log::LOGGER.log(core::log::Logger::LogLevel::INFO, "\033[2J\033[H");
     }
 }
