@@ -5,7 +5,7 @@
 // Add all the necessary include statements here
 #include <core/manager.hpp>
 
-namespace io = core::io;
+namespace io   = core::io;
 namespace time = core::time;
 
 int main() {
@@ -25,6 +25,5 @@ int main() {
         // Wait for 500 milliseconds
 
         // Reset the screen and return the cursor to the top (use the escape sequence: "\033[2J\033[H")
-
     }
 }
