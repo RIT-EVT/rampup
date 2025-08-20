@@ -14,12 +14,14 @@ When talking about GPIO:
 
 ## Template Functions
 A template in C++ is like a blueprint for code, it lets you write a function or class once and then reuse 
-it with different types or values without rewriting it.
+it with different types or values without rewriting it. Templates also have the advantage that if you call a template 
+twice with the same input, it guarantees we get the same instance back.
 
-In EVT's case, we mainly will use them for initializing things like GPIO independent of platform (aka, no matter what
-microcontroller it is on, the same template call will work on it, assuming the uC is supported by EVT).
+This is important for initializing microcontroller hardware, like GPIO pins.
+Each pin on the microcontroller is a single physical resource, meaning if two different parts 
+of the code think they both “own” the same pin, you’ll get bugs, conflicts, or even damage hardware.
 
-We will be using the following template function to create a GPIO, found on line 191 of the `manager.hpp`.
+We will be using the following template function to create a GPIO pin, found on line 191 of the `manager.hpp`.
 
 ```cpp
 /**
