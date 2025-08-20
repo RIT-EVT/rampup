@@ -8,7 +8,7 @@ int main() {
     // Set up UART
 
     // Create array of 1 GPIO pointer for the chip select GPIO
-    
+
     // Set up chip select GPIO and put in array
 
     // Set up and configure SPI (<1 MHz, Mode 3, MSB first)
