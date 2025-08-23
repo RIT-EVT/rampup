@@ -32,14 +32,16 @@ In EVT’s bikes, GPIO pins are used for things like reading from sensors and se
 ### Your First Embedded Program: Blink an LED
 
 #### Step 1 – Understand Controlling LED's
-- The LED is connected to a specific pin on your board (e.g., PA_5).
+- The LED is connected to a specific pin on your board (e.g., PA_3).
 - The pin must be set as Output, as you are sending a signal (turn on, or turn off) to the LED.
 - As the LED is connected to a pin, when the pin is set to HIGH, it will send out a 3.3 volt signal,
 which will cause the LED to turn on.
 
 #### Step 2 - Choosing a pin
-- You will need to figure out what pin to connect your LED to
-  - This will be done by looking at a pinout for the microcontroller you are using
+You will need to figure out what pin controls the onboard LED.
+To do so, refer to the [Nucleo Datasheet section](../../datasheets/datasheets.md#nucleo-datasheet)
+of the [`datasheets.md`](../../datasheets/datasheets.md) file, 
+along with the [`datasheets/nucleo.pdf`](../../datasheets/nucleo.pdf) datasheet.
 
 #### Step 3 - Writing the code
 - create a gpio for your pin
