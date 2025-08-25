@@ -11,7 +11,7 @@ int main() {
     core::platform::init();
 
     // Setup GPIO pin for LED
-    io::GPIO& led = io::getGPIO<io::Pin::PA_1>();
+    io::GPIO& led = io::getGPIO<io::Pin::PB_13>(); // Might be PA_5 if on f446 board
 
     // variable to store state in
     io::GPIO::State state = io::GPIO::State::HIGH;
