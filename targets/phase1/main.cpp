@@ -13,5 +13,4 @@ int main() {
     // Setup GPIO
 
     // Loop and toggle LED on and off; waiting .5 seconds after each toggle
-
 }
