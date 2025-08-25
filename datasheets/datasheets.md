@@ -40,10 +40,11 @@ Now we could try both, but there is a very quick and easy way to check what nucl
 you have.
 
 ### Identifying Nucleo's
-On all of our STM Nucleo's, there should be a sticker that gives the STM chip identifier,
-which will look something like this.
+On all of our STM Nucleo's, there should be a sticker that gives the STM microcontroller 
+identifier, which will look something like below, with F302r8 being this boards specification 
+(sometimes referred to as just F302).
 
-INSERT PHOTO
+<img src="../photos/board-type.png" alt="Photo of board type" width="400">
 
 ### Finding the Correct Pin for our Nucleo
 Now that we know what nucleo we have, we can go back to the datasheet and look to see 
