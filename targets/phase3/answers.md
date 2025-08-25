@@ -53,10 +53,10 @@ output = rawOutput * 78125 / 1000000 // celsius
 Look at src/dev/TMP117.cpp for completed implementation.
 
 ## Expected UART output
-IMAGE TO BE ADDED!
+<img src="uart_expected.png" alt="UART Expected Output" width="300">
 
 ## Saleae Expected Image
-IMAGE TO BE ADDED!
+<img src="saleae_expected.png" alt="Saleae Expected Output" width="700">
 
 ## FAQ
 Any commonly asked questions and their answers should be recorded here. Keep track of what questions
