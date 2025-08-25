@@ -96,11 +96,12 @@ Generally, we to want to operate at the fastest speed possible that is
 compatible with all of the devices on the bus to limit latency and maximize 
 throughput. 
 
-Now each dataset will specify this information a little differently, but start 
-out searching for the section on SPI. We can pretty quickly find the section
-titled "SERIAL COMMUNICATIONS" with a subsection titled "SPI". Reading the 
-description we can the maximum clock speed. This information can also be found 
-in "Table 9. SPI Digital Input/Output" under the fSCLK parameter's maximum 
+Now each datasheet will specify this information a little differently, but 
+start out searching for the section on SPI. We can pretty quickly find the 
+section titled "SERIAL COMMUNICATIONS" with a subsection titled "SPI". Reading 
+the description we can the maximum clock speed. This information can also be 
+found in "Table 9. SPI Digital Input/Output" under the fSCLK parameter's 
+maximum.
 
 #### Mode
 The mode is the combination of the clock polarity and phase in relation to the
@@ -147,7 +148,10 @@ labeling indicates that the most significant bit (A5) is being sent first, so
 the bit order is MSB first.
 
 ### Device configuration
-Once SPI has been configured, the next thing you'll need to do is find which registers need to be configure to produce data and which registers you need to read data from. Unlike the TMP117, you need to first configure the ADXL345 to take measurements before you can read the data. 
+Once SPI has been configured, the next thing you'll need to do is find which 
+registers need to be configure to produce data and which registers you need to 
+read data from. Unlike the TMP117, you need to first configure the ADXL345 to 
+take measurements before you can read the data. 
 
 #### Register Access
 Before looking into which registers you need to use, take a moment to 
@@ -186,4 +190,4 @@ indicates that you're reading two bytes from the slave. To simplify things, it
 is recommended to make dedicated read and write methods that set the R/W and MB 
 bits depending on the call to avoid having to remember to set them every time 
 you want to access a register. Once again, if you're having issues, be sure to 
-use the Saleae to check what's happening
+use the Saleae to check what's happening.

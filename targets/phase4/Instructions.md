@@ -13,8 +13,8 @@ The next communication protocol to cover is the Serial Peripheral Interface
 and a 3-axis accelerometer. An accelerometer is an special integrated circuit 
 (IC) that is capable of sensing the acceleration of the chip. For our purposes, 
 we're going simply read the acceleration of all three axes, convert it to 
-Gforce, and print it out. You'll still need the Saleae and FTB, but you'll need 
-to switch out the TMP117 board for the ADXL345 board. For this phase, the 
+G-force, and print it out. You'll still need the Saleae and FTB, but you'll 
+need to switch out the TMP117 board for the ADXL345 board. For this phase, the 
 header file hasn't been provided for you, so you'll have to write that 
 yourself. The files you need to edit are `include/dev/ADXL345.hpp`,
 `src/dev/ADXL345.cpp`, and `targets/phase4/main.cpp`. 
@@ -40,4 +40,10 @@ the data matches what is output over UART.
 - Look at the SPI sample in EVT-core for an example.
 
 ## Completion
-Once you have completed your implementation, you should see the acceleration in the z-axis around 9.8m/s due to gravity. Try standing the board up on one end to see if the acceleration shifts to one of the other axes. Try it again on the perpendicular axis. You should be able to see a positive and negative acceleration due to gravity on each axis. When you're happy with the performance, have a senior member look at your Saleae output and your code. If it looks good, you can start on phase 5.
+Once you have completed your implementation, you should see a g-force on the 
+z-axis around 1 due to gravity. Try standing the board up on one end 
+to see if the acceleration shifts to one of the other axes. Try it again on the 
+perpendicular axis. You should be able to see a positive and negative 
+acceleration due to gravity on each axis. When you're happy with the 
+performance, have a senior member look at your Saleae output and your code. If 
+it looks good, you can start on phase 5.
