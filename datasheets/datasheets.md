@@ -101,9 +101,8 @@ with this, set up the Saleae to check if the signals being sent match the values
 in this call. 
 
 After that, you will need to properly convert the output, in a ratio
-of 1 to 7.8125 (34.56 °C would be stored as 3456 m°C). If you are having issues with 
-losing data, make sure to use a temporary variable of larger scale, like a 
-uint32_t or uint64_t (32 or 64 bit integer).
+of 1 to 7.8125. If you are having issues with losing data, make sure to 
+use a temporary variable of larger scale, like a uint32_t or uint64_t (32 or 64 bit integer).
 
 ## MAX22530 Datasheet
 
