@@ -27,7 +27,7 @@ io::I2C::I2CStatus TMP117::readTemp(uint16_t& temperature) {
     // The raw output is 1 unit = 7.8125 m°C (= 0.078125°C)
     // so convert, without floating point math
     raw *= 78125;
-    raw /= 100000; // they could add 2 zeros to return in normal Celsius, but all temps would be rounded down (sensors 20.75°C returned as 20°C)
+    raw /= 10000; // they could add 2 zeros to return in normal Celsius, but all temps would be rounded down (sensors 20.759°C returned as 20°C)
 
     // Assign the value of the converted temp to the temperature variable
     temperature = raw;

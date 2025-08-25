@@ -33,8 +33,8 @@ int main() {
         // Read temperature
         io::I2C::I2CStatus status = tmp.readTemp(temperature);
 
-        // Print temperature as normal celsius (2534 centi-Celsius => 25.34 Celsius)
-        uart.printf("Temp: %d.%d Celsius\n\r", temperature / 100, temperature % 100);
+        // Print temperature as normal celsius (25348 centi-Celsius => 25.348 Celsius)
+        uart.printf("Temp: %d.%d Celsius\n\r", temperature / 1000, temperature % 1000);
 
         // Wait 1 s
         time::wait(1000);
