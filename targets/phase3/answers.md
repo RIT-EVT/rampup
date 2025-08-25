@@ -43,11 +43,11 @@ io::I2C::I2CStatus status = i2c.readReg(i2cSlaveAddress, &registerValue, 1, outp
 rawOutput = (outputBuffer[0] << 8) | outputBuffer[1]
 ```
 
-- Converting raw output into either centi-celsius (preferred) or celsius
+- Converting raw output into either milli-celsius (preferred) or celsius
 ```cpp
-output = rawOutput * 78125 / 10000 // centi-celsius
+output = rawOutput * 78125 / 10000 // milli-celsius
 // Or
-output = rawOutput * 78125 / 1000000 // celsius
+output = rawOutput * 78125 / 10000000 // celsius
 ```
 
 Look at src/dev/TMP117.cpp for completed implementation.
