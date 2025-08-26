@@ -19,6 +19,54 @@ devices and where that data is found in the datasheets for the two ICs used for
 the project. This page will be assuming you've already read the team's 
 documentation on I2C and SPI, so be sure to read over those if you haven't.
 
+## Nucleo Datasheet
+The Nucleo datasheet is for information regarding the STM32 Nucleo boards, which are 
+general testing boards that can be used when prototyping. The boards you will be using 
+for this rampup will almost all be STM Nucleo's.
+
+For now, all the information we need from this datasheet is what pin on our 
+microcontroller controls the LED. The first thing to do is find the section that discusses 
+the LEDs, pins, or possibly a section for Pins. This datasheet actually has an entire section 
+just for LEDs. In the table of contents, find `LEDs` and go to that section (Page 23). 
+
+### LEDs
+According to the LED section of the datasheet, all nucleo's has 3 LEDs on it, 
+but only one is a user LED, meaning it can be controlled by us. This is the one 
+we want to focus on. It is referred to as _LD2_, and we can see it says that the 
+LED is connected to signal `D13`, which corresponds to the STM I/O (input/output pins) 
+PA5 or PB13, depending on what specific STM nucleo you have. 
+
+Now we could try both, but there is a very quick and easy way to check what nucleo 
+you have.
+
+### Identifying Nucleo's
+On all of our STM Nucleo's, there should be a sticker that gives the STM microcontroller 
+identifier, which will look something like below, with F302r8 being this boards specification 
+(sometimes referred to as just F302).
+
+<img src="../photos/board-type.png" alt="Photo of board type" width="400">
+
+### Finding the Correct Pin for our Nucleo
+Now that we know what nucleo we have, we can go back to the datasheet and look to see 
+if PA5 or PB13 is the LED pin. They refer us to Tables 11 to 23, and we can see that 
+each table corresponds to one or more nucleo, seen in the title.
+
+Table 11, for example, shows the Pins for F030R8, F070RB, F072RB, and F091RC nucleo's. Now, go 
+through the tables til you find the one that is for your nucleo.
+
+Once you have found the table for your nucleo, simply find `D13` under the Pin Name column, 
+and find the associated STM32 Pin. This will be the pin you should use to create the 
+GPIO instance to control the LED.
+
+### Implementation
+As this was just to find the correct Pin, the way this will be used is by  
+passing the corresponding Pin Enum type to the GPIO creator.
+
+Using the Pin enum will look something like this.
+```cpp
+core::io::Pin myPin = core::io::Pin::PA_5; // Or PB_13
+```
+
 ## TMP117 Datasheet
 
 ### Slave Address
