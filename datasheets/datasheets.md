@@ -44,7 +44,10 @@ slave address. Here it calls it a "two-wire address" because it's the same
 address for both I2C and SMBus, which each use two wires. "ADD0 PIN CONNECTION"
 indicates which pin should be connected to the ADD0 to pin to set the address on
 the left. This way, the electrical engineers can configure the address of the 
-device just by changing which pin they have connected to ADD0.
+device just by changing which pin they have connected to ADD0. Normally, there will
+be some sort of identification on the board, or you will need to talk to the Electrical 
+Engineers to figure the ADD0 pin connection out. In this case, the ADD0 pin is connected 
+to Ground (GND).
 
 In the left column, there are 4 possible addresses listed, each of the form 
 "10010##x". These indicate the actual bits of each of the addresses. The last bit is
