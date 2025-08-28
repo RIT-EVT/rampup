@@ -2,15 +2,10 @@
  * This is a simple example of ADCs
  */
 
-// Add all the necessary include statements here
-#include <core/manager.hpp>
-
-namespace io   = core::io;
-namespace time = core::time;
+// Add all the necessary include statements and namespaces here
 
 int main() {
     // Start up the system
-    core::platform::init();
 
     // Set up UART at a baudrate of 9600
 

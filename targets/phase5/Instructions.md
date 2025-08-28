@@ -9,13 +9,14 @@
 ## Summary
 Now that you have learned how to use SPI, you are going to learn the basics of using the STM32 Nucleo's onboard ADCs. You will not need the Firmware Test Board (FTB) or the Saleae Logic Analyzer for this. 
 
-An ADC (Analog to Digital Converter) is a device that, in this case, takes an analog (continuous) voltage signal and converts it to a discrete value. The STM32F446 has 3 different ADC peripherals that can be accessed by 16 different pins. It will be your job to setup a potentiometer that takes a 3V3 voltage from the board and reads it back as a different voltage depending on how much you turn it. The potentiometer should read back ~0V to ~3.3V depending on whether it is twisted fully counter-clockwise or fully clockwise respectively. You will then write code that properly sets up an ADC device and the EVT-core logger and then displays the voltage being read from the potentiometer on a UART terminal.
+An ADC (Analog to Digital Converter) is a device that, in this case, takes an analog (continuous) voltage signal and converts it to a discrete value. The STM32F446 has 3 different ADC peripherals that can be accessed by 16 different pins. The previous model boards will also have onboard ADCs, but they will have different pinouts and amount of peripherals (peripherals are the actual devices the receive the signals from the pins. It will be your job to setup a potentiometer that takes a 3V3 voltage from the board and reads it back as a different voltage depending on how much you turn it. The potentiometer should read back ~0V to ~3.3V depending on whether it is twisted fully counter-clockwise or fully clockwise respectively. You will then write code that properly sets up an ADC device and the EVT-core logger and then displays the voltage being read from the potentiometer on a UART terminal.
 
 ## Task Breakdown
-1. Check out the ADC samples in EVT-core to get a better idea of how to set it up.
-2. Find out which pin you want to use (Hint: There are 16 possible pins you can use).
-3. Write the target code to initialize and read values back from the throttle (potentiometer).
-4. The throttle should read back ~0.0V to ~3.3V depending on where it is twisted to.
+1. First make sure that you actually have a STM32F446 board. This section can be done with any of the boards available, but you will have to find the pinout of the other boards as it may not be the same as the f4.
+2. Check out the ADC samples in EVT-core to get a better idea of how to set it up.
+3. Find out which pin you want to use (Hint: There are 16 possible pins you can use).
+4. Write the target code to initialize and read values back from the throttle (potentiometer).
+5. The throttle should read back ~0.0V to ~3.3V depending on where it is twisted to.
 
 ## Suggestions
 - Check out this link at [mbed.com](https://os.mbed.com/platforms/ST-Nucleo-F446RE/) for more information on which pins are used for ADC functionality.
@@ -25,3 +26,4 @@ An ADC (Analog to Digital Converter) is a device that, in this case, takes an an
 - Your UART terminal should display a voltage that makes sense depending on where the potentiometer is turned.
 - 0.0V when turned fully counter-clockwise.
 - 3.3V when turned fully clockwise.
+- Verify it with a senior member of the team and then you can move on.
