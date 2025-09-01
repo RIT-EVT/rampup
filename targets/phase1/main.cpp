@@ -7,7 +7,7 @@ namespace io = core::io;
 namespace time = core::time;
 
 int main() {
-    // Initialize system
+    // Initialize the EVT system
     core::platform::init();
 
     // Setup GPIO pin for LED
@@ -16,7 +16,7 @@ int main() {
     // variable to store state in
     io::GPIO::State state = io::GPIO::State::HIGH;
 
-    // Loop infinitely while toggling the LED on/off
+    // Loop and toggle LED on and off; waiting .5 seconds after each toggle
     while (true) {
         // Toggle the LED on/off
         led.writePin(state);
