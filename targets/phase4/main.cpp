@@ -39,7 +39,7 @@ int main() {
     spi.configureSPI(SPI_SPEED, io::SPI::SPIMode::SPI_MODE3, SPI_MSB_FIRST);
 
     // Create ADXL345 instance
-    rampup::ADXL345 adxl345(spi, 0);
+    rampup::ADXL345 adxl345(spi, 0xE5);
 
     // Create a uint16_t array to store the three accelerations
     int16_t accel[3];
