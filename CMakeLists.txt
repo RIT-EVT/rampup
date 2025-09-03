@@ -11,9 +11,9 @@ if(EVT_CORE_LOG_ENABLE)
 endif()
 
 # Handle selection of the target device
-option(TARGET_DEV "Target device" "STM32F334x8")
+option(TARGET_DEV "Target device" "STM32F302x8")
 if(NOT TARGET_DEV)
-    set(TARGET_DEV "STM32F334x8")
+    set(TARGET_DEV "STM32F302x8")
 endif()
 
 if(TARGET_DEV STREQUAL "STM32F302x8")
@@ -62,7 +62,7 @@ add_library(${PROJECT_NAME} STATIC)
 # Add sources
 target_sources(${PROJECT_NAME} PRIVATE
         src/dev/TMP117.cpp
-        src/dev/MAX22530.cpp
+        src/dev/ADXL345.cpp
         src/dev/HUDL.cpp
         src/RampupBoard.cpp
         )
