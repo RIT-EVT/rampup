@@ -33,6 +33,8 @@ public:
     /** Node ID used to identify the board on the CAN network. */
     static constexpr uint8_t NODE_ID = 50;
 
+    RampupBoard(ADXL345 adxl345, TMP117 tmp);
+
     /**
      * Get a pointer to the start of the object dictionary.
      *
@@ -103,7 +105,7 @@ private:
          * 3: Timer trigger time in 1ms units, 0 will disable the timer based triggering.
          */
         TRANSMIT_PDO_SETTINGS_OBJECT_18XX(0, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE,
-                                          0 /*Replace with trigger interval*/),
+                                          1000 /*Replace with trigger interval*/),
 
         /**
          * RampupBoard TPDO 1 settings:
@@ -113,7 +115,7 @@ private:
          * 3: Timer trigger time in 1ms units, 0 will disable the timer based triggering.
          */
         TRANSMIT_PDO_SETTINGS_OBJECT_18XX(1, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE,
-                                          0 /*Replace with trigger interval*/),
+                                          1000 /*Replace with trigger interval*/),
 
         //***************************** Begin TPDO Maping *****************************//
         /**
@@ -147,14 +149,14 @@ private:
          */
         /* Link the data we want to map into RampupBoard TPDO 0 to variables */
         DATA_LINK_START_KEY_21XX(0, 4),
-        DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, nullptr /*Replace with address of first voltage*/),
-        DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, nullptr /*Replace with address of second voltage*/),
-        DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, nullptr /*Replace with address of third voltage*/),
-        DATA_LINK_21XX(0, 4, CO_TUNSIGNED16, nullptr /*Replace with address of fourth voltage*/),
+        DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, &voltages[0] /*Replace with address of first voltage*/),
+        DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, &voltages[1] /*Replace with address of second voltage*/),
+        DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, &voltages[2] /*Replace with address of third voltage*/),
+        DATA_LINK_21XX(0, 4, CO_TUNSIGNED16, &voltages[3] /*Replace with address of fourth voltage*/),
 
         /* Link the data we want to map into RampupBoard TPDO 1 to variables */
         DATA_LINK_START_KEY_21XX(1, 1),
-        DATA_LINK_21XX(1, 1, CO_TUNSIGNED16, nullptr /*Replace with address of temperature*/),
+        DATA_LINK_21XX(1, 1, CO_TUNSIGNED16, &temp /*Replace with address of temperature*/),
 
         //*************************** End Object Dictionary ***************************//
         CO_OBJ_DICT_ENDMARK,
