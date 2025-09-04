@@ -37,24 +37,23 @@ this phase, the files you need to edit are `include/RampupBoard.hpp`,
 
 ## Task Breakdown
 
-1. Read the [CAN documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can?authuser=0).
-2. Read the [CANopen documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can/canopen).
-3. Read the [FUN-E SNAIL documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/fun-e-snail?authuser=0).
-4. Read the [PEAK dongle documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/peak-can-viewer?authuser=0).
-5. Read the [oscilloscope documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/oscilloscope?authuser=0).
-6. Modify the RampupBoard header file to link the data to the CANopen
-   dictionary. Search through the dictionary to find all the "replace" comments.
-7. Write the constructor and `process()` methods for RampupBoard in the header
-   and implementation files.
-8. Write the main target to initialize everything. Then run `process()` and the
-   necessary functions to get CANopen working.
-9. Plug the FTB and HUDL into the FUN-E SNAIL to confirm the data displays on
-   the HUDL.
-10. Use the PEAK CAN dongle to decode the CAN messages and confirm the data
-    matches what is being sent.
-11. Use the Saleae to decode the waveforms on CAN TX and RX to confirm that it
-    matches the data that should be sent.
-12. Use the Oscilloscope to see the CAN messages on CAN high and low.
+1. Read the [CANopen documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can/canopen).
+2. Read the [FUN-E SNAIL documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/fun-e-snail?authuser=0).
+3. Read the [PEAK dongle documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/peak-can-viewer?authuser=0). 
+4. Read the [oscilloscope documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/oscilloscope?authuser=0). 
+5. Modify the RampupBoard header file to link the data to the CANopen
+   dictionary. Search through the dictionary to find all the "replace" comments. 
+6. Write the constructor and `process()` methods for RampupBoard in the header
+   and implementation files. 
+7. Write the main target to initialize everything. Then run `process()` and the
+   necessary functions to get CANopen working. 
+8. Plug the FTB and HUDL into the FUN-E SNAIL to confirm the data displays on
+   the HUDL. 
+9. Use the PEAK CAN dongle to decode the CAN messages and confirm the data
+    matches what is being sent. 
+10. Use the Saleae to decode the waveforms on CAN TX and RX to confirm that it
+    matches the data that should be sent. 
+11. Use the Oscilloscope to see the CAN messages on CAN high and low.
 
 ## Suggestions
 
