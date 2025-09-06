@@ -41,7 +41,7 @@ Download MinGW from [this SourceForge page](https://sourceforge.net/projects/min
 Creating The Executable:
 After installing gcc (you can run `g++ --version` in your terminal to make sure it is installed correctly), navigate to the
 `targets/phase0` directory in your terminal and run the command: 
-`g++ -o phase0 main.cpp ../..src/dev/Rectangle.cpp ../..src/dev/Square.cpp`.
+`g++ -o phase0 main.cpp ../../src/dev/Rectangle.cpp ../../src/dev/Square.cpp`.
 This will use gcc's c++ compiler (referred to as g++) to compile and link `main.cpp`, `Rectangle.cpp`, and `Square.cpp` 
 together to create an executable file called phase0.exe (if you want a different name, change the phase0 in the command 
 to the desired name).
