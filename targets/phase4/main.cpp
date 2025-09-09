@@ -31,7 +31,7 @@ int main() {
     io::GPIO* devices[DEVICE_COUNT];
 
     // Set up chip select GPIO and put in array
-    devices[0] = &io::getGPIO<io::Pin::SPI_CS>(io::GPIO::Direction::OUTPUT);
+    devices[0] = &io::getGPIO<io::Pin::PA_9>(io::GPIO::Direction::OUTPUT);
     devices[0]->writePin(io::GPIO::State::HIGH);
 
     // Set up and configure SPI (<1 MHz, Mode 3, MSB first)
