@@ -19,7 +19,7 @@ allows you to sniff the CAN communication using your computer.
 1. Read the [CAN Documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can?authuser=0)
 2. Read the [FUN-E SNAIL Documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/fun-e-snail?authuser=0)
 3. Read the [PEAK CAN Dongle Documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/device-documentation/peak-can-dongle?authuser=0)
-4. In `phase4/main.cpp`, add code to repeatedly send a CAN message with the payload "DEADBEEF" (in hexadecimal)
+4. In `phase6/main.cpp`, add code to repeatedly send a CAN message with the payload "DEADBEEF" (in hexadecimal)
 5. In the same file, add code to print out any received CAN messages
 6. Flash one Nucleo with the canboard target and one with your target, and make sure your board is receiving "BEEFEEEF"
 7. Connect the PEAK CAN and download PCAN Viewer and take a look at the traffic on the CAN bus.
