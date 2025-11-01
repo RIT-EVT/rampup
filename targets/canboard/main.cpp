@@ -17,10 +17,9 @@ namespace dev  = core::dev;
 namespace time = core::time;
 namespace log  = core::log;
 
-
-#define MY_ID 2
-#define MY_DATA_LENGTH 4
-#define OTHER_BOARD_ID 1
+#define MY_ID                    2
+#define MY_DATA_LENGTH           4
+#define OTHER_BOARD_ID           1
 #define OTHER_MESSAGE_SIZE_BYTES 4
 
 using namespace std;
@@ -29,7 +28,7 @@ constexpr io::Pin CAN_TX_PIN = io::Pin::PA_12;
 constexpr io::Pin CAN_RX_PIN = io::Pin::PA_11;
 
 uint8_t my_payload[MY_DATA_LENGTH] = {0xBE, 0xEF, 0xEE, 0xEF};
-io::CANMessage responseMessage = io::CANMessage(MY_ID, MY_DATA_LENGTH, my_payload, false);
+io::CANMessage responseMessage     = io::CANMessage(MY_ID, MY_DATA_LENGTH, my_payload, false);
 
 /****************************************************************************************
  * EVT-core CAN callback and CAN setup. This will include logic to set aside CANopen
@@ -57,7 +56,6 @@ void canInterrupt(io::CANMessage& message, void* priv) {
     }
 }
 
-
 /****************************************************************************************
  * Main program. This includes all the logic to initalized the necessary hardware and run
  * the main processing loop.
@@ -73,23 +71,20 @@ int main() {
     // Initialize the timer.
     dev::Timerf3xx timer(TIM2, 160);
 
-
     /************************************************************************************
      * Setup CAN configuration, this handles making drivers, applying settings. And
      * generally creating the CANopen stack node which is the interface between the
      * application (the code we write) and the physical CAN network.
      ***********************************************************************************/
 
-    //Create the CAN queue
+    // Create the CAN queue
     core::types::FixedQueue<CAN_MESSAGE_QUEUE_SIZE, io::CANMessage> canQueue =
         core::types::FixedQueue<CAN_MESSAGE_QUEUE_SIZE, io::CANMessage>();
-
 
     // Initialize CAN, add an IRQ which will add messages to the queue above.
 
     io::CAN& can = io::getCAN<CAN_TX_PIN, CAN_RX_PIN>();
     can.addIRQHandler(canInterrupt, reinterpret_cast<void*>(&canQueue));
-
 
     // Attempt to join the CAN network.
     io::CAN::CANStatus result = can.connect();
@@ -101,7 +96,6 @@ int main() {
     } else {
         log::LOGGER.log(log::Logger::LogLevel::INFO, "Connected to CAN network\r\n");
     }
-
 
     time::wait(500);
 
@@ -120,16 +114,16 @@ int main() {
 
         // make sure this message is one we care about
         if (message.getId() == OTHER_BOARD_ID && message.getDataLength() == OTHER_MESSAGE_SIZE_BYTES) {
-                payload = message.getPayload();
+            payload = message.getPayload();
 
-                for (uint8_t i = 0; i < OTHER_MESSAGE_SIZE_BYTES; i++) {
-                    expandedPayload <<= 8;
-                    expandedPayload |= payload[i];
-                }
+            for (uint8_t i = 0; i < OTHER_MESSAGE_SIZE_BYTES; i++) {
+                expandedPayload <<= 8;
+                expandedPayload |= payload[i];
+            }
 
-                if (expandedPayload == 0xDEADBEEF) {
-                    can.transmit(responseMessage);
-                }
+            if (expandedPayload == 0xDEADBEEF) {
+                can.transmit(responseMessage);
+            }
         }
 
         time::wait(10);
