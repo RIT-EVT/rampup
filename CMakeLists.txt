@@ -59,7 +59,9 @@ project(${BOARD_LIB_NAME}
         LANGUAGES CXX C
         )
 
-add_library(${PROJECT_NAME} STATIC)
+add_library(${PROJECT_NAME} STATIC
+        include/dev/Triangle.hpp
+        src/dev/Triangle.cpp)
 
 # Add sources
 target_sources(${PROJECT_NAME} PRIVATE

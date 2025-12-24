@@ -1,5 +1,9 @@
-#ifndef _RECTANGLE_
-#define _RECTANGLE_
+//
+// Created by Joshua Cruz on 12/23/25.
+//
+
+#ifndef RAMPUP_TRIANGLE_H
+#define RAMPUP_TRIANGLE_H
 
 #include "Shape.hpp"
 #include <cstdint>
@@ -9,7 +13,7 @@ namespace rampup {
 /**
  * Represents a rectangle, defined as a width and height. Inherits from Shape class
  */
-class Rectangle : public Shape {
+class Triangle : public Shape {
 public:
     /**
      * Constructs a new rectangle object with the given width and height
@@ -17,7 +21,7 @@ public:
      * @param[in] length
      * @param[in] width
      */
-    Rectangle(uint32_t length, uint32_t width);
+    Triangle(uint32_t length, uint32_t width);
 
     /**
      * Gets the length of the rectangle.
@@ -46,4 +50,4 @@ private:
 
 } // namespace rampup
 
-#endif // _RECTANGLE_
+#endif // RAMPUP_TRIANGLE_H

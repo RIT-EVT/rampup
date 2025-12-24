@@ -17,6 +17,8 @@ int main() {
     // constructing two rectangles
     rampup::Rectangle rect1((uint32_t) 2, (uint32_t) 3), rect2((uint32_t) 3, (uint32_t) 4);
     // TODO: (Step 6) construct 2 square objects here, then add them to the shapeArray
+    rampup::Square A(5);
+    rampup::Square B(10);
 
     // TODO: (Step 7) when you make your other type of Shape, construct it here
 
@@ -24,6 +26,8 @@ int main() {
     rampup::Shape* shapeArr[SHAPE_ARRAY_LENGTH] = {
         &rect1,
         &rect2,
+        &A,
+        &B,
     };
     for (int i = 0; i < SHAPE_ARRAY_LENGTH; i++) {
         printf("Shape %u has area %u and perimeter %u\n\r", i, shapeArr[i]->getArea(), shapeArr[i]->getPerimeter());
