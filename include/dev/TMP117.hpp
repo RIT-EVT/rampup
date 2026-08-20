@@ -11,7 +11,7 @@ namespace rampup {
 
 /**
  * Temp sensor for TMS
- * Datasheet: https://www.ti.com/lit/ds/symlink/tmp117.pdf
+ * https://www.ti.com/lit/ds/symlink/tmp117.pdf
  */
 class TMP117 {
 public:
@@ -19,17 +19,16 @@ public:
      * Temp sensor constructor
      *
      * @param i2c used to read temperature
-     * @param[in] i2cSlaveAddress address to identify the sensor on the I2C bus
+     * @param i2cSlaveAddress address to ID the sensor on the I2C bus
      * */
     TMP117(io::I2C& i2c, uint8_t i2cSlaveAddress);
 
     /**
-     * Reads the temperature from the TMP sensor
+     * Reads the temperature
      *
-     * @param[out] temperature reading in centi-degrees Celsius (Celsius * 100)
-     * @return I2CStatus indicating the success or failure of the read.
+     * @return temperature reading in degrees centi celsius
      */
-    io::I2C::I2CStatus readTemp(uint16_t& temperature);
+    io::I2C::I2CStatus readTemp(uint16_t& temp);
 
 private:
     /** Device ID */
@@ -39,6 +38,6 @@ private:
     io::I2C& i2c;
 };
 
-} // namespace rampup
+}// namespace rampup
 
-#endif // TMP117_HPP
+#endif//TMP117_HPP

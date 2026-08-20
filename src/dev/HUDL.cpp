@@ -1,9 +1,21 @@
+/**
+* Implementation of the HUDL device: an LCD display plus the object
+* dictionary used to receive temperature and voltage data over CAN.
+*/
+
+// clang-format off
+#include <core/dev/LCD.hpp>
+#include <core/io/GPIO.hpp>
+#include <core/io/SPI.hpp>
 #include <core/utils/log.hpp>
+#include <core/utils/time.hpp>
 #include <dev/HUDL.hpp>
 
 #include <cstdio>
+#include <cstring>
+// clang-format on
 
-namespace io  = core::io;
+namespace io = core::io;
 namespace dev = core::dev;
 namespace log = core::log;
 
@@ -15,7 +27,6 @@ void HUDL::initLCD() {
     lcd.initLCD();
     lcd.clearLCD();
     lcd.setEntireScreenBitMap(evtBitMap);
-
     core::time::wait(2000);
     lcd.clearLCD();
 
@@ -35,6 +46,18 @@ void HUDL::initLCD() {
     lcd.displaySectionHeaders();
 }
 
+CO_OBJ_T* HUDL::getObjectDictionary() {
+    return &objectDictionary[0];
+}
+
+uint8_t HUDL::getNumElements() {
+    return OBJECT_DICTIONARY_SIZE;
+}
+
+uint8_t HUDL::getNodeID() {
+    return NODE_ID;
+}
+
 void HUDL::updateLCD() {
     for (int x = 0; x < 4; x++) {
         char voltage[9];
@@ -46,4 +69,4 @@ void HUDL::updateLCD() {
     std::sprintf(temp, "%d", temperature);
     lcd.setTextForSection(4, temp);
 }
-} // namespace rampup
+}// namespace rampup

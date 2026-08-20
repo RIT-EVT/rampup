@@ -9,9 +9,6 @@ venv/
 
 # IDE Files
 .idea/
-.vscode/
-.cache/
-*.settings/
 
 # macOS files
 .DS_Store
