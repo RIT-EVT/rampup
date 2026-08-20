@@ -23,12 +23,12 @@ public:
     /** Rampup Board Pinout */
     static constexpr io::Pin UART_TX_PIN = io::Pin::UART_TX;
     static constexpr io::Pin UART_RX_PIN = io::Pin::UART_RX;
-    static constexpr io::Pin CAN_TX_PIN = io::Pin::PA_12;
-    static constexpr io::Pin CAN_RX_PIN = io::Pin::PA_11;
-    static constexpr io::Pin SPI_CS = io::Pin::SPI_CS;
-    static constexpr io::Pin SPI_MOSI = io::Pin::SPI_MOSI;
-    static constexpr io::Pin SPI_MISO = io::Pin::SPI_MISO;
-    static constexpr io::Pin SPI_SCK = io::Pin::SPI_SCK;
+    static constexpr io::Pin CAN_TX_PIN  = io::Pin::PA_12;
+    static constexpr io::Pin CAN_RX_PIN  = io::Pin::PA_11;
+    static constexpr io::Pin SPI_CS      = io::Pin::SPI_CS;
+    static constexpr io::Pin SPI_MOSI    = io::Pin::SPI_MOSI;
+    static constexpr io::Pin SPI_MISO    = io::Pin::SPI_MISO;
+    static constexpr io::Pin SPI_SCK     = io::Pin::SPI_SCK;
 
     /** Node ID used to identify the board on the CAN network */
     static constexpr uint8_t NODE_ID = 50;

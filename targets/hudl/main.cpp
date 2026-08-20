@@ -12,12 +12,12 @@
 
 #include <dev/HUDL.hpp>
 
-namespace io = core::io;
-namespace dev = core::dev;
+namespace io   = core::io;
+namespace dev  = core::dev;
 namespace time = core::time;
-namespace log = core::log;
+namespace log  = core::log;
 
-const uint32_t SPI_SPEED = SPI_SPEED_500KHZ;
+const uint32_t SPI_SPEED  = SPI_SPEED_500KHZ;
 const uint8_t deviceCount = 1;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ int main() {
 
     // HUDL 1.2
     io::GPIO& reset = io::getGPIO<io::Pin::PB_7>(io::GPIO::Direction::OUTPUT);
-    devices[0] = &io::getGPIO<io::Pin::PB_12>(io::GPIO::Direction::OUTPUT);
+    devices[0]      = &io::getGPIO<io::Pin::PB_12>(io::GPIO::Direction::OUTPUT);
 
     devices[0]->writePin(io::GPIO::State::HIGH);
 
