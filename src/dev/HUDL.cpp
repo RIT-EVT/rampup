@@ -69,4 +69,4 @@ void HUDL::updateLCD() {
     std::sprintf(temp, "%d", temperature);
     lcd.setTextForSection(4, temp);
 }
-}// namespace rampup
+} // namespace rampup

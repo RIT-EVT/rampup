@@ -16,7 +16,7 @@ namespace io = core::io;
 namespace rampup {
 
 /**
- * Represents the board used for the rampup project
+ * Represents the board used for the rampup project.
  */
 class RampupBoard : public CANDevice {
 public:
@@ -41,9 +41,9 @@ public:
     void process();
 
     /**
-     * Get a pointer to the start of the object dictionary
+     * Get a pointer to the start of the object dictionary.
      *
-     * @return Pointer to the start of the object dictionary
+     * @return Pointer to the start of the object dictionary.
      */
     CO_OBJ_T* getObjectDictionary() override;
 
@@ -124,6 +124,6 @@ private:
     };
 };
 
-}// namespace rampup
+} // namespace rampup
 
-#endif//RAMPUP_BOARD_HPP
+#endif // RAMPUP_BOARD_HPP

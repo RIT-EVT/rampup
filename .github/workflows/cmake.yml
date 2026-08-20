@@ -26,12 +26,12 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           submodules: recursive
 
-      # Install the gcc-arm tools and clang-format, and ensure clang-format 12 is being used
+      # Install the gcc-arm tools and clang-format, and ensure clang-format 15 is being used
       - name: Install Compiler and Linter
         run: |
           sudo apt-get install gcc-arm-none-eabi
-          sudo apt-get install clang-format-12
-          sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-12 10000
+          sudo apt-get install clang-format-15
+          sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 10000
 
       # Build the code for all supported chips
       - name: F302 Build

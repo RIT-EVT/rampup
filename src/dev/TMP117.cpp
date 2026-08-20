@@ -8,4 +8,4 @@ namespace rampup {
 //    // Implementation here
 //}
 
-}// namespace rampup
+} // namespace rampup

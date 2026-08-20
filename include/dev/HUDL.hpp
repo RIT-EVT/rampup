@@ -23,55 +23,55 @@ namespace rampup {
 class HUDL : public CANDevice {
 public:
     /**
-         * The node ID used to identify the device on the CAN network.
-         */
+     * The node ID used to identify the device on the CAN network.
+     */
     static constexpr uint8_t NODE_ID = 0x11;
 
     /**
-         * Default Constructor for the HUDL class
-         *
-         * @param[in] reg_select is the register select pin
-         * @param[in] reset is the reset pin
-         * @param[in] spi is the SPI instance
-         */
+     * Default Constructor for the HUDL class
+     *
+     * @param[in] reg_select is the register select pin
+     * @param[in] reset is the reset pin
+     * @param[in] spi is the SPI instance
+     */
     HUDL(io::GPIO& reg_select, io::GPIO& reset, io::SPI& spi);
 
     /**
-         * Initializes LCD for use
-         */
+     * Initializes LCD for use
+     */
     void initLCD();
 
     /**
-         * Gets the object dictionary
-         *
-         * @return an object dictionary
-         */
+     * Get a pointer to the start of the object dictionary
+     *
+     * @return Pointer to the start of the object dictionary
+     */
     CO_OBJ_T* getObjectDictionary() override;
 
     /**
-         * Gets the number of elements in the object dictionary.
-         *
-         * @return the number of elements in the object dictionary
-         */
+     * Get the number of elements in the object dictionary.
+     *
+     * @return The number of elements in the object dictionary
+     */
     uint8_t getNumElements() override;
 
     /**
-         * Gets the device's node ID
-         *
-         * @return the node ID of the CAN device
-         */
+     * Get the device's node ID
+     *
+     * @return The node ID of the can device.
+     */
     uint8_t getNodeID() override;
 
     /**
-         * Updates the LCD display with values received from the CAN network
-         */
+     * Updates the LCD display with values received from the CAN network
+     */
     void updateLCD();
 
     /**
-         * reg_select PA_3
-         * reset      PB_3
-         * cs         PB_12
-         */
+     * reg_select PA_3
+     * reset      PB_3
+     * cs         PB_12
+     */
     dev::LCD lcd;
 
     static constexpr uint8_t RAMPUP_NODE_ID = 50;
@@ -146,10 +146,11 @@ private:
     uint16_t voltages[4];
     uint16_t temperature;
 
-    static constexpr uint16_t OBJECT_DICTIONARY_SIZE = 32;
+    static constexpr uint16_t OBJECT_DICTIONARY_SIZE = 33;
 
     CO_OBJ_T objectDictionary[OBJECT_DICTIONARY_SIZE + 1] = {
         MANDATORY_IDENTIFICATION_ENTRIES_1000_1014,
+        HEARTBEAT_PRODUCER_1017(100),
         IDENTITY_OBJECT_1018,
         SDO_CONFIGURATION_1200,
 
@@ -185,6 +186,6 @@ private:
     };
 };
 
-}// namespace rampup
+} // namespace rampup
 
 #endif

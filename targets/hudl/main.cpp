@@ -65,7 +65,6 @@ int main() {
     // Initialize the timer
     dev::Timer& timer = dev::getTimer<dev::MCUTimer::Timer2>(160);
 
-    //create the RPDO node
     io::GPIO* devices[deviceCount];
 
     io::GPIO& regSelect = io::getGPIO<io::Pin::PA_3>(io::GPIO::Direction::OUTPUT);
@@ -93,7 +92,7 @@ int main() {
     // Attempt to join the CAN network
     io::CAN::CANStatus result = can.connect();
 
-    //test that the board is connected to the can network
+    // Test that the board is connected to the can network
     if (result != io::CAN::CANStatus::OK) {
         log::LOGGER.log(log::Logger::LogLevel::ERROR, "Failed to connect to CAN network\r\n");
         return 1;
@@ -120,7 +119,7 @@ int main() {
 
     time::wait(500);
 
-    //print any CANopen errors
+    // Print any CANopen errors
     log::LOGGER.log(log::Logger::LogLevel::DEBUG, "Error: %d\r\n", CONodeGetErr(&canNode));
 
     hudl.initLCD();
