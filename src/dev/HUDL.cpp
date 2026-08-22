@@ -51,7 +51,7 @@ CO_OBJ_T* HUDL::getObjectDictionary() {
 }
 
 uint8_t HUDL::getNumElements() {
-    return OBJECT_DICTIONARY_SIZE;
+    return OBJECT_DICTIONARY_SIZE + 1;
 }
 
 uint8_t HUDL::getNodeID() {

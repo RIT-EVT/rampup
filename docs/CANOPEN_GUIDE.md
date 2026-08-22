@@ -95,7 +95,7 @@ the bus. If you see nothing at `0x1B2`, your TPDO0 isn't firing.
   - A lightweight broadcast: no request needed, the node just sends the
     current value(s) on some trigger. This is what RampupBoard uses for
     its actual sensor data, because we want the HUDL to just receive
-    updates, not poll for them.
+    updates, not have to constantly make requests for them.
   - A **TPDO** (Transmit PDO) is data *this* node sends; an **RPDO**
     (Receive PDO) is data it listens for from another node. RampupBoard
     only transmits, so you'll only see TPDOs.

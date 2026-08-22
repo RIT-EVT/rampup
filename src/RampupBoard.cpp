@@ -10,7 +10,7 @@ CO_OBJ_T* RampupBoard::getObjectDictionary() {
 }
 
 uint8_t RampupBoard::getNumElements() {
-    return OBJECT_DICTIONARY_SIZE;
+    return OBJECT_DICTIONARY_SIZE + 1;
 }
 
 uint8_t RampupBoard::getNodeID() {
