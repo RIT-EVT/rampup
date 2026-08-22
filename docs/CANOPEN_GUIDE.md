@@ -10,6 +10,8 @@ editing.
 
 Read the team's [CAN documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can) first if you haven't. Everything here assumes
 you already understand how normal CAN works (broadcast messages, IDs, etc).
+See [`docs/GLOSSARY.md`](GLOSSARY.md) for quick definitions of the terms
+used below (object dictionary, SDO, PDO, COB-ID, etc.).
 
 ## Why CANopen on top of CAN?
 

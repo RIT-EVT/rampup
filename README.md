@@ -24,6 +24,11 @@ grinding out code on your own!
 **Do this before starting Phase 1:**
 - Follow [`docs/GETTING_STARTED.md`](docs/GETTING_STARTED.md) to install the
    toolchain and confirm you can build, flash, and talk to a board.
+- Keep [`docs/GLOSSARY.md`](docs/GLOSSARY.md) handy. It's a reference for
+   terms you'll run into throughout rampup (microcontroller basics,
+   communication protocols, PCB/electrical terms, and the hardware tools the
+   team uses); you don't need to read it up front, just come back to it
+   whenever you hit an unfamiliar word.
 ### How each phase works
 
 Every phase below follows the same shape: 
