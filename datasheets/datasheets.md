@@ -115,7 +115,7 @@ devices support a range of speeds, but they should have a maximum speed.
 Generally, we're always going to want to operate at the fastest speed possible to
 limit latency, so we should operate at the max speed of the device.
 
-Searching with Ctrl+F or using the table, we can pretty quickly find the section
+Searching with Ctrl+F, we can pretty quickly find the section
 titled "SPI Interface," which has the speed limit of 10 MHz directly under it.
 This information can also be found in the "Electrical Characteristics" table
 under the heading "SPI TIMING CHARACTERISTICS." 
