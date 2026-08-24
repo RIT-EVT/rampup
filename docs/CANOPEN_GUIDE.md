@@ -90,7 +90,7 @@ the bus. If you see nothing at `0x1B2`, your TPDO0 isn't firing.
 ## SDO vs. PDO: two ways to move data
 
 - **SDO (Service Data Object)**
-  - A request/response exchange: a master asks "what's the value at index
+  - A request/response exchange: a leader asks "what's the value at index
     X?" and the node answers. Reliable, but has overhead for every single
     value. Good for configuration, not for streaming sensor data.
 - **PDO (Process Data Object)**
