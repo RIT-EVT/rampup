@@ -120,7 +120,7 @@ Many bits of data are sent at the same time, each over its own wire.
 
 Communication where data can flow in both directions, but only one
 direction at a time, like a walkie-talkie. [I2C](#i2c)'s data line (SDA) is
-shared this way between master and slave.
+shared this way between leader and follower.
 
 ### Full-Duplex
 
@@ -201,10 +201,10 @@ mainly for laptop-to-board debugging output.
 *Phase 2*
 
 Short for Inter-Integrated Circuit, read "eye-two-cee" or "eye-squared-cee."
-A two-wire, synchronous, [master/slave](#master-slave)
+A two-wire, synchronous, [leader/follower](#Leader%20%28Master%29%20%2F%20Follower%20%28Slave%29)
 [serial](#serial-communication) protocol: one wire for data (SDA) and one
 for a shared clock (SCL), which tells the devices when to read the value from the data line. 
-Multiple slave devices can share the same two wires, each addressed individually. 
+Multiple follower devices can share the same two wires, each addressed individually. 
 Used in rampup to read the TMP117 temperature sensor.
 
 ### SPI
@@ -212,7 +212,7 @@ Used in rampup to read the TMP117 temperature sensor.
 *Phase 3*
 
 Short for Serial Peripheral Interface, read "spy." A faster, synchronous,
-[master/slave](#master-slave) [serial](#serial-communication) protocol
+[leader/follower](#Leader%20%28Master%29%20%2F%20Follower%20%28Slave%29) [serial](#serial-communication) protocol
 using separate data lines for each direction (MOSI/MISO), a shared clock
 (SCK), and a dedicated chip-select (CS) line per follower device. Used in
 rampup to talk to the MAX22530 ADC.
@@ -224,7 +224,7 @@ rampup to talk to the MAX22530 ADC.
 Short for Controller Area Network. A serial bus, originally built for cars,
 where every device on the bus sees every message and decides for itself
 whether to care about it (unlike [I2C](#i2c)/[SPI](#spi), there's no single
-fixed master). It's the shared bus EVT's boards use to talk to each other
+fixed leader). It's the shared bus EVT's boards use to talk to each other
 on a bike.
 
 ### CANopen
