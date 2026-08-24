@@ -85,45 +85,76 @@ private:
      */
     CO_OBJ_T objectDictionary[OBJECT_DICTIONARY_SIZE + 1] = {
         MANDATORY_IDENTIFICATION_ENTRIES_1000_1014,
-        HEARTBEAT_PRODUCER_1017(100),
+        HEARTBEAT_PRODUCER_1017(2000),
         IDENTITY_OBJECT_1018,
         SDO_CONFIGURATION_1200,
 
-        // TPDO0 settings: reports the 4 ADC voltages
-        TRANSMIT_PDO_SETTINGS_OBJECT_18XX(0x00, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE,
-                                          0 /*Replace with trigger time*/),
-        // TPDO1 settings: reports the temperature
-        TRANSMIT_PDO_SETTINGS_OBJECT_18XX(0x01, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE,
-                                          0 /*Replace with trigger time*/),
+        //**************************** Begin TPDO Settings ****************************//
+        /**
+         * RampupBoard TPDO 0 settings:
+         * 0: The TPDO number, 0.
+         * 1: How the TPO is triggered, timed triggering.
+         * 2: Inhibit time, disabled or 0.
+         * 3: Timer trigger time in 1ms units, 0 will disable the timer based triggering.
+         */
+        TRANSMIT_PDO_SETTINGS_OBJECT_18XX(0, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE,
+                                          0 /*Replace with trigger interval*/),
 
-        // TPDO0 mapping: 4 voltages
-        TRANSMIT_PDO_MAPPING_START_KEY_1AXX(0x00, 0x04),
-        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0x00, 0x01, PDO_MAPPING_UNSIGNED16),
-        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0x00, 0x02, PDO_MAPPING_UNSIGNED16),
-        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0x00, 0x03, PDO_MAPPING_UNSIGNED16),
-        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0x00, 0x04, PDO_MAPPING_UNSIGNED16),
+        /**
+         * RampupBoard TPDO 1 settings:
+         * 0: The TPDO number, 1.
+         * 1: How the TPO is triggered, timed triggering.
+         * 2: Inhibit time, disabled or 0.
+         * 3: Timer trigger time in 1ms units, 0 will disable the timer based triggering.
+         */
+        TRANSMIT_PDO_SETTINGS_OBJECT_18XX(1, TRANSMIT_PDO_TRIGGER_TIMER, TRANSMIT_PDO_INHIBIT_TIME_DISABLE,
+                                          0 /*Replace with trigger interval*/),
 
-        // TPDO1 mapping: temperature
-        TRANSMIT_PDO_MAPPING_START_KEY_1AXX(0x01, 0x01),
-        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0x01, 0x01, PDO_MAPPING_UNSIGNED16),
+        //***************************** Begin TPDO Maping *****************************//
+        /**
+         * RampupBoard TPDO 0 Mapping:
+         * Determines the PDO messages to send when TPDO 0 is triggered.
+         * 0: The number of PDO message associated with the TPDO.
+         * 1: Link to the first voltage PDO data.
+         * 2: Link to the second voltage PDO data.
+         * 3: Link to the third voltage PDO data.
+         * 4: Link to the fourth voltage PDO data.
+         */
+        TRANSMIT_PDO_MAPPING_START_KEY_1AXX(0, 4),
+        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0, 1, PDO_MAPPING_UNSIGNED16),
+        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0, 2, PDO_MAPPING_UNSIGNED16),
+        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0, 3, PDO_MAPPING_UNSIGNED16),
+        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0, 4, PDO_MAPPING_UNSIGNED16),
 
-        // Data links, this is where we tie the mapped PDO entries to our
-        // actual member variables. Accessible via SDO and, depending on
-        // configuration, PDO.
-        DATA_LINK_START_KEY_21XX(0x00, 0x04),
-        DATA_LINK_21XX(0x00, 0x01, CO_TUNSIGNED16, nullptr /*Replace with address of first voltage*/),
-        DATA_LINK_21XX(0x00, 0x02, CO_TUNSIGNED16, nullptr /*Replace with address of second voltage*/),
-        DATA_LINK_21XX(0x00, 0x03, CO_TUNSIGNED16, nullptr /*Replace with address of third voltage*/),
-        DATA_LINK_21XX(0x00, 0x04, CO_TUNSIGNED16, nullptr /*Replace with address of fourth voltage*/),
+        /**
+         * RampupBoard TPDO 1 Mapping:
+         * Determines the PDO messages to send when TPDO 1 is triggered.
+         * 0: The number of PDO message associated with the TPDO.
+         * 1: Link to the temperature PDO data.
+         */
+        TRANSMIT_PDO_MAPPING_START_KEY_1AXX(1, 1),
+        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(1, 1, PDO_MAPPING_UNSIGNED16),
 
-        DATA_LINK_START_KEY_21XX(0x01, 0x01),
-        DATA_LINK_21XX(0x01, 0x01, CO_TUNSIGNED16, nullptr /*Replace with address of temperature*/),
+        //**************************** Begin Data Linking *****************************//
+        /**
+         * User defined data. This will be where we put elements that can be accessed
+         * via SDO and the first PDO.
+         */
+        /* Link the data we want to map into RampupBoard TPDO 0 to variables */
+        DATA_LINK_START_KEY_21XX(0, 4),
+        DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, nullptr /*Replace with address of first voltage*/),
+        DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, nullptr /*Replace with address of second voltage*/),
+        DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, nullptr /*Replace with address of third voltage*/),
+        DATA_LINK_21XX(0, 4, CO_TUNSIGNED16, nullptr /*Replace with address of fourth voltage*/),
 
-        // End of dictionary marker
+        /* Link the data we want to map into RampupBoard TPDO 1 to variables */
+        DATA_LINK_START_KEY_21XX(1, 1),
+        DATA_LINK_21XX(1, 1, CO_TUNSIGNED16, nullptr /*Replace with address of temperature*/),
+
+        //*************************** End Object Dictionary ***************************//
         CO_OBJ_DICT_ENDMARK,
     };
 };
-
 } // namespace rampup
 
 #endif // RAMPUP_BOARD_HPP
