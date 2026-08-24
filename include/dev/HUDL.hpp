@@ -142,39 +142,73 @@ private:
     static constexpr uint16_t OBJECT_DICTIONARY_SIZE = 33;
 
     CO_OBJ_T objectDictionary[OBJECT_DICTIONARY_SIZE + 1] = {
+        //*********************** Begin Required Board Entries ************************//
         MANDATORY_IDENTIFICATION_ENTRIES_1000_1014,
-        HEARTBEAT_PRODUCER_1017(100),
+        HEARTBEAT_PRODUCER_1017(2000),
         IDENTITY_OBJECT_1018,
         SDO_CONFIGURATION_1200,
 
-        // RPDO0 settings: receives the RampupBoard's TPDO0 (4 voltages)
-        RECEIVE_PDO_SETTINGS_OBJECT_140X(0x00, 0x00, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
-        // RPDO1 settings: receives the RampupBoard's TPDO1 (temperature)
-        RECEIVE_PDO_SETTINGS_OBJECT_140X(0x01, 0x01, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
+        //**************************** Begin RPDO Settings ****************************//
+        /**
+         * RampupBoard RPDO 0 Settings:
+         * 0: The RPDO number, 0
+         * 1: The PDO number to receive, 0
+         * 2: The COB-ID to receive PDOs from.
+         * 3: transmission trigger
+         */
+        RECEIVE_PDO_SETTINGS_OBJECT_140X(0, 0, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
 
-        // RPDO0 mapping: 4 voltages
-        RECEIVE_PDO_MAPPING_START_KEY_16XX(0x00, 0x04),
-        RECEIVE_PDO_MAPPING_ENTRY_16XX(0x00, 0x01, PDO_MAPPING_UNSIGNED16),
-        RECEIVE_PDO_MAPPING_ENTRY_16XX(0x00, 0x02, PDO_MAPPING_UNSIGNED16),
-        RECEIVE_PDO_MAPPING_ENTRY_16XX(0x00, 0x03, PDO_MAPPING_UNSIGNED16),
-        RECEIVE_PDO_MAPPING_ENTRY_16XX(0x00, 0x04, PDO_MAPPING_UNSIGNED16),
+        /**
+         * RampupBoard RPDO 1 Settings:
+         * 0: The RPDO number, 1
+         * 1: The PDO number to receive, 1
+         * 2: The COB-ID to receive PDOs from.
+         * 3: transmission trigger
+         */
+        RECEIVE_PDO_SETTINGS_OBJECT_140X(1, 1, RAMPUP_NODE_ID, RECEIVE_PDO_TRIGGER_ASYNC),
 
-        // RPDO1 mapping: temperature
-        RECEIVE_PDO_MAPPING_START_KEY_16XX(0x01, 0x01),
-        RECEIVE_PDO_MAPPING_ENTRY_16XX(0x01, 0x01, PDO_MAPPING_UNSIGNED16),
+        //***************************** Begin RPDO Maping *****************************//
+        /**
+         * RampupBoard RPDO 0 Mapping:
+         * Determines the PDO messages to receive when RPDO 0 is triggered
+         * 0: The number of PDO message associated with the RPDO
+         * 1: Link to the first voltage PDO data.
+         * 2: Link to the second voltage PDO data.
+         * 3: Link to the third voltage PDO data.
+         * 4: Link to the fourth voltage PDO data.
+         */
+        RECEIVE_PDO_MAPPING_START_KEY_16XX(0, 4),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 1, PDO_MAPPING_UNSIGNED16),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 2, PDO_MAPPING_UNSIGNED16),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 3, PDO_MAPPING_UNSIGNED16),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 4, PDO_MAPPING_UNSIGNED16),
 
-        // Data links: bind the mapped values to HUDL's own variables so
-        // updateLCD() can read them directly.
-        DATA_LINK_START_KEY_21XX(0x00, 0x04),
-        DATA_LINK_21XX(0x00, 0x01, CO_TUNSIGNED16, &voltages[0]),
-        DATA_LINK_21XX(0x00, 0x02, CO_TUNSIGNED16, &voltages[1]),
-        DATA_LINK_21XX(0x00, 0x03, CO_TUNSIGNED16, &voltages[2]),
-        DATA_LINK_21XX(0x00, 0x04, CO_TUNSIGNED16, &voltages[3]),
+        /**
+         * RampupBoard RPDO 1 Mapping
+         * Determines the PDO messages to receive when RPDO 1 is triggered
+         * 0: The number of PDO message associated with the RPDO
+         * 1: Link to the temperature PDO data.
+         */
+        RECEIVE_PDO_MAPPING_START_KEY_16XX(1, 1),
+        RECEIVE_PDO_MAPPING_ENTRY_16XX(1, 1, PDO_MAPPING_UNSIGNED16),
 
-        DATA_LINK_START_KEY_21XX(0x01, 0x01),
-        DATA_LINK_21XX(0x01, 0x01, CO_TUNSIGNED16, &temperature),
+        //**************************** Begin Data Linking *****************************//
+        /**
+         * User defined data. Put elements that can be accessed via SDO
+         * and depending on the configuration PDO
+         */
+        /* Assign the data we mapped in the RampupBoard RPDO 0 Mapping to variables */
+        DATA_LINK_START_KEY_21XX(0, 4),
+        DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, &voltages[0]),
+        DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, &voltages[1]),
+        DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, &voltages[2]),
+        DATA_LINK_21XX(0, 4, CO_TUNSIGNED16, &voltages[3]),
 
-        // End of dictionary marker
+        /* Assign the data we mapped in the RampupBoard RPDO 1 Mapping to variables */
+        DATA_LINK_START_KEY_21XX(1, 1),
+        DATA_LINK_21XX(1, 1, CO_TUNSIGNED16, &temperature),
+
+        //*************************** End Object Dictionary ***************************//
         CO_OBJ_DICT_ENDMARK,
     };
 };
