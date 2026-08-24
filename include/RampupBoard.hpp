@@ -84,6 +84,7 @@ private:
      * The plus one is for the special "end of dictionary" marker.
      */
     CO_OBJ_T objectDictionary[OBJECT_DICTIONARY_SIZE + 1] = {
+        //*********************** Begin Required Board Entries ************************//
         MANDATORY_IDENTIFICATION_ENTRIES_1000_1014,
         HEARTBEAT_PRODUCER_1017(2000),
         IDENTITY_OBJECT_1018,
