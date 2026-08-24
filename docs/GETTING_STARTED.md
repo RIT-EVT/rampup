@@ -11,6 +11,15 @@ always something someone else has already hit.
 
 ## 1. Install the tools
 
+**Try the automated setup scripts first.** The team's
+[environment setup page](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/environment-setup)
+has a script for your OS (Windows, Mac, or Linux) that installs CMake, the
+ARM toolchain, and clang-format for you in one step. Start there.
+
+The rest of this section covers the same ground manually, in more detail.
+Use it if the automated script didn't work for you, or if you want to
+understand what each piece actually does.
+
 You need four things: Git, CMake, the ARM GCC compiler, and an editor/IDE.
 
 - **Git** - [git-scm.com](https://git-scm.com/downloads). You likely already
@@ -64,6 +73,11 @@ git submodule update --init --recursive
 ```
 
 ## 3. Build the code
+
+The team's [running code page](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/running-code)
+also walks through building, flashing, and debugging, including setting up
+CLion's debugger via OpenOCD. Check it out if you want a second walkthrough
+or get stuck on anything in this section or the next.
 
 First, figure out which Nucleo board you have. Look for a label like
 `NUCLEO-F334R8` or `NUCLEO-F302R8` printed on the board itself. The `F334` or
@@ -152,8 +166,9 @@ console on your laptop, at **9600 baud**.
   Connection Type to "Serial," enter the COM port and baud rate 9600.
 - **Mac/Linux:** use `screen` (built in) or download a friendlier option for macOS, [cereal](https://github.com/ActuallyTaylor/cereal):
   ```bash
-  screen /dev/tty.usbmodem* 9600      # Mac, path will vary
-  screen /dev/ttyACM0 9600            # Linux, path will vary
+  screen /dev/tty.usbmodem* 9600  # Mac, path will vary
+  screen /dev/ttyACM0 9600        # Linux, path will vary
+  cereal                          # an interactive menu will walk you through connecting
   ```
   To exit `screen`, press `Ctrl-A` then `K`, then confirm.
 
