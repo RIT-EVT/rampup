@@ -141,10 +141,10 @@ A set of rules two devices agree on ahead of time so they can reliably
 exchange data: things like who talks first, how fast, and how bits are
 grouped into meaningful values.
 
-### Master / Slave
+### Leader (Master) / Follower (Slave)
 
-A communication model where the master decides when communication happens
-and who it talks to. Slave devices wait and respond only when the master
+A communication model where the leader decides when communication happens
+and who it talks to. Follower devices wait and respond only when the leader
 addresses them. [I2C](#i2c) and [SPI](#spi) both use this model.
 
 ### Polling
