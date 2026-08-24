@@ -214,7 +214,7 @@ Used in rampup to read the TMP117 temperature sensor.
 Short for Serial Peripheral Interface, read "spy." A faster, synchronous,
 [master/slave](#master-slave) [serial](#serial-communication) protocol
 using separate data lines for each direction (MOSI/MISO), a shared clock
-(SCK), and a dedicated chip-select (CS) line per slave device. Used in
+(SCK), and a dedicated chip-select (CS) line per follower device. Used in
 rampup to talk to the MAX22530 ADC.
 
 ### CAN
