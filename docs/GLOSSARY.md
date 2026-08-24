@@ -80,7 +80,7 @@ Eight [bits](#bit). A byte can represent 256 different values (`0` to `255`
 
 ### Unsigned vs Signed
 
-*Unsigned* means the data can only be positive (`0` to *x*). *Signed* means
+*Unsigned* means the data can only be positive, whereas *signed* means
 it can be negative or positive (i.e. in 4 bits, while signed you can do `[-8, 7]`, when unsigned, you can do `[0, 15]`), since
 one [bit](#bit) is used to represent the sign instead of the value itself.
 
