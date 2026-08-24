@@ -1,7 +1,7 @@
 /**
-* Implementation of the HUDL device: an LCD display plus the object
-* dictionary used to receive temperature and voltage data over CAN.
-*/
+ * Implementation of the HUDL device: an LCD display plus the object
+ * dictionary used to receive temperature and voltage data over CAN.
+ */
 
 // clang-format off
 #include <core/dev/LCD.hpp>
@@ -15,7 +15,7 @@
 #include <cstring>
 // clang-format on
 
-namespace io = core::io;
+namespace io  = core::io;
 namespace dev = core::dev;
 namespace log = core::log;
 
@@ -51,7 +51,7 @@ CO_OBJ_T* HUDL::getObjectDictionary() {
 }
 
 uint8_t HUDL::getNumElements() {
-    return OBJECT_DICTIONARY_SIZE;
+    return OBJECT_DICTIONARY_SIZE + 1;
 }
 
 uint8_t HUDL::getNodeID() {

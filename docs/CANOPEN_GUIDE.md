@@ -10,6 +10,8 @@ editing.
 
 Read the team's [CAN documentation](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/controller-area-network-can) first if you haven't. Everything here assumes
 you already understand how normal CAN works (broadcast messages, IDs, etc).
+See [`docs/GLOSSARY.md`](GLOSSARY.md) for quick definitions of the terms
+used below (object dictionary, SDO, PDO, COB-ID, etc.).
 
 ## Why CANopen on top of CAN?
 
@@ -95,7 +97,7 @@ the bus. If you see nothing at `0x1B2`, your TPDO0 isn't firing.
   - A lightweight broadcast: no request needed, the node just sends the
     current value(s) on some trigger. This is what RampupBoard uses for
     its actual sensor data, because we want the HUDL to just receive
-    updates, not poll for them.
+    updates, not have to constantly make requests for them.
   - A **TPDO** (Transmit PDO) is data *this* node sends; an **RPDO**
     (Receive PDO) is data it listens for from another node. RampupBoard
     only transmits, so you'll only see TPDOs.

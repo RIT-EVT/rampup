@@ -4,4 +4,4 @@ namespace rampup {
 
 // Implementations here
 
-}// namespace rampup
+} // namespace rampup

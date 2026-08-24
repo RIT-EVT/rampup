@@ -35,7 +35,7 @@ You need four things: Git, CMake, the ARM GCC compiler, and an editor/IDE.
   (as of writing, the latest is `v15.2.1-1.1`; pick the top-most release and
   the archive matching your OS). On Mac/Linux, this comes as a `.tar.gz`
   you extract; on Windows, a `.zip`.
-  1. Note where you extracted it, then find the `bin/` folder inside it.
+  1. <u>**_Note where you extracted it_**</u>, then find the `bin/` folder inside it.
   2. Set an environment variable named `GCC_ARM_TOOLS_PATH` pointing at that
      `bin/` folder:
      - **Windows:** [create a user environment variable](https://phoenixnap.com/kb/windows-set-environment-variable)
