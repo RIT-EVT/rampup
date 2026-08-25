@@ -54,7 +54,7 @@ memory so it actually runs there.
 
 ### .bin file
 
-Short for binary file. The actual [compiled](#compiler) output you flash
+Short for binary file. The actual compiled output you flash
 onto a board: raw machine code and nothing else, no symbol names or debug
 info attached. This is the file `docs/GETTING_STARTED.md` has you drag
 onto a Nucleo or select in STM32CubeProgrammer.
@@ -201,7 +201,7 @@ mainly for laptop-to-board debugging output.
 *Phase 2*
 
 Short for Inter-Integrated Circuit, read "eye-two-cee" or "eye-squared-cee."
-A two-wire, synchronous, [leader/follower](#Leader%20%28Master%29%20%2F%20Follower%20%28Slave%29)
+A two-wire, synchronous, [leader/follower](#leader-master--follower-slave)
 [serial](#serial-communication) protocol: one wire for data (SDA) and one
 for a shared clock (SCL), which tells the devices when to read the value from the data line. 
 Multiple follower devices can share the same two wires, each addressed individually. 
@@ -212,7 +212,7 @@ Used in rampup to read the TMP117 temperature sensor.
 *Phase 3*
 
 Short for Serial Peripheral Interface, read "spy." A faster, synchronous,
-[leader/follower](#Leader%20%28Master%29%20%2F%20Follower%20%28Slave%29) [serial](#serial-communication) protocol
+[leader/follower](#leader-master--follower-slave) [serial](#serial-communication) protocol
 using separate data lines for each direction (MOSI/MISO), a shared clock
 (SCK), and a dedicated chip-select (CS) line per follower device. Used in
 rampup to talk to the MAX22530 ADC.
@@ -356,7 +356,7 @@ computer.
 
 STMicroelectronics' programmer/debugger hardware, used to
 [flash](#flashing) and debug EVT's custom boards, which don't have the
-[Nucleo](#nucleo)'s built-in USB drag-and-drop [bootloader](#bootloader).
+[Nucleo](#nucleo)'s built-in USB drag-and-drop bootloader.
 
 ### HUDL
 
