@@ -8,6 +8,60 @@ If you read a term here and it still doesn't make sense, or find a term that isn
 that's a great question for a senior firmware member, and tell them to send it to the firmware lead 
 so it can be added here before the next group of people try to do rampup.
 
+## Acronym Quick Reference
+
+A place to lookup the acronyms you'll run into, both in rampup and
+around EVT more broadly. Acronyms with a full write-up elsewhere in this
+doc link to it; short signal/pin names that don't need their own section
+just get a one-line note here.
+
+| Acronym | Meaning                                                                                                                                                                               |
+| --- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ACK | Acknowledge: a response signal confirming data was received correctly, opposite of NACK. Basically a "yep, got it."                                                                   |
+| ADC | Analog-to-Digital Converter: turns a real-world, wobbly voltage into a number your code can use. The MAX22530 you use in Phase 3 is one; see [Analog vs Digital](#analog-vs-digital). |
+| [CAN](#can) | Controller Area Network                                                                                                                                                               |
+| CLK | Clock, a generic name for a clock signal line. See [Clock / Oscillator](#clock--oscillator).                                                                                          |
+| [COB-ID](#cob-id) | CAN message ID used for a specific purpose                                                                                                                                            |
+| CPHA | Clock Phase, part of an SPI device's mode setting (paired with CPOL). A fiddly timing detail you'll rarely have to figure out yourself, the datasheet will tell you the right value.  |
+| CPOL | Clock Polarity, part of an SPI device's mode setting (paired with CPHA). Same idea as CPHA, another timing detail the datasheet spells out for you.                                   |
+| CRC | Cyclic Redundancy Check: error-checking bits included at the end of a CAN frame, like a checksum that catches data that got corrupted along the way.                                  |
+| CS | Chip Select: the SPI line that tells one follower device it's being addressed, like tapping one specific person on the shoulder before talking to them.                               |
+| DBC | Database CAN: a file format for documenting what a CAN message's bytes mean.                                                                                                          |
+| [FTB](#ftb) | Firmware Test Board                                                                                                                                                                   |
+| [GND](#gnd) | Ground                                                                                                                                                                                |
+| [GPIO](#gpio) | General Purpose Input/Output                                                                                                                                                          |
+| HAL | Hardware Abstraction Layer: ST's own driver layer that EVT-core is built on top of, so you get to call simple functions instead of poking at raw hardware registers yourself.         |
+| [HUDL](#hudl) | Phase 4's display node                                                                                                                                                                |
+| [I2C](#i2c) | Inter-Integrated Circuit                                                                                                                                                              |
+| IC | Integrated Circuit; see the [full entry](#integrated-circuit)                                                                                                                         |
+| IDE | Integrated Development Environment: the actual application you write, build, and debug your code in, e.g. CLion or VS Code.                                                           |
+| IWDG | Independent Watchdog: a hardware timer that resets the microcontroller if your code hangs, so a bug can't leave the board stuck forever.                                              |
+| JTAG | Joint Test Action Group: a standard multi-pin hardware debugging interface. EVT mainly uses the simpler two-wire SWD instead.                                                         |
+| LED | Light-Emitting Diode. Basically a tiny light bulb that you can switch on/off (or dim) from a GPIO pin.                                                                                |
+| [LSB](#lsb) | Least Significant Bit                                                                                                                                                                 |
+| MISO | Master-In Slave-Out: the SPI line carrying data from follower to leader                                                                                                               |
+| MOSI | Master-Out Slave-In: the SPI line carrying data from leader to follower                                                                                                               |
+| [MSB](#msb) | Most Significant Bit                                                                                                                                                                  |
+| NACK | Not Acknowledge, the opposite of ACK. Basically a "nope, that didn't come through."                                                                                                   |
+| NVM | Non-Volatile Memory: storage that keeps its contents without power, like a USB drive, unlike RAM which forgets everything the moment power is cut.                                    |
+| [PCB](#pcb) | Printed Circuit Board                                                                                                                                                                 |
+| [PDO](#pdo) | Process Data Object                                                                                                                                                                   |
+| [PWM](#pwm) | Pulse Width Modulation                                                                                                                                                                |
+| [RPDO](#rpdo) | Receive [PDO](#pdo)                                                                                                                                                                   |
+| RTC | Real-Time Clock: a peripheral that keeps track of the actual date and time, independent of your main program.                                                                         |
+| SCK | Serial Clock: SPI's shared clock line                                                                                                                                                 |
+| SCL | Serial Clock: I2C's shared clock line (same name as SCK, different bus)                                                                                                               |
+| SDA | Serial Data: I2C's shared data line                                                                                                                                                   |
+| [SDO](#sdo) | Service Data Object                                                                                                                                                                   |
+| [SPI](#spi) | Serial Peripheral Interface                                                                                                                                                           |
+| SWD | Serial Wire Debug: the two-wire debugging interface used through an ST-Link. Lets you pause your code mid-run and look around while it's actually executing on the board.             |
+| [TPDO](#tpdo) | Transmit [PDO](#pdo)                                                                                                                                                                  |
+| TX / RX | Transmit / Receive: sending data out and receiving data in, respectively.                                                                                                             |
+| [UART](#uart) | Universal Asynchronous Receiver/Transmitter                                                                                                                                           |
+| USART | Universal Synchronous/Asynchronous Receiver/Transmitter: UART's synchronous-capable sibling. EVT boards mostly just use it in plain UART (asynchronous) mode.                         |
+| USB | Universal Serial Bus. The same kind of cable and port you already use to charge your phone or plug in a mouse.                                                                        |
+| [VCC](#vcc) | Positive power supply line                                                                                                                                                            |
+
 ## Embedded Systems Basics
 
 ### Microcontroller
