@@ -15,7 +15,7 @@ namespace rampup {
  *
  * @param[out] temp The variable to put the final temperature value in
  * @return The status of the I2C read performed
-*/
+ */
 // io::I2C::I2CStatus TMP117::readTemp(uint16_t& temp) {
 //     // Implementation here
 // }
