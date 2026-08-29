@@ -1,6 +1,6 @@
 /**
  * Implementation of the HUDL device: an LCD display plus the object
- * dictionary used to receive temperature and voltage data over CAN.
+ * dictionary used to receive temperature and acceleration data over CAN.
  */
 
 // clang-format off
@@ -32,11 +32,11 @@ void HUDL::initLCD() {
 
     // The segment titles
     char* titles[9] = {
-        "Volt 1",
-        "Volt 2",
-        "Volt 3",
-        "Volt 4",
+        "Accel X",
+        "Accel Y",
+        "Accel Z",
         "Temp",
+        "Not Set",
         "Not Set",
         "Not Set",
         "Not Set",
@@ -59,14 +59,14 @@ uint8_t HUDL::getNodeID() {
 }
 
 void HUDL::updateLCD() {
-    for (int x = 0; x < 4; x++) {
-        char voltage[9];
-        std::sprintf(voltage, "%d", voltages[x]);
-        lcd.setTextForSection(x, voltage);
+    for (int x = 0; x < 3; x++) {
+        char acceleration[9];
+        std::sprintf(acceleration, "%d", accelerations[x]);
+        lcd.setTextForSection(x, acceleration);
     }
 
     char temp[9];
     std::sprintf(temp, "%d", temperature);
-    lcd.setTextForSection(4, temp);
+    lcd.setTextForSection(3, temp);
 }
 } // namespace rampup

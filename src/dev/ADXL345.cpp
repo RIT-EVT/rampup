@@ -1,4 +1,4 @@
-#include <dev/MAX22530.hpp>
+#include <dev/ADXL345.hpp>
 
 namespace rampup {
 

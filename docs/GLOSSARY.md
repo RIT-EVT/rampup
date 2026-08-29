@@ -18,7 +18,7 @@ just get a one-line note here.
 | Acronym | Meaning                                                                                                                                                                                        |
 | --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ACK | Acknowledge: a response signal confirming data was received correctly, opposite of NACK. Basically a "yep, got it."                                                                            |
-| ADC | Analog-to-Digital Converter: turns a real-world, wobbly voltage into a number your code can use. The MAX22530 you use in Phase 3 is one; see [Analog vs Digital](#analog-vs-digital).          |
+| ADC | Analog-to-Digital Converter: turns a real-world, wobbly voltage into a number your code can use, see [Analog vs Digital](#analog-vs-digital).          |
 | [CAN](#can) | Controller Area Network                                                                                                                                                                        |
 | CLK | Clock, a generic name for a clock signal line. See [Clock / Oscillator](#clock--oscillator).                                                                                                   |
 | [COB-ID](#cob-id) | CAN message ID used for a specific purpose                                                                                                                                                     |
@@ -80,11 +80,11 @@ screen, a [UART](#uart) port, etc.).
 ### Integrated Circuit
 
 Commonly shortened to IC, or just called a chip. An electrical circuit
-built to do one specific job (sense temperature, convert a signal, drive a
-motor, amplify a signal, etc.), manufactured as a single small package
-instead of being wired together out of individual parts. The TMP117 (Phase 2) 
-is an IC whose job is sensing temperature; the MAX22530 (Phase 3) is an
-IC whose job is converting an analog voltage into a digital value.
+built to do one specific job (sense temperature, sense motion, convert a
+signal, drive a motor, amplify a signal, etc.), manufactured as a single
+small package instead of being wired together out of individual parts. The
+TMP117 (Phase 2) is an IC whose job is sensing temperature; the ADXL345
+(Phase 3) is an IC whose job is sensing acceleration.
 
 ### GPIO
 
@@ -98,7 +98,7 @@ hardware (a sensor, display, or motor controller) without you having to
 spell out every low-level step each time. A driver exposes high level
 commands like `readTemp()` and internally does whatever
 [protocol](#communication-protocol)-specific work is needed to make that
-happen. Writing drivers for the TMP117 and MAX22530 is the core of Phases 2
+happen. Writing drivers for the TMP117 and ADXL345 is the core of Phases 2
 and 3.
 
 ### Flashing
@@ -228,8 +228,8 @@ signal.
 An *analog* signal is continuous, it can take any value in a range (like
 the voltage out of a sensor). A *digital* signal is discrete, it only takes
 specific values, most commonly just two (`1`/`0`, "high"/"low"). An ADC
-(see Phase 3) converts an analog signal into a digital one your
-microcontroller can work with.
+converts an analog signal into a digital one your microcontroller can work
+with.
 
 ### PWM
 
@@ -269,7 +269,7 @@ Short for Serial Peripheral Interface, read "spy." A faster, synchronous,
 [leader/follower](#leader-master--follower-slave) [serial](#serial-communication) protocol
 using separate data lines for each direction (MOSI/MISO), a shared clock
 (SCK), and a dedicated chip-select (CS) line per follower device. Used in
-rampup to talk to the MAX22530 ADC.
+rampup to talk to the ADXL345 accelerometer.
 
 ### CAN
 
@@ -384,7 +384,7 @@ EVT board.
 ### Click Board
 
 A small standardized board carrying a single [IC](#integrated-circuit)
-(like the TMP117 or MAX22530), designed to plug into sockets like the
+(like the TMP117 or ADXL345), designed to plug into sockets like the
 [FTB](#ftb)'s for easy swapping during development.
 
 ### Saleae Logic Analyzer

@@ -43,9 +43,9 @@ int main() {
 
     // Set up chip select GPIO and put in array
 
-    // Set up and configure SPI (<10 MHz, Mode 0, MSB first)
+    // Set up and configure SPI (<1 MHz, Mode 3, MSB first)
 
-    // Create MAX22530 instance
+    // Create ADXL345 instance
 
     // Create RampupBoard instance
 
@@ -64,24 +64,9 @@ int main() {
     // And generally creating the CANopen stack node which is the interface
     // between the application (the code we write) and the physical CAN network
     ///////////////////////////////////////////////////////////////////////////
-    // Make drivers
-
-    // Set up CANopen Node
-    /*
-    CO_IF_DRV canStackDriver;
-    CO_IF_CAN_DRV canDriver;
-    CO_IF_TIMER_DRV timerDriver;
-    CO_IF_NVM_DRV nvmDriver;
-
-    io::initializeCANopenDriver(&canOpenQueue, &can, &timer, &canStackDriver, &nvmDriver, &timerDriver, &canDriver);
-
-    CO_NODE canNode;
-    // Pass in the RampupBoard instance; it supplies the object dictionary,
-    // element count, and node ID via the CANDevice interface.
-    io::initializeCANopenNode(&canNode, &rampupBoard, &canStackDriver, sdoBuffer, appTmrMem);
-
-    CONmtSetMode(&canNode.Nmt, CO_OPERATIONAL);
-    */
+    // Make drivers, then build and start the CANopen node from the
+    // RampupBoard instance (see docs/CANOPEN_GUIDE.md and
+    // targets/hudl/main.cpp for a fully worked example of this pattern)
 
     while (1) {
         // Run rampup board process

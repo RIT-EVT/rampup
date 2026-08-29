@@ -5,7 +5,7 @@
 
 #include <co_core.h>
 
-#include "dev/MAX22530.hpp"
+#include "dev/ADXL345.hpp"
 #include "dev/TMP117.hpp"
 #include <core/io/CANDevice.hpp>
 #include <core/io/CANOpenMacros.hpp>
@@ -62,12 +62,12 @@ public:
     uint8_t getNodeID() override;
 
 private:
-    /** MAX instance used to get voltage data*/
-    MAX22530 max;
+    /** ADXL instance used to get acceleration data */
+    ADXL345 accel;
     /** TMP instance used to get temperature data */
     TMP117 tmp;
-    /** Current voltages */
-    uint16_t voltages[4];
+    /** Current accelerations */
+    uint16_t accelerations[3];
     /** Current temperature */
     uint16_t temp;
 
@@ -75,7 +75,7 @@ private:
      * Have to know the size of the object dictionary for initialization
      * process.
      */
-    static constexpr uint8_t OBJECT_DICTIONARY_SIZE = 37;
+    static constexpr uint8_t OBJECT_DICTIONARY_SIZE = 35;
 
     /**
      * The object dictionary itself. Will be populated by this object during
@@ -116,16 +116,14 @@ private:
          * RampupBoard TPDO 0 Mapping:
          * Determines the PDO messages to send when TPDO 0 is triggered.
          * 0: The number of PDO message associated with the TPDO.
-         * 1: Link to the first voltage PDO data.
-         * 2: Link to the second voltage PDO data.
-         * 3: Link to the third voltage PDO data.
-         * 4: Link to the fourth voltage PDO data.
+         * 1: Link to the X-axis acceleration PDO data.
+         * 2: Link to the Y-axis acceleration PDO data.
+         * 3: Link to the Z-axis acceleration PDO data.
          */
-        TRANSMIT_PDO_MAPPING_START_KEY_1AXX(0, 4),
+        TRANSMIT_PDO_MAPPING_START_KEY_1AXX(0, 3),
         TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0, 1, PDO_MAPPING_UNSIGNED16),
         TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0, 2, PDO_MAPPING_UNSIGNED16),
         TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0, 3, PDO_MAPPING_UNSIGNED16),
-        TRANSMIT_PDO_MAPPING_ENTRY_1AXX(0, 4, PDO_MAPPING_UNSIGNED16),
 
         /**
          * RampupBoard TPDO 1 Mapping:
@@ -142,11 +140,10 @@ private:
          * via SDO and the first PDO.
          */
         /* Link the data we want to map into RampupBoard TPDO 0 to variables */
-        DATA_LINK_START_KEY_21XX(0, 4),
-        DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, nullptr /*Replace with address of first voltage*/),
-        DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, nullptr /*Replace with address of second voltage*/),
-        DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, nullptr /*Replace with address of third voltage*/),
-        DATA_LINK_21XX(0, 4, CO_TUNSIGNED16, nullptr /*Replace with address of fourth voltage*/),
+        DATA_LINK_START_KEY_21XX(0, 3),
+        DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, nullptr /*Replace with address of X-axis acceleration*/),
+        DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, nullptr /*Replace with address of Y-axis acceleration*/),
+        DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, nullptr /*Replace with address of Z-axis acceleration*/),
 
         /* Link the data we want to map into RampupBoard TPDO 1 to variables */
         DATA_LINK_START_KEY_21XX(1, 1),

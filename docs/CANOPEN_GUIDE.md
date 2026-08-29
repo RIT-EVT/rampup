@@ -34,7 +34,7 @@ addressed by a 16-bit **index** and an 8-bit **subindex** (e.g. index
 `0x1017`, subindex `0`). Some index ranges are reserved by the CANopen
 standard for things every node has (device info, heartbeat settings, PDO
 configuration); one range (`0x2000`–`0x5FFF`) is left open for
-manufacturer-specific data. This is where your temperature and voltage
+manufacturer-specific data. This is where your temperature and acceleration
 readings live.
 
 Under the hood, each entry is one `CO_OBJ_T` struct with an index+subindex
@@ -112,7 +112,7 @@ The dictionary in `RampupBoard.hpp` is organized in blocks, in this order:
      alive" heartbeat message, identity numbers, SDO request/response
      COB-IDs). Not something you need to change for rampup.
 2. **`TRANSMIT_PDO_SETTINGS_OBJECT_18XX(...)`**
-   - One call per TPDO (TPDO0 for voltages, TPDO1 for temperature). Each
+   - One call per TPDO (TPDO0 for accelerations, TPDO1 for temperature). Each
      configures that TPDO's trigger type (`TRANSMIT_PDO_TRIGGER_TIMER`
      means "send on a timer" rather than only in response to an external
      sync message) and, as the last argument, the timer interval in
@@ -120,16 +120,16 @@ The dictionary in `RampupBoard.hpp` is organized in blocks, in this order:
      in.** Search for the `/*Replace with trigger time*/` comments.
 3. **`TRANSMIT_PDO_MAPPING_START_KEY_1AXX` / `TRANSMIT_PDO_MAPPING_ENTRY_1AXX`**
    - These say *which* values get bundled into each TPDO's CAN payload, and
-     in what order. TPDO0 maps four 16-bit entries (the four ADC voltages,
-     fitting in one 8-byte CAN frame); TPDO1 maps one 16-bit entry (the
+     in what order. TPDO0 maps three 16-bit entries (the three acceleration
+     axes, fitting in one 8-byte CAN frame); TPDO1 maps one 16-bit entry (the
      temperature).
 4. **`DATA_LINK_START_KEY_21XX` / `DATA_LINK_21XX`**
    - The actual data, in the manufacturer-specific `0x2100`/`0x2101` range.
      Each `DATA_LINK_21XX` call currently passes `nullptr` with a
      `/*Replace with address of ...*/` comment as its last argument. **This
      is the other thing you need to fill in.** Pass the real address of the
-     corresponding variable (e.g. `&voltages[0]`) instead, so that when the
-     stack builds the TPDO payload, it reads the live sensor value, not a
+     corresponding variable (e.g. `&accelerations[0]`) instead, so that when
+     the stack builds the TPDO payload, it reads the live sensor value, not a
      stale copy.
 
 ## What you're actually implementing in Phase 4
@@ -139,7 +139,7 @@ maps onto three concrete pieces of work:
 
 1. **Wire up the dictionary** (`RampupBoard.hpp`)
    - Replace the `nullptr` arguments in the `DATA_LINK_21XX` calls with
-     addresses of your `voltages[4]` and `temp` member variables, and pick
+     addresses of your `accelerations[3]` and `temp` member variables, and pick
      a sensible event timer interval (the last argument to each
      `TRANSMIT_PDO_SETTINGS_OBJECT_18XX` call). How often should the board
      really report new data? (Compare to how often you read the sensors in
@@ -148,8 +148,8 @@ maps onto three concrete pieces of work:
      are filled in for you in `RampupBoard.cpp`), so you don't need to
      touch those three methods yourself.
 2. **`RampupBoard::process()`** (`RampupBoard.cpp`)
-   - This should call into your Phase 2/3 drivers (`TMP117`, `MAX22530`) to
-     refresh `temp` and `voltages`. The CANopen stack reads whatever is
+   - This should call into your Phase 2/3 drivers (`TMP117`, `ADXL345`) to
+     refresh `temp` and `accelerations`. The CANopen stack reads whatever is
      currently in those variables when a TPDO fires. It has no idea how to
      talk to the sensors itself, so if `process()` isn't called regularly,
      the board will keep broadcasting stale data.
