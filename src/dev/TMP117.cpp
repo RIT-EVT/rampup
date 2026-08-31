@@ -2,22 +2,21 @@
 
 namespace rampup {
 
-// TMP117::TMP117(io::I2C& i2c, uint8_t i2cSlaveAddress) : i2cSlaveAddress(/*something here*/), i2c(/*something here*/)
-// {}
+TMP117::TMP117(io::I2C& i2c, uint8_t i2cSlaveAddress) : i2cSlaveAddress(i2cSlaveAddress), i2c(i2c) {}
 
-/**
- * @brief Reads the temperature over I2C
- * Create variables to hold the I2C output and the register value you need to read from. Then, do a multibyte I2C read
- * due to the wanted register being 2 bytes.
- * Be careful of integer overflows; creating a temporary variable (u32 or u64) may be helpful for the conversion math.
- * Convert the raw output into a human readable value. The raw output is 1 unit = 7.8125 m°C (= 0.0078125°C).
- * Assign the value of the converted temp to the temperature variable.
- *
- * @param[out] temp The variable to put the final temperature value in
- * @return The status of the I2C read performed
- */
-// io::I2C::I2CStatus TMP117::readTemp(uint16_t& temp) {
-//     // Implementation here
-// }
+io::I2C::I2CStatus TMP117::readTemp(uint16_t& temperature) {
+    uint8_t registerValue = TEMP_REG;
+    uint8_t outputBuffer[2];
+
+    io::I2C::I2CStatus status = i2c.readReg(i2cSlaveAddress, &registerValue, 1, outputBuffer, 2);
+
+    // Raw output is 1 unit = 7.8125 m°C; use a wider type to avoid overflow during conversion
+    uint64_t raw = (outputBuffer[0] << 8) | outputBuffer[1];
+    raw = raw * 78125 / 10000;
+
+    temperature = raw;
+
+    return status;
+}
 
 } // namespace rampup
