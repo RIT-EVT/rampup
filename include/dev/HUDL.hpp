@@ -1,14 +1,14 @@
 #ifndef _HUDL_
 #define _HUDL_
 
-#include <stdint.h>
-
 #include <co_core.h>
 #include <core/dev/LCD.hpp>
 #include <core/io/CANDevice.hpp>
 #include <core/io/CANOpenMacros.hpp>
+#include <core/io/CANopen.hpp>
 #include <core/io/GPIO.hpp>
 #include <core/io/SPI.hpp>
+#include <stdint.h>
 
 namespace io  = core::io;
 namespace dev = core::dev;
@@ -46,27 +46,21 @@ public:
      *
      * @return Pointer to the start of the object dictionary
      */
-    CO_OBJ_T* getObjectDictionary() override {
-        return &objectDictionary[0];
-    };
+    CO_OBJ_T* getObjectDictionary() override;
 
     /**
      * Get the number of elements in the object dictionary.
      *
      * @return The number of elements in the object dictionary
      */
-    uint8_t getNumElements() override {
-        return OBJECT_DICTIONARY_SIZE + 1;
-    };
+    uint8_t getNumElements() override;
 
     /**
      * Get the device's node ID
      *
      * @return The node ID of the can device.
      */
-    uint8_t getNodeID() override {
-        return NODE_ID;
-    };
+    uint8_t getNodeID() override;
 
     /**
      * Updates the LCD display with values received from the CAN network
@@ -142,10 +136,10 @@ private:
         0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
         0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
-    uint16_t voltages[4];
+    uint16_t accelerations[3];
     uint16_t temperature;
 
-    static constexpr uint16_t OBJECT_DICTIONARY_SIZE = 33;
+    static constexpr uint16_t OBJECT_DICTIONARY_SIZE = 31;
 
     CO_OBJ_T objectDictionary[OBJECT_DICTIONARY_SIZE + 1] = {
         //*********************** Begin Required Board Entries ************************//
@@ -178,16 +172,14 @@ private:
          * RampupBoard RPDO 0 Mapping:
          * Determines the PDO messages to receive when RPDO 0 is triggered
          * 0: The number of PDO message associated with the RPDO
-         * 1: Link to the first voltage PDO data.
-         * 2: Link to the second voltage PDO data.
-         * 3: Link to the third voltage PDO data.
-         * 4: Link to the fourth voltage PDO data.
+         * 1: Link to the X-axis acceleration PDO data.
+         * 2: Link to the Y-axis acceleration PDO data.
+         * 3: Link to the Z-axis acceleration PDO data.
          */
-        RECEIVE_PDO_MAPPING_START_KEY_16XX(0, 4),
+        RECEIVE_PDO_MAPPING_START_KEY_16XX(0, 3),
         RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 1, PDO_MAPPING_UNSIGNED16),
         RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 2, PDO_MAPPING_UNSIGNED16),
         RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 3, PDO_MAPPING_UNSIGNED16),
-        RECEIVE_PDO_MAPPING_ENTRY_16XX(0, 4, PDO_MAPPING_UNSIGNED16),
 
         /**
          * RampupBoard RPDO 1 Mapping
@@ -204,11 +196,10 @@ private:
          * and depending on the configuration PDO
          */
         /* Assign the data we mapped in the RampupBoard RPDO 0 Mapping to variables */
-        DATA_LINK_START_KEY_21XX(0, 4),
-        DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, &voltages[0]),
-        DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, &voltages[1]),
-        DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, &voltages[2]),
-        DATA_LINK_21XX(0, 4, CO_TUNSIGNED16, &voltages[3]),
+        DATA_LINK_START_KEY_21XX(0, 3),
+        DATA_LINK_21XX(0, 1, CO_TUNSIGNED16, &accelerations[0]),
+        DATA_LINK_21XX(0, 2, CO_TUNSIGNED16, &accelerations[1]),
+        DATA_LINK_21XX(0, 3, CO_TUNSIGNED16, &accelerations[2]),
 
         /* Assign the data we mapped in the RampupBoard RPDO 1 Mapping to variables */
         DATA_LINK_START_KEY_21XX(1, 1),

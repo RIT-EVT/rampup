@@ -1,25 +1,21 @@
 /**
- * This is a simple example of taking user input and printing output over UART.
+ * This is a simple example of reading data over I2C and printing it over UART.
  */
-#include <core/io/UART.hpp>
-#include <core/io/pin.hpp>
-#include <core/manager.hpp>
-
-namespace io = core::io;
 
 int main() {
     // Initialize system
-    core::platform::init();
 
     // Set up UART
 
-    // Declare two arrays of characters to store user input
+    // Set up I2C
+
+    // Create TMP117 instance
 
     while (1) {
-        // Read user input
+        // Read temperature
 
-        // Convert the two character arrays to uint64_t
+        // Print temperature
 
-        // Output the sum of the two numbers
+        // Wait 1 s
     }
 }

@@ -1,16 +1,19 @@
 /**
- * This is a simple example of GPIO usage
+ * This is a simple example of taking user input and printing output over UART.
  */
-#include <core/io/GPIO.hpp>
-#include <core/manager.hpp>
-
-namespace io = core::io;
 
 int main() {
-    // Initialize the EVT system
-    core::platform::init();
+    // Initialize system
 
-    // Setup GPIO
+    // Set up UART
 
-    // Loop and toggle LED on and off; waiting .5 seconds after each toggle
+    // Declare two arrays of characters to store user input
+
+    while (1) {
+        // Read user input
+
+        // Convert the two character arrays to uint64_t
+
+        // Output the sum of the two numbers
+    }
 }
