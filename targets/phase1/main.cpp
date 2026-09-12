@@ -12,7 +12,7 @@ int main() {
     while (1) {
         // Read user input
 
-        // Convert the two character arrays to uint64_t
+        // Convert the two character arrays to uint32_t
 
         // Output the sum of the two numbers
     }
