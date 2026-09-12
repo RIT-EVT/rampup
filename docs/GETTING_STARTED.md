@@ -72,7 +72,7 @@ Open your terminal, and run the command `pwd` to print the working directory.
 pwd
 ```
 
-On Windows, this should show something like `/c/Users/<Your_User>`. If your `<Your_User>` is `greg` then you would get `/c/Users/greg`. You also see a `~` just above the cursor and that this the shorthand name for it.
+On Windows, this should show something like `/c/Users/<Your_User>`. If your `<Your_User>` is `greg` then you would get `/c/Users/greg`. You also see a `~` just above the cursor and that this the shorthand name for your home directory. So for `greg`, this would mean that `~ == /c/Users/greg`
 
 To make a new directory, we can run `mkdir`.
 
@@ -104,7 +104,7 @@ git clone https://github.com/RIT-EVT/rampup/
 
 We can confirm that this worked using the `ls` command. It should show a new folder called `rampup`. Using `cd` to go into it and then `ls` to show the contents, we see that there are a ton of new files, similarly laid out to the github page.
 
-There is one last step necessary to ensure that this local version can work. This is to get all the additional code from a different repository called `EVT-core`. That is our main development center and is the code base that will you be using after the project. Because of the way that it is set up, we cannot use the same process to directly reference it. Instead, you must get a version of it using the `submodule` interface. The `git` command is as follows.
+There is one last step necessary to ensure that this local version can work. This is to get all the additional code from a different repository called `EVT-core`. That is our main development center and is the code base that will you be using after rampup. Because of the way that it is set up, we cannot use the same process to directly reference it. Instead, you must get a version of it using the `submodule` interface. The `git` command is as follows.
 
 ```bash
 git submodule update --init --recursive
