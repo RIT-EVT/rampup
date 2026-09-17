@@ -11,10 +11,13 @@ always something someone else has already hit.
 
 ## 1. Install the tools
 
-**Try the automated setup scripts first.** The team's
-[environment setup page](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/environment-setup)
+### ***Try the automated setup scripts first, then come back*** 
+
+The team's [environment setup page](https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/getting-started/environment-setup)
 has a script for your OS (Windows, Mac, or Linux) that installs CMake, the
-ARM toolchain, and clang-format for you in one step. Start there.
+ARM toolchain, and clang-format for you in one step. 
+
+**[If the setup scripts work, skip directly to 2.](https://github.com/RIT-EVT/rampup/blob/main/docs/GETTING_STARTED.md#2-get-the-code)**
 
 The rest of this section covers the same ground manually, in more detail.
 Use it if the automated script didn't work for you, or if you want to
@@ -59,18 +62,57 @@ You need four things: Git, CMake, the ARM GCC compiler, and an editor/IDE.
 
 ## 2. Get the code
 
-This repo depends on **EVT-core**, our shared hardware abstraction library,
-which is included as a git submodule. If you haven't cloned this repo yet:
+There are a couple of steps necessary to actually get the code up and running.
+
+Firstly, you need to create a folder for this rampup project to exist. This is usually placed within `<Your_User>/EVT`. The created folder will also usually be the home for the rest of your EVT projects. You can do this by using a file explorer, or by using a terminal. The terminal process will be described here and use **Git Bash**. That is the terminal of choice for most users on EVT, but you are welcome to use any.
+
+Open your terminal, and run the command `pwd` to print the working directory.
 
 ```bash
-git clone --recurse-submodules <this-repo-url>
+pwd
 ```
 
-If you already cloned it without that flag (or the `libs/EVT-core` folder looks empty):
+On Windows, this should show something like `/c/Users/<Your_User>`. If your `<Your_User>` is `greg` then you would get `/c/Users/greg`. You also see a `~` just above the cursor and that this the shorthand name for your home directory. So for `greg`, this would mean that `~ == /c/Users/greg`
+
+To make a new directory, we can run `mkdir`.
+
+```bash
+mkdir EVT
+```
+
+To see the output of this we can use a file explorer or the command to list files, `ls`. We can also use this command with some special flags, `-la` where `-l` means list and `-a ` means all. These can be used separately and are useful independently. For now, we will only use the `ls` command with no flags.
+
+```bash
+ls
+```
+
+In the list, we should see the folder named `EVT`. This means it exists and we can get into it. Through the terminal, we can access this directory through the command `cd`, meaning change directory. 
+
+```bash
+cd EVT
+```
+
+Now, if we run `pwd` it shows that we are in the directory `/c/Users/<Your_User>/EVT`. After running the `ls` command, we see that there are no files in this directory.
+
+To actually get the rampup project, you need to go to its [github repository](https://www.github.com/RIT-EVT/rampup/). On the main page for it, there should be a green button that says `<> Code`. Click on that and copy the first link that pops up (Specifically, get the link under the HTTPS tab). With that, we are ready to begin using Git.
+
+Going back to the terminal, type in the command `git`. It should output a bunch of stuff that we do not really need to worry about. This is just to ensure that it works. To actually get the repository, run the `git clone` command. This will copy all the files and folders seen on the github page, directly to your device.
+
+```bash
+git clone https://github.com/RIT-EVT/rampup/
+```
+
+We can confirm that this worked using the `ls` command. It should show a new folder called `rampup`. Using `cd` to go into it and then `ls` to show the contents, we see that there are a ton of new files, similarly laid out to the github page.
+
+There is one last step necessary to ensure that this local version can work. This is to get all the additional code from a different repository called `EVT-core`. That is our main development center and is the code base that will you be using after rampup. Because of the way that it is set up, we cannot use the same process to directly reference it. Instead, you must get a version of it using the `submodule` interface. The `git` command is as follows.
 
 ```bash
 git submodule update --init --recursive
 ```
+
+Finishing that means that all the setup to get code from github is complete!
+
+We can check out the code in CLion by opening the folder where we cloned the repository. If you followed along, it should be under `C:\Users\<Your_User>\EVT\rampup`. Be sure to fill in the `<Your_User>` with your own user's name.
 
 ## 3. Build the code
 
@@ -114,20 +156,23 @@ This field passes flags to the underlying build tool instead of to CMake itself.
 on multi-core machines. Feel free to raise or lower the number to match how many 
 cores your machine has.
 
-6. Click "OK" / "Apply." CLion will reload CMake in the background. Wait
+6. If you are on Windows and used the setup script, you will need to fill in the environment variable too. Put the following code into it.
+```
+GCC_ARM_TOOLS_PATH=C:/EVT/arm-tools/bin
+```
+
+If you are on Windows and did not use the setup script, you will need to find where the overall `arm-tools/bin` was put and fill that path instead of this one from the equals sign to the right.
+
+7. Click "OK" / "Apply." CLion will reload CMake in the background. Wait
    for that to finish (watch the status bar at the bottom) before building.
 
-7. Use the target dropdown in the top-right to pick which target to build
+8. Use the target dropdown in the top-right to pick which target to build
    (e.g. `phase1`), then click the green hammer icon to build, or the green
    play/bug icon to build and run/debug.
 
 If you ever need to change chip target later (e.g. you switch to a
 different Nucleo), go back to this same settings page, edit the option, and
 reload CMake; you don't need to re-create the project.
-
-If the build fails immediately with something about a missing compiler,
-re-check the `GCC_ARM_TOOLS_PATH` environment variable from step 1; that's
-the most common cause.
 
 Built files land in `build/targets/<phase>/`, including a `.bin` file, which
 is what you'll flash onto the board.
