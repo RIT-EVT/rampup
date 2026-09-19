@@ -172,6 +172,8 @@ hasn't been provided for you, so you'll have to write that yourself. The
 files you need to edit are `include/dev/ADXL345.hpp`, `src/dev/ADXL345.cpp`,
 and `targets/phase3/main.cpp`.
 
+> IMPORTANT: The Chip Select (CS) pin is not the default SPI_CS pin, it is instead PA_9!
+
 ### Task Breakdown
 1. Read the [SPI documentation](
 https://sites.google.com/g.rit.edu/evt-home-page/firmware-team/communication-protocols/serial-peripheral-interface-spi?authuser=0).
